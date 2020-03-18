@@ -8,4 +8,22 @@ The main technology that will validate and monitor the voting process will be th
 
 ## Scope
 
-The purposed scope is to provide a software solution for a easier and a more secured way of voting, the electronical one.
+The scope of this project is to provide a software solution for an easier and a more secured way of voting process, the electronical one. This means that the voter can give his/her option remotely, and to be sure that his vote is confident and couldn't be modified by anyone.
+
+##More information:
+<ul>
+  <li>
+    <a href="https://github.com/aminoiu/e-voting/wiki"> Wiki page
+  </li>
+  <li>
+    <a href="https://github.com/aminoiu/e-voting/wiki/Functional-requirements"> Functional requirements
+  </li>
+  <li>
+    <a href="https://github.com/aminoiu/e-voting/wiki/Non-Functional-requirements"> Non_Functional requirements
+  </li>
+  <li>
+    <a href="https://github.com/aminoiu/e-voting/wiki/Functional-viewpoint"> Functional viewpoint
+  </li>
+   <li>
+     <a href="https://github.com/aminoiu/e-voting/wiki/Informational-viewpoints"> Informational viewpoint
+  </li>
