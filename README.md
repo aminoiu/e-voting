@@ -10,7 +10,7 @@ The main technology that will validate and monitor the voting process will be th
 
 The scope of this project is to provide a software solution for an easier and a more secured way of voting process, the electronical one. This means that the voter can give his/her option remotely, and to be sure that his vote is confident and couldn't be modified by anyone.
 
-##More information:
+# More information:
 <ul>
   <li>
     <a href="https://github.com/aminoiu/e-voting/wiki"> Wiki page
