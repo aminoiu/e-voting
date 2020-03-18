@@ -14,16 +14,16 @@ The scope of this project is to provide a software solution for an easier and a 
 <ul>
   <li>
     <a href="https://github.com/aminoiu/e-voting/wiki"> Wiki page
-  </li>
+ 
   <li>
     <a href="https://github.com/aminoiu/e-voting/wiki/Functional-requirements"> Functional requirements
-  </li>
+  
   <li>
     <a href="https://github.com/aminoiu/e-voting/wiki/Non-Functional-requirements"> Non_Functional requirements
-  </li>
+ 
   <li>
     <a href="https://github.com/aminoiu/e-voting/wiki/Functional-viewpoint"> Functional viewpoint
-  </li>
+  
    <li>
      <a href="https://github.com/aminoiu/e-voting/wiki/Informational-viewpoints"> Informational viewpoint
-  </li>
+  
