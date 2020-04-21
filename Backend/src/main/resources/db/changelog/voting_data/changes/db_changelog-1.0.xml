@@ -1,0 +1,31 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="7bc04a40-8830-47bb-827a-4cf87948f9f4" author="aminoiu">
+        <validCheckSum>8:273e2e9c29151e8887503487428b7348</validCheckSum>
+
+        <insert tableName="admin">
+            <column name="admin_id" value="197ff9d5-8e88-4143-8b67-49974034604e"/>
+            <column name="name" value="Anna Minoiu"/>
+            <column name="email" value="minoiuanna@gmail.com"/>
+            <column name="work_place" value="ISD"/>
+            <column name="country" value="Moldova"/>
+            <column name="city" value="Chisinau"/>
+            <column name="street" value="Bulgara 33/1"/>
+            <column name="phone_number" value="+373069384394"/>
+            <column name="hash_password" value="43014c2c8be9cc5a10b4dd573642f72554570b7812b9008fb3514f9053bb9d16"/>
+        </insert>
+        <insert tableName="candidate_type">
+            <column name="type_id" value="6944b0c7-6fa6-48ed-be4c-3fffc02b30ab"/>
+            <column name="type" value="person"/>
+        </insert>
+        <insert tableName="candidate_type">
+            <column name="type_id" value="98e74d94-61ad-43b5-b837-daee6d01d57a"/>
+            <column name="type" value="option"/>
+        </insert>
+        <rollback>
+
+        </rollback>
+    </changeSet>
+</databaseChangeLog>

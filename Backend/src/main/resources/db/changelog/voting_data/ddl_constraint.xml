@@ -1,0 +1,47 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+<changeSet id="b13377e2-41e6-4806-a583-67ff49a4ae3d" author="aminoiu">
+    <validCheckSum>8:ed222eb3ec905f69dcb1d4ddbdb1db65</validCheckSum>
+    <addForeignKeyConstraint baseColumnNames="voting_id"
+                             baseTableName="voter"
+                             constraintName="fk_voting_id"
+                             referencedColumnNames="voting_id"
+                             referencedTableName="voting_data"/>
+    <addForeignKeyConstraint baseColumnNames="cand_type_id"
+                             baseTableName="candidate"
+                             constraintName="fk_cand_type_id"
+                             referencedColumnNames="type_id"
+                             referencedTableName="candidate_type"/>
+    <addForeignKeyConstraint baseColumnNames="voting_id"
+                             baseTableName="candidate"
+                             constraintName="fk_voting_id"
+                             referencedColumnNames="voting_id"
+                             referencedTableName="voting_data"/>
+    <addForeignKeyConstraint baseColumnNames="admin_id"
+                             baseTableName="voting_data"
+                             constraintName="fk_admin_id_id"
+                             referencedColumnNames="admin_id"
+                             referencedTableName="admin"/>
+    <addForeignKeyConstraint baseColumnNames="voting_winner"
+                             baseTableName="voting_data"
+                             constraintName="fk_winner_id"
+                             referencedColumnNames="candidate_id"
+                             referencedTableName="candidate"/>
+    <addForeignKeyConstraint baseColumnNames="voting_id"
+                             baseTableName="casted_vote"
+                             constraintName="fk_voting_id"
+                             referencedColumnNames="voting_id"
+                             referencedTableName="voting_data"/>
+    <addForeignKeyConstraint baseColumnNames="voter_id"
+                             baseTableName="casted_vote"
+                             constraintName="fk_voter_id"
+                             referencedColumnNames="voter_id"
+                             referencedTableName="voter"/>
+    <addForeignKeyConstraint baseColumnNames="candidate_id"
+                             baseTableName="casted_vote"
+                             constraintName="fk_candidate_id"
+                             referencedColumnNames="candidate_id"
+                             referencedTableName="candidate"/>
+</changeSet>
+</databaseChangeLog>
