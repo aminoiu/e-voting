@@ -12,13 +12,13 @@ public class CandidateServiceImpl implements CandidateService {
 
     private final CandidateRepository candidateRepository;
 
-        public CandidateServiceImpl(CandidateRepository candidateRepository) {
+    public CandidateServiceImpl(CandidateRepository candidateRepository) {
         this.candidateRepository = candidateRepository;
     }
 
     @Override
     public Candidate findByEmail(String email) {
-        log.info("Find admin by e-mail[{}]",email);
+        log.info("Find candidate by e-mail[{}]", email);
         return candidateRepository.findByEmail(email);
     }
 
@@ -29,12 +29,18 @@ public class CandidateServiceImpl implements CandidateService {
     }
 
     @Override
-    public String getHashPass(Candidate candidate) {
-        return candidate.getHashPass();
+    public void updateEmail(Candidate candidate, String newEmail) {
+        boolean emailExists=candidateRepository.existsByEmail(newEmail);
+        if(emailExists) {
+            return; //TODO: Create exception for it, and if it exists, throw it
+        }
+        candidate.setEmail(newEmail);
     }
 
     @Override
-    public void setHashPass(Candidate candidate,String hashedPass) {
-
+    public void deleteCandidate(String email) {
+this.candidateRepository.deleteByEmail(email);
     }
+
+
 }

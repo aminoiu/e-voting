@@ -36,7 +36,7 @@ public class AdminController {
     }
 
     @PostMapping(consumes = "application/json")
-    ResponseEntity<Admin> saveUserAdmin(@RequestBody Admin admin) throws InvalidKeySpecException, NoSuchAlgorithmException {
+    ResponseEntity<Admin> createAdmin(@RequestBody Admin admin) throws InvalidKeySpecException, NoSuchAlgorithmException {
         admin.setAdminId(UUID.randomUUID().toString());
         admin.setHashPassword(GenerateHashPasswordWithSalt.generateStrongPasswordHash(admin.getHashPassword()));
         this.adminService.saveUserAdmin(admin);

@@ -20,7 +20,7 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public Admin findByEmail(String email) {
-        log.info("Find admin by e-mail[{}]",email);
+        log.info("Find admin by e-mail[{}]", email);
         return adminRepository.findByEmail(email);
     }
 
@@ -31,11 +31,8 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public String getHashPass(Admin admin) {
-       return admin.getHashPassword();
+        return admin.getHashPassword();
     }
 
-    @Override
-    public void setHashPass(Admin admin,String hashedPass) {
 
-    }
 }

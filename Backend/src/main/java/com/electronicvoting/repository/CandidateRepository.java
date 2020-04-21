@@ -12,4 +12,7 @@ public interface CandidateRepository extends JpaRepository<Candidate, String> {
     Candidate findByName(String name);
 
     List<Candidate> findAllByVotingId(String votingId);
+    Boolean existsByEmail(String email);
+
+    void deleteByEmail(String email);
 }

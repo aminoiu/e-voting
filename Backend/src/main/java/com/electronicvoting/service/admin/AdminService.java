@@ -10,7 +10,4 @@ public interface AdminService {
     void saveUserAdmin(Admin admin);
 
    String getHashPass(Admin admin);
-
-   void setHashPass(Admin admin,String hashedPass);
-
 }
