@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface VotingDataRepository extends JpaRepository<VotingData, String> {
+    VotingData findByVotingTitle(String votingTitle);
 }

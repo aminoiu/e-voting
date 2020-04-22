@@ -25,5 +25,7 @@ public class CastedVote {
     private Instant timestamp;
     @Column(name ="device_ip",nullable = false)
     private String deviceIp;
+    @Column(name ="candidate_id",nullable = false)
+    private String candidateId;
 
 }
