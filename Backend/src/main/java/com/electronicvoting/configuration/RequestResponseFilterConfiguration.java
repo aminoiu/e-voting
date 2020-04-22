@@ -31,7 +31,7 @@ public class RequestResponseFilterConfiguration implements Filter {
         log.info("----- Response ---------");
 
         rep.getHeaderNames()
-                .forEach(n -> log.info("{} : {}",n,req.getHeader(n)));
+                .forEach(n -> log.info("{} : {}",n,rep.getHeader(n)));
 
        log.info("Response status: {}", rep.getStatus());
         log.info("\n=================================================================================");
