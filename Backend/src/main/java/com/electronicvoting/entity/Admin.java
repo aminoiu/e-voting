@@ -7,6 +7,9 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
 import java.sql.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -34,9 +37,8 @@ public class Admin {
     private Date birthDate;
     @Column(name = "phone_number", length = 20, unique = true, nullable = false)
     private String phoneNumber;
-    @Column(name = "hash_password", nullable = false)
-    private String hashPassword;
-//    @Column(name = "salt")
-//    private String salt;
+    @Column(name = "user_id")
+    private long user_id;
+
 
 }

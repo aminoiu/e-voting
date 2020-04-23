@@ -9,4 +9,5 @@ public class VoterDto {
     String voterId;
     String name;
     String email;
+    String password;
 }

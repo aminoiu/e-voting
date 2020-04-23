@@ -11,7 +11,7 @@ import javax.persistence.Table;
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name = "voting_data")
+@Table(name = "voting_data",schema = "voting_data")
 public class VotingData {
 
     @Id
@@ -25,8 +25,8 @@ public class VotingData {
     private Integer votersNumber;
     @Column(name = "candidates_number",nullable = false)
     private Integer candidatesNumber;
-    @Column(name = "votes_number",nullable = false)
+    @Column(name = "votes_number")
     private Integer votesNumber;
-    @Column(name = "voting_winner",nullable = false)
+    @Column(name = "voting_winner")
     private String votingWinner;
 }

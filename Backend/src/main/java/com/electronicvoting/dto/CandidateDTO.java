@@ -9,4 +9,6 @@ public class CandidateDTO {
     String candidateId;
     String name;
     String email;
+    String password;
+    String votingTitle;
 }

@@ -1,6 +1,10 @@
 package com.electronicvoting.configuration;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.jmx.export.annotation.ManagedOperation;
+import org.springframework.jmx.export.annotation.ManagedOperationParameter;
+import org.springframework.jmx.export.annotation.ManagedOperationParameters;
+import org.springframework.jmx.export.annotation.ManagedResource;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.*;
@@ -8,16 +12,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Collections;
-
+@ManagedResource
 @Component
 @Slf4j
 public class RequestResponseFilterConfiguration implements Filter {
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
+    public void init(FilterConfig filterConfig) {
 
     }
 
+
+    @ManagedOperation(description = "Changed request filter content")
+    @ManagedOperationParameters({
+            @ManagedOperationParameter(name = "filter", description = "new filter content")
+    })
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) servletRequest;

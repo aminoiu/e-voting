@@ -9,7 +9,7 @@ import java.time.Instant;
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name = "transactions")
+@Table(name = "transactions",schema = "blockchain")
 public class BlockchainTransaction {
 
     @Id

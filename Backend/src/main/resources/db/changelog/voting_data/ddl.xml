@@ -3,10 +3,10 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
     <changeSet id="142b8ff9-cec3-4f2a-930a-fa3799f0e1d8" author="aminoiu">
-        <validCheckSum>8:ab865a8f168149ecfc7b3ab5f279c345</validCheckSum>
+        <validCheckSum>8:a1a85475aa54688584b42351d20d789d</validCheckSum>
         <createTable tableName="admin">
             <column name="admin_id" type="VARCHAR(255)">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_ADMINS_TABLE"/>
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_ADMIN_TABLE"/>
             </column>
             <column name="name" type="VARCHAR(255)">
                 <constraints nullable="false"/>
@@ -30,9 +30,10 @@
             <column name="phone_number" type="VARCHAR(20)">
                 <constraints nullable="false"/>
             </column>
-            <column name="hash_password" type="VARCHAR(255)">
+            <column name="user_id" type="BIGINT">
                 <constraints nullable="false"/>
             </column>
+
         </createTable>
 
         <createTable tableName="voter">
@@ -45,10 +46,10 @@
             <column name="email" type="VARCHAR(100)">
                 <constraints nullable="false" unique="true" validateUnique="true"/>
             </column>
-            <column name="hash_password" type="VARCHAR(255)">
+            <column name="voting_id" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="voting_id" type="VARCHAR(255)">
+            <column name="user_id" type="BIGINT">
                 <constraints nullable="false"/>
             </column>
 
@@ -62,18 +63,16 @@
                 <constraints nullable="false"/>
             </column>
             <column name="profile_id" type="VARCHAR(255)">
-                <constraints nullable="false"/>
             </column>
             <column name="email" type="VARCHAR(100)">
                 <constraints nullable="false" unique="true" validateUnique="true"/>
             </column>
             <column name="cand_type_id" type="VARCHAR(255)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="hash_password" type="VARCHAR(255)">
-                <constraints nullable="false"/>
             </column>
             <column name="voting_id" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="BIGINT">
                 <constraints nullable="false"/>
             </column>
 
@@ -96,10 +95,8 @@
                 <constraints nullable="false"/>
             </column>
             <column name="votes_number" type="BIGINT">
-                <constraints nullable="false"/>
             </column>
             <column name="voting_winner" type="VARCHAR(255)">
-                <constraints nullable="false"/>
             </column>
 
         </createTable>
@@ -134,6 +131,32 @@
             </column>
 
         </createTable>
+
+        <createTable tableName="roles" schemaName="voting_data">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_ROLE_ID_TABLE"/>
+            </column>
+            <column name="name" type="VARCHAR(10)"/>
+        </createTable>
+        <createTable tableName="users" schemaName="voting_data">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_USER_ID_TABLE"/>
+            </column>
+            <column name="username" type="VARCHAR(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="email" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <createTable tableName="users_role" schemaName="voting_data">
+            <column name="user_id" type="BIGINT"/>
+            <column name="role_id" type="BIGINT"/>
+        </createTable>
+
 
     </changeSet>
 </databaseChangeLog>

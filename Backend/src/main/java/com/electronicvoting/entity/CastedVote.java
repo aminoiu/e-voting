@@ -12,7 +12,7 @@ import java.time.Instant;
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name = "casted_vote")
+@Table(name = "casted_vote",schema = "voting_data")
 public class CastedVote {
     @Id
     @Column(name ="vote_id")

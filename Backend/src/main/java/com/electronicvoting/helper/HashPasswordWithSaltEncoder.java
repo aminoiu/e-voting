@@ -2,10 +2,13 @@ package com.electronicvoting.helper;
 
 
 import lombok.AllArgsConstructor;
+import lombok.SneakyThrows;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import javax.inject.Named;
+import javax.validation.executable.ValidateOnExecution;
 import java.math.BigInteger;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
@@ -13,8 +16,8 @@ import java.security.spec.InvalidKeySpecException;
 
 @Named
 @AllArgsConstructor
-public class GenerateHashPasswordWithSalt {
-    public static String generateStrongPasswordHash(String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
+public class HashPasswordWithSaltEncoder implements PasswordEncoder {
+    public String generateStrongPasswordHash(String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
         int iterations = 1000;
         char[] chars = password.toCharArray();
         byte[] salt = getSalt();
@@ -44,5 +47,17 @@ public class GenerateHashPasswordWithSalt {
         }else{
             return hex;
         }
+    }
+
+    @SneakyThrows
+    @Override
+    public String encode(CharSequence charSequence) {
+        return generateStrongPasswordHash(charSequence.toString());
+    }
+
+    @SneakyThrows
+    @Override
+    public boolean matches(CharSequence charSequence, String s) {
+        return ValidatePassword.validatePassword(charSequence.toString(),s);
     }
 }

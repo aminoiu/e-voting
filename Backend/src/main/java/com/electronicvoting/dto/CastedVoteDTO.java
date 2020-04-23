@@ -1,10 +1,7 @@
 package com.electronicvoting.dto;
 
-import com.electronicvoting.entity.CastedVote;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.sql.Date;
 import java.time.Instant;
 
 @Data

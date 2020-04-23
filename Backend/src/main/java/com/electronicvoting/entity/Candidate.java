@@ -12,7 +12,7 @@ import javax.validation.constraints.Email;
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name = "candidate")
+@Table(name = "candidate",schema = "voting_data")
 public class Candidate {
     @Id
     @Column(name = "candidate_id")
@@ -26,10 +26,9 @@ public class Candidate {
     private String email;
     @Column(name = "cand_type_id", nullable = false)
     private String candTypeId;
-    @Column(name = "hash_password", nullable = false)
-    private String hashPass;
     @Column(name = "voting_id", nullable = false)
     private String votingId;
-//    @Column(name = "salt")
-//    private String salt;
+    @Column(name = "user_id")
+    private long user_id;
+
 }

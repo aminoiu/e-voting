@@ -96,6 +96,30 @@
 			<artifactId>spring-boot</artifactId>
 			<version>2.2.5.RELEASE</version>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.xml.bind</groupId>
+			<artifactId>jaxb-api</artifactId>
+			<version>2.3.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.auth0</groupId>
+			<artifactId>java-jwt</artifactId>
+			<version>3.4.0</version>
+		</dependency>
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>0.9.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.soulwing.jwt</groupId>
+			<artifactId>jwt-util</artifactId>
+			<version>1.2.5</version>
+		</dependency>
 
 	</dependencies>
 
@@ -112,7 +136,7 @@
 				<executions>
 					<execution>
 						<id>db1</id>
-						<phase>compile</phase>
+						<phase>generate-resources</phase>
 						<configuration>
 							<changeLogFile>db\changelog\voting_data\liquibase-changeLog-master-schema1.xml</changeLogFile>
 							<driver>org.postgresql.Driver</driver>
@@ -129,7 +153,7 @@
 					</execution>
 					<execution>
 						<id>db2</id>
-						<phase>compile</phase>
+						<phase>generate-resources</phase>
 						<configuration>
 							<changeLogFile>db\changelog\blockchain\liquibase-changeLog-master-schema2.xml</changeLogFile>
 							<driver>org.postgresql.Driver</driver>

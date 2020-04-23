@@ -11,7 +11,7 @@ import javax.persistence.Table;
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name = "blocks")
+@Table(name = "blocks",schema = "blockchain")
 public class DataBlock {
     @Id
     @Column(name="block_id")

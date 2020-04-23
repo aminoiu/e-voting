@@ -46,7 +46,7 @@
     <logger name="com.electronicvoting.configuration.RequestResponseFilterConfiguration" level="info" additivity="false">
         <appender-ref ref="Request_Response"/>
     </logger>
-    <logger name="com.electronicvoting" level="info" additivity="false">
+    <logger name="com.electronicvoting" level="debug" additivity="false">
         <appender-ref ref="RollingFile"/>
     </logger>
 </configuration>

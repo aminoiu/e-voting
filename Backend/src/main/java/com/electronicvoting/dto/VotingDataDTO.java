@@ -6,10 +6,10 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class VotingDataDTO {
-    String votingId;
-    String votingName;
-    String voters_number;
-    String votes_Number;
+    String votingTitle;
+    Integer votersNumber;
+    Integer votesNumber;
     String votingWinner;
-    String candidatesNumber;
+    Integer candidatesNumber;
+    String adminEmail;
 }

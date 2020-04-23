@@ -1,7 +1,7 @@
 package com.electronicvoting.service.voter;
 
+import com.electronicvoting.dto.VoterDto;
 import com.electronicvoting.entity.Voter;
-import com.electronicvoting.repository.CandidateRepository;
 import com.electronicvoting.repository.VoterRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -27,15 +27,13 @@ public class VoterServiceImpl implements VoterService {
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED)
-    public void saveUserVoter(Voter voter) {
+    public void saveUserVoter(VoterDto voterDto) {
+        Voter voter=new Voter();
+        //TODO implement
         this.voterRepository.save(voter);
     }
 
-    @Override
-    @Transactional(propagation = Propagation.REQUIRED)
-    public String getHashPass(Voter voter) {
-        return voter.getHashPassword();
-    }
+
 
 
 }
