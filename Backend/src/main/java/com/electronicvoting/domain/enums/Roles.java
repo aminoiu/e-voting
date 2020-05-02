@@ -1,4 +1,4 @@
-package com.electronicvoting.enums;
+package com.electronicvoting.domain.enums;
 
 public enum Roles {
     ADMIN,

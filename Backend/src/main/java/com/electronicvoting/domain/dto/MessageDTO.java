@@ -1,4 +1,4 @@
-package com.electronicvoting.dto;
+package com.electronicvoting.domain.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

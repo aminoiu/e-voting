@@ -1,7 +1,12 @@
 package com.electronicvoting.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name="users_role",schema = "voting_data")
 public class UsersRole {

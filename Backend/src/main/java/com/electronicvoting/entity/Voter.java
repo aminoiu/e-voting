@@ -1,5 +1,7 @@
 package com.electronicvoting.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,8 +13,10 @@ import javax.validation.constraints.Email;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "voter",schema = "voting_data")
+@Builder
 public class Voter {
     @Id
     @Column(name = "voter_id")
@@ -22,9 +26,7 @@ public class Voter {
     @Email
     @Column(name = "email", nullable = false)
     private String email;
-    @Column(name = "voting_id", nullable = false)
-    private String votingId;
     @Column(name = "user_id")
-    private long user_id;
+    private long userId;
 
 }

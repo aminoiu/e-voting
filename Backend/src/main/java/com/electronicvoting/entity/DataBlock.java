@@ -1,5 +1,7 @@
 package com.electronicvoting.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,8 +12,10 @@ import javax.persistence.Table;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "blocks",schema = "blockchain")
+@Builder
 public class DataBlock {
     @Id
     @Column(name="block_id")

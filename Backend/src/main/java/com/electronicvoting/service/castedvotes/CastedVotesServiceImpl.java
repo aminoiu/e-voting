@@ -1,46 +1,30 @@
 package com.electronicvoting.service.castedvotes;
 
-import com.electronicvoting.dto.CastedVoteDTO;
-import com.electronicvoting.entity.Candidate;
+import com.electronicvoting.domain.dto.CastedVoteDTO;
 import com.electronicvoting.entity.CastedVote;
-import com.electronicvoting.entity.Voter;
-import com.electronicvoting.entity.VotingData;
 import com.electronicvoting.repository.CastedVoteRepository;
 import com.electronicvoting.service.candidate.CandidateService;
 import com.electronicvoting.service.voter.VoterService;
 import com.electronicvoting.service.votingdata.VotingDataService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.UUID;
 
 @Service
+@RequiredArgsConstructor
 public class CastedVotesServiceImpl implements CastedVotesService {
-    VoterService voterService;
-    CandidateService candidateService;
-    VotingDataService votingDataService;
-
-    CastedVoteRepository castedVoteRepository;
-
-
-    CastedVotesServiceImpl(CastedVoteRepository castedVoteRepository) {
-        this.castedVoteRepository = castedVoteRepository;
-    }
+    private final VoterService voterService;
+    private final CandidateService candidateService;
+    private final VotingDataService votingDataService;
+    private final CastedVoteRepository castedVoteRepository;
 
     @Override
-    @Transactional(propagation = Propagation.REQUIRED)
+    @Transactional
     public void saveVote(CastedVoteDTO castedVoteDTO) {
-        Voter voter = voterService.findByEmail(castedVoteDTO.getVoterEmail());
-        Candidate candidate = candidateService.findByEmail(castedVoteDTO.getVote());//the vote will represent the candidate email
-        VotingData votingData = votingDataService.findByVotingTitle(castedVoteDTO.getVotingTitle());
-        CastedVote castedVote = new CastedVote();
+        CastedVote castedVote = CastedVoteDTO.dtoToEntity(castedVoteDTO);
         castedVote.setVoteId(UUID.randomUUID().toString());
-        castedVote.setDeviceIp(castedVoteDTO.getDeviceIp());
-        castedVote.setVoterId(voter.getVoterId());
-        castedVote.setVotingId(votingData.getVotingId());
-        castedVote.setCandidateId(candidate.getCandidateId());
-        castedVote.setTimestamp(castedVoteDTO.getTimestamp());
         castedVoteRepository.save(castedVote);
 
     }

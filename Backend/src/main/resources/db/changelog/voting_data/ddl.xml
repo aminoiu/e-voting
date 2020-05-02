@@ -46,9 +46,6 @@
             <column name="email" type="VARCHAR(100)">
                 <constraints nullable="false" unique="true" validateUnique="true"/>
             </column>
-            <column name="voting_id" type="VARCHAR(255)">
-                <constraints nullable="false"/>
-            </column>
             <column name="user_id" type="BIGINT">
                 <constraints nullable="false"/>
             </column>
@@ -66,11 +63,6 @@
             </column>
             <column name="email" type="VARCHAR(100)">
                 <constraints nullable="false" unique="true" validateUnique="true"/>
-            </column>
-            <column name="cand_type_id" type="VARCHAR(255)">
-            </column>
-            <column name="voting_id" type="VARCHAR(255)">
-                <constraints nullable="false"/>
             </column>
             <column name="user_id" type="BIGINT">
                 <constraints nullable="false"/>
@@ -108,10 +100,10 @@
             <column name="voting_id" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="voter_id" type="VARCHAR(255)">
+            <column name="voter_email" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="candidate_id" type="VARCHAR(255)">
+            <column name="candidate_email" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
             <column name="timestamp" type="TIMESTAMP">
@@ -120,16 +112,6 @@
             <column name="device_ip" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
-        </createTable>
-
-        <createTable tableName="candidate_type">
-            <column name="type_id" type="VARCHAR(255)">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_CANDID_TYPE_TABLE"/>
-            </column>
-            <column name="type" type="VARCHAR(255)">
-                <constraints nullable="false"/>
-            </column>
-
         </createTable>
 
         <createTable tableName="roles" schemaName="voting_data">

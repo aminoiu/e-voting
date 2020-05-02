@@ -15,14 +15,6 @@
             <column name="street" value="Bulgara 33/1"/>
             <column name="phone_number" value="+373069384394"/>
         </insert>
-        <insert tableName="candidate_type">
-            <column name="type_id" value="6944b0c7-6fa6-48ed-be4c-3fffc02b30ab"/>
-            <column name="type" value="person"/>
-        </insert>
-        <insert tableName="candidate_type">
-            <column name="type_id" value="98e74d94-61ad-43b5-b837-daee6d01d57a"/>
-            <column name="type" value="option"/>
-        </insert>
         <rollback>
 
         </rollback>

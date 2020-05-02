@@ -1,42 +1,40 @@
 package com.electronicvoting.service.votingdata;
 
-import com.electronicvoting.dto.VotingDataDTO;
+import com.electronicvoting.domain.dto.VotingDataDTO;
 import com.electronicvoting.entity.VotingData;
 import com.electronicvoting.repository.VotingDataRepository;
 import com.electronicvoting.service.admin.AdminService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.UUID;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class VotingDataServiceImpl implements VotingDataService {
-    VotingDataRepository votingDataRepository;
-    AdminService adminService;
-
-    VotingDataServiceImpl(VotingDataRepository votingDataRepository) {
-        this.votingDataRepository = votingDataRepository;
-    }
-
+    private final VotingDataRepository votingDataRepository;
+    private final AdminService adminService;
 
     @Override
-    @Transactional(propagation = Propagation.REQUIRED)
+    @Transactional(readOnly = true)
     public VotingData findByVotingTitle(String votingTitle) {
         return votingDataRepository.findByVotingTitle(votingTitle);
     }
 
     @Override
-    @Transactional(propagation = Propagation.REQUIRED)
+    @Transactional
     public void saveVotingSession(VotingDataDTO votingDataDTO) {
-        VotingData votingData = new VotingData();
-        votingData.setVotingId(UUID.randomUUID().toString());
-        votingData.setAdminId(adminService.findByEmail(votingDataDTO.getAdminEmail()).getAdminId());
-        votingData.setVotersNumber(votingDataDTO.getVotersNumber());
-        votingData.setCandidatesNumber(votingDataDTO.getCandidatesNumber());
-        votingData.setVotingTitle(votingDataDTO.getVotingTitle());
+        VotingData votingData = VotingDataDTO.dtoToEntity(votingDataDTO);
+        votingData.setVotingId(votingDataDTO.getVotingTitle());
         votingDataRepository.save(votingData);
+    }
+
+    @Override
+    public String findTitleById(String id) {
+        VotingData votingData=votingDataRepository.findByVotingId(id).orElseThrow(() ->
+                new RuntimeException("Error: Voting data not found."));
+        return votingData.getVotingTitle();
     }
 }

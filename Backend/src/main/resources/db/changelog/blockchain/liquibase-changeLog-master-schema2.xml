@@ -4,7 +4,7 @@
 
    <include file="ddl.xml" relativeToChangelogFile="true"/>
    <include file="ddl_constraint.xml" relativeToChangelogFile="true"/>
-   <include file="dml.xml" relativeToChangelogFile="true"/>
+   <include file="migration.xml" relativeToChangelogFile="true"/>
 
 
 </databaseChangeLog>
