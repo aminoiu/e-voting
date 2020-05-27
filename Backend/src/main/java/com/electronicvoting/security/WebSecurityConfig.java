@@ -25,7 +25,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private UserDetailsServiceImpl userDetailsService;
 
 
-    private AuthEntryPointJwt unauthorizedHandler;
+    private RequestAutheticationEntryPoint requestAutheticationEntryPoint;
 
     public WebSecurityConfig(UserDetailsServiceImpl userDetailsService) {
         this.userDetailsService = userDetailsService;
@@ -55,13 +55,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable()
-                .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
+                .authorizeRequests().and()
+                .exceptionHandling().
+                authenticationEntryPoint(requestAutheticationEntryPoint).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests()
                 .antMatchers("/api/auth/**").permitAll()
-                .antMatchers("/evoting/**").permitAll()
+                //.antMatchers("/evoting/**").permitAll()
                 .antMatchers("/actuator/**").permitAll()
-                .anyRequest().authenticated();
+//                .antMatchers("/**").permitAll()
+                .antMatchers("swagger-ui.html").permitAll()
+                .anyRequest().authenticated().and()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        ;
 
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
     }

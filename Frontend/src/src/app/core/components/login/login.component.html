@@ -1,1 +1,67 @@
-<p>login works!</p>
+<nav class="navbar navbar-expand-xl bg-dark navbar-dark">
+  <!-- Brand/logo -->
+  <a class="navbar-brand" href="#">
+    <img alt="logo" src="assets/images/LOGO.jpg" style="width:60px;">
+  </a>
+
+  <!-- Links -->
+  <ul class="navbar-nav na-e ">
+    <li class="nav-item">
+      <a class="nav-link text-light" href="#">PRODUCTS</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link text-light" href="#">FEATURES</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link text-light" href="#">STATISTICS</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link text-light" href="#">HELP</a>
+    </li>
+    <span class=""></span>
+
+  </ul>
+
+
+</nav>
+<br>
+<div class="container" style="width: 30%;padding-top: 20px; border: solid">
+  <div class="modal-header" style=" padding-top: 10px">
+    <h4 class="modal-title" id="modal-basic-title" style="alignment: center">Log In</h4>
+    <button aria-label="Close" class="close" routerLink="/" type="button">
+      <span aria-hidden="true">&times;</span>
+    </button>
+
+  </div>
+
+  <div class="modal-body" style="">
+    <form (ngSubmit)="onSubmit()" [formGroup]="loginForm">
+
+      <div class="form-group">
+        <label for="email">E-mail</label>
+
+        <input class="form-control" formControlName="email" id="email" name="email" type="email">
+        <p *ngIf="email.hasError('invalid')">Invalid username or password!</p>
+
+      </div>
+
+      <div class="form-group ">
+        <label for="password">Password</label>
+
+        <input class="form-control" formControlName="password" id="password" name="password" type="password">
+        <p *ngIf="password.hasError('invalid')">Invalid username or password!</p>
+
+      </div>
+
+      <div class="form-group ">
+        <label class="text-info" for="password">* If you are an administrator, make sure you have the fingerprint
+          scanner connected</label>
+      </div>
+      <div class="modal-footer" style="">
+        <a (click)="resetPassword()" class="btn-link text-primary" type="button">*Reset password</a>
+        <button class="btn btn-outline-dark" type="submit">Submit</button>
+      </div>
+    </form>
+  </div>
+
+</div>

@@ -1,0 +1,28 @@
+#sign-up{
+  margin-left: 10px;
+  color: white;
+  border: solid 1px white;
+  background-color: floralwhite;
+}
+
+header,
+.view {
+  height: 100%;
+}
+
+html,body {
+
+  height: 100%;
+
+  position: relative;
+
+}
+footer
+{
+  background: #7f7f7f;
+  padding: 30px;
+}
+
+.copyright{
+  padding-top: 21px;
+}

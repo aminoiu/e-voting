@@ -3,23 +3,27 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.2.6.RELEASE</version>
+		<groupId>com.electronicvoting</groupId>
+		<artifactId>EVoting</artifactId>
+		<version>1.0-SNAPSHOT</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.electronicvoting</groupId>
+
 	<artifactId>Backend</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>Backend</name>
-	<description>E-Voting project</description>
 
 	<properties>
-		<java.version>11</java.version>
+<!--		<java.version>11</java.version>-->
 		<defaultSchemaName>voting_data</defaultSchemaName>
 		<changelogSchemaName>voting_data</changelogSchemaName>
+		<java.version>11</java.version>
 	</properties>
-
+	<repositories>
+		<repository>
+			<id>jcenter-snapshots</id>
+			<name>jcenter</name>
+			<url>http://oss.jfrog.org/artifactory/oss-snapshot-local/</url>
+		</repository>
+	</repositories>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -121,6 +125,27 @@
 			<version>1.2.5</version>
 		</dependency>
 
+		<!--<dependency>
+			<groupId>org.hyperledger.fabric-sdk-java</groupId>
+			<artifactId>fabric-sdk-java</artifactId>
+			<version>2.1.1</version>
+		</dependency>-->
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>3.0.0-SNAPSHOT</version>
+		</dependency>
+<dependency>
+		<groupId>io.springfox</groupId>
+		<artifactId>springfox-swagger2</artifactId>
+		<version>3.0.0-SNAPSHOT</version>
+	</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-data-rest</artifactId>
+			<version>3.0.0-SNAPSHOT</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -138,7 +163,7 @@
 						<id>db1</id>
 						<phase>generate-resources</phase>
 						<configuration>
-							<changeLogFile>db\changelog\voting_data\liquibase-changeLog-master-schema1.xml</changeLogFile>
+							<changeLogFile>D:\ISD\JTOM\Project\e-voting\Backend\src\main\resources\db\changelog\voting_data\liquibase-changeLog-master-schema1.xml</changeLogFile>
 							<driver>org.postgresql.Driver</driver>
 							<url>jdbc:postgresql://localhost:5432/evoting</url>
 							<username>db_user</username>
@@ -155,7 +180,7 @@
 						<id>db2</id>
 						<phase>generate-resources</phase>
 						<configuration>
-							<changeLogFile>db\changelog\blockchain\liquibase-changeLog-master-schema2.xml</changeLogFile>
+							<changeLogFile>D:\ISD\JTOM\Project\e-voting\Backend\src\main\resources\db\changelog\blockchain\liquibase-changeLog-master-schema2.xml</changeLogFile>
 							<driver>org.postgresql.Driver</driver>
 							<url>jdbc:postgresql://localhost:5432/evoting</url>
 							<username>db_user</username>
@@ -171,6 +196,35 @@
 				</executions>
 
 			</plugin>
+
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy-resources</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.directory}/classes/resources/</outputDirectory>
+							<resources>
+								<resource>
+									<directory>${project.parent.basedir}/Frontend/src/dist/evoting-app</directory>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<!--<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>11</source>
+					<target>11</target>
+				</configuration>
+			</plugin>-->
 		</plugins>
 	</build>
 

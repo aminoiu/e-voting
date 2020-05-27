@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./view1.component.css']
 })
 export class View1Component implements OnInit {
-
+  title = 'Admin view1';
   constructor() { }
 
   ngOnInit(): void {
