@@ -1,11 +1,16 @@
 import { TestBed } from '@angular/core/testing';
 
 import { ErrorInterceptor } from './error.interceptor';
+import {HttpClient, HttpHandler} from "@angular/common/http";
+import {Router} from "@angular/router";
 
 describe('ErrorInterceptor', () => {
   beforeEach(() => TestBed.configureTestingModule({
     providers: [
-      ErrorInterceptor
+      ErrorInterceptor,
+      HttpClient,
+      HttpHandler,
+      Router
       ]
   }));
 

@@ -1,13 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { first } from 'rxjs/operators';
 import {AlertService} from "../../services/alert/alert.service";
 import {AuthService} from "../../services/auth/auth.service";
-import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {LoginDto} from "../../models/login-dto";
 import {HttpErrorResponse} from "@angular/common/http";
 import {HttpStatus} from "../../models/http-status.enum";
+import {LoginDto} from "../../models/login-dto.model";
 
 
 
@@ -35,6 +33,10 @@ export class LoginComponent implements OnInit {
 
   get password() { return this.loginForm.get('password'); }
 
+  get f() { return this.loginForm.controls; }
+
+  // convenience getter for easy access to form fields
+
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required,Validators.email]],
@@ -44,10 +46,6 @@ export class LoginComponent implements OnInit {
     // get return url from route parameters or default to '/'
     // this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
-
-  // convenience getter for easy access to form fields
-
-  get f() { return this.loginForm.controls; }
 
   onSubmit() {
 

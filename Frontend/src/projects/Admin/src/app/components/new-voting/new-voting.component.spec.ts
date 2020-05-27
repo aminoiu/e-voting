@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { View2Component } from './view2.component';
+import { NewVotingComponent } from './new-voting.component';
 
 describe('View2Component', () => {
-  let component: View2Component;
-  let fixture: ComponentFixture<View2Component>;
+  let component: NewVotingComponent;
+  let fixture: ComponentFixture<NewVotingComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ View2Component ]
+      declarations: [ NewVotingComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(View2Component);
+    fixture = TestBed.createComponent(NewVotingComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

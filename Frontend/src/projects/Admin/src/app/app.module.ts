@@ -3,16 +3,16 @@ import {ModuleWithProviders, NgModule} from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { View1Component } from './components/view1/view1.component';
-import { View2Component } from './components/view2/view2.component';
+import { AdminHomeComponent } from './components/admin-home/admin-home.component';
+import { NewVotingComponent } from './components/new-voting/new-voting.component';
 import { NavComponent } from './components/nav/nav.component';
 import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    View1Component,
-    View2Component,
+    AdminHomeComponent,
+    NewVotingComponent,
     NavComponent,
     FooterComponent
   ],

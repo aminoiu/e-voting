@@ -1,7 +1,7 @@
 <admin-app-nav></admin-app-nav>
 
 
-<body style="padding-bottom: 20%;">
+<body class="content" style="padding-bottom: 20%;">
 <br><br>
 <div class="container" style="padding-top: 20px; border: solid">
   <div class="modal-header" style=" padding-top: 10px">
@@ -108,7 +108,7 @@
 
       <div class="modal-footer" style="">
         <!--        <a (click)="resetPassword()" class="btn-link text-primary" type="button">*Reset password</a>-->
-        <button class="btn btn-outline-dark rounded-pill font-weight-bold" type="submit">CONTINUE</button>
+        <button (click)="continue1()" class="btn btn-outline-dark rounded-pill font-weight-bold" type="submit">CONTINUE</button>
       </div>
     </form>
   </div>
@@ -117,4 +117,7 @@
 </body>
 
 <app-footer></app-footer>
+
+
+
 

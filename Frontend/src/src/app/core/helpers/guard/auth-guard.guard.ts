@@ -1,11 +1,7 @@
 import { Injectable } from '@angular/core';
-import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router} from '@angular/router';
-import {Observable, of} from 'rxjs';
+import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot} from '@angular/router';
 import {AuthService} from "../../services/auth/auth.service";
 import {MatDialog} from "@angular/material/dialog";
-import {LoginComponent} from "../../components/login/login.component";
-import {User} from "../../models/user";
-import {switchMap, take} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +21,7 @@ export class AuthGuard implements CanActivate {
     this.router.navigate(['/login'], { queryParams: { returnUrl: state.url }});
     return false;
   }*/
-  constructor(readonly auth: AuthService, private dialog: MatDialog) {}
+  constructor(readonly auth: AuthService) {}
 
   /** Returns true whenever the user is authenticated */
   get authenticated() { return this.auth.authenticated; }

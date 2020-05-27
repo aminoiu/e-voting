@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {View2Component} from "./components/view2/view2.component";
-import {View1Component} from "./components/view1/view1.component";
+import {NewVotingComponent} from "./components/new-voting/new-voting.component";
+import {AdminHomeComponent} from "./components/admin-home/admin-home.component";
 
 
 const routes: Routes = [
-  { path: 'admin/one', component: View1Component },
-  { path: 'admin/start-new-voting', component: View2Component },
+  { path: 'admin/one', component: AdminHomeComponent },
+  { path: 'admin/start-new-voting', component: NewVotingComponent },
   { path: 'admin', redirectTo: 'admin/one' }
 ];
 

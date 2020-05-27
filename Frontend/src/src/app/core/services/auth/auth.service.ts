@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import {User} from "../../models/user";
 import {BehaviorSubject, Observable} from "rxjs";
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {map} from "rxjs/operators";
 import {AlertService} from "../alert/alert.service";
-import {LoginDto} from "../../models/login-dto";
 import {HttpStatus} from "../../models/http-status.enum";
 import {Router} from "@angular/router";
+import {User} from "../../models/user.model";
+import {LoginDto} from "../../models/login-dto.model";
 
 @Injectable({
   providedIn: 'root'
@@ -16,15 +16,14 @@ export class AuthService {
   authenticated = false;
   public readonly TOKEN_KEY: string = 'E-voting-SecretKeyToGenJWTs';
   private currentUserSubject: BehaviorSubject<User>;
-  private alertService: AlertService;
   private role: string;
-  private readonly BASE_URL: string = 'http://localhost:8080';
+/*  private readonly BASE_URL: string = 'http://localhost:8080';
   private readonly SING_IN_URL: string = '';
   private readonly SING_UP_URL: string = '';
-  private readonly EMAIL_VERIFICATION_URL;
+  private readonly EMAIL_VERIFICATION_URL;*/
   private router: Router;
 
-  constructor(private http: HttpClient, router: Router) {
+  constructor(private http: HttpClient) {
     this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
     this.currentUser = this.currentUserSubject.asObservable();
   }
@@ -37,19 +36,19 @@ export class AuthService {
     return this.role;
   }
 
-  login(loginDTO: LoginDto) {
+  login(loginDto: LoginDto) {
 
-    this.getRole(loginDTO.email).toPromise()
+    this.getRole(loginDto.email).toPromise()
       .then(role => {
         this.role = role;
-        console.log(loginDTO.email + " has role: " + role);
+        console.log(loginDto.email + " has role: " + role);
       })
       .catch(error => {
-        this.handleError(error, loginDTO.email);
+        this.handleError(error, loginDto.email);
       });
 
 
-    return this.http.post<any>('http://localhost:8080/evoting/users/', loginDTO)
+    return this.http.post<any>('http://localhost:8080/evoting/users/', loginDto)
       .pipe(map(user => {
         // store user details and jwt token in local storage to keep user logged in between page refreshes
         sessionStorage.setItem('currentUser', JSON.stringify(user));
@@ -61,9 +60,9 @@ export class AuthService {
 
   }
 
-  // logout() {
-  //
-  // }
+  logout() {
+
+  }
 
   getToken() {
 
