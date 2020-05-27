@@ -10,6 +10,13 @@ The main technology that will validate and monitor the voting process will be th
 
 The scope of this project is to provide a software solution for an easier and a more secured way of voting process, the electronical one. This means that the voter can give his/her option remotely, and to be sure that his vote is confident and couldn't be modified by anyone.
 
+## Current progress
+At the moment project has 2 modules: Frontend and Backend. 
+The Backend module has the most basic business logic implemented. The Frontend module has done the Home page, Log In page and partially the Admin module.
+## To Do
+For the backend must be implemented the blockchain algorithm, implement business logic for voters and candidates, implement business logic for polls and surveys.
+For the Frontend must be implemented the module for each type of user, the business logic for voting process, statistics.
+
 # More information:
 <ul>
   <li>
@@ -26,4 +33,6 @@ The scope of this project is to provide a software solution for an easier and a 
   
    <li>
      <a href="https://github.com/aminoiu/e-voting/wiki/Informational-viewpoints"> Informational viewpoint
+ 
+ 
   
