@@ -1,0 +1,356 @@
+<admin-app-nav></admin-app-nav>
+<head>
+  <title>Bootstrap Example</title>
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+
+<body style="padding-bottom: 20%; background-image: url('assets/images/Background.png'); background-repeat: no-repeat; background-size: cover; background-position: center center; ">
+<div class="supreme-container">
+<br><br>
+<div #main class="container" style="padding-top: 20px; border: solid">
+  <div class="modal-header row " style=" padding-top: 10px">
+    <h4 class="modal-title text-center" id="modal-basic-title" style="padding-left:35% ">Create a new voting
+      session</h4>
+    <button aria-label="Close" class="close " routerLink="/admin" type="button">
+      <span aria-hidden="true">&times;</span>
+    </button>
+
+  </div>
+
+  <div [ngClass]="{'active': main}" class="modal-body container" style="">
+    <form (ngSubmit)="onSubmit()" [formGroup]="form1"> <!--[formGroup]="loginForm" (ngSubmit)="onSubmit()-->
+
+      <div class="form-group">
+        <label class="font-weight-bold" for="title">Title</label>
+        <input class="form-control shadow-sm bg-white rounded" formControlName="title" id="title"
+               required type="text">
+        <!--<mat-hint align="end">
+          Can contain only characters.
+          Maximum 25
+        </mat-hint>-->
+        <!--        <p *ngIf="email.hasError('invalid')">Invalid username or password!</p>-->
+      </div>
+
+      <div class="form-group">
+        <label class="font-weight-bold" for="voting_type">Voting type</label>
+        <select class="form-control bg-light" formControlName="voting_type" id="voting_type">
+          <option>Candidate election</option>
+          <option>Option election</option>
+        </select>
+        <!--        <p *ngIf="password.hasError('invalid')">Invalid username or password!</p>-->
+      </div>
+
+      <div class="form-group">
+        <label class="font-weight-bold" for="categories">Categories</label>
+        <select class="form-control bg-light" formControlName="categories" id="categories">
+          <option>Management</option>
+          <option>Education</option>
+        </select>
+        <!--        <p *ngIf="password.hasError('invalid')">Invalid username or password!</p>-->
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col form-group" style="padding-left: 0">
+            <label class="font-weight-bold" for="start_date">Voting start date</label>
+            <input class="form-control shadow-sm bg-white rounded" formControlName="start_date" id="start_date"
+                   style=""
+                   type="date">
+            <!--        <p *ngIf="password.hasError('invalid')">Invalid username or password!</p>-->
+          </div>
+          <div class="col form-group" style="padding-right: 0">
+            <label class="font-weight-bold" for="start_time">Voting start time</label>
+            <input class="form-control float-right shadow-sm bg-white rounded" formControlName="start_time" id="start_time"
+                   style="; padding-right: 0"
+                   type="time">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col  form-group" style="padding-left: 0">
+            <label class="font-weight-bold" for="end_date">Voting end date</label>
+            <input class="form-control shadow-sm bg-white rounded" formControlName="end_date" id="end_date"
+                   style=""
+                   type="date">
+            <!--        <p *ngIf="password.hasError('invalid')">Invalid username or password!</p>-->
+          </div>
+          <div class="col form-group" style="padding-right: 0">
+            <label class="font-weight-bold" for="end_time">Voting end time</label>
+            <input class="form-control float-right shadow-sm bg-white rounded" formControlName="end_time" id="end_time"
+                   style="; padding-right: 0"
+                   type="time">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col dropdown show  form-group" style="padding-left: 0">
+            <label class="font-weight-bold" for="add_voters">Choose how to add voters</label>
+            <select class="form-control bg-light" formControlName="add_voters" id="add_voters">
+              <option>Manual</option>
+              <option>Import</option>
+            </select>
+            <!--        <p *ngIf="password.hasError('invalid')">Invalid username or password!</p>-->
+          </div>
+
+          <div class="col  dropdown show float-right form-group" style="padding-right: 0;">
+            <label class="font-weight-bold " for="add_candidates">Choose how to add candidates</label>
+            <select class="form-control bg-light" formControlName="add_candidates" id="add_candidates">
+              <option>Manual</option>
+              <option>Import</option>
+            </select>
+          </div>
+
+        </div>
+
+      </div>
+      <br>
+
+      <!--<div class="modal-footer" style="">
+        &lt;!&ndash;        <a (click)="resetPassword()" class="btn-link text-primary" type="button">*Reset password</a>&ndash;&gt;
+        <button routerLinkActive="active" (click)="continue1()" class="btn btn-outline-dark rounded-pill font-weight-bold" type="submit">CONTINUE</button>
+      </div>-->
+
+    </form>
+  </div>
+
+</div>
+
+<br><br>
+<!--Form for adding voters-->
+<div #addVotersContainer class="container" style="padding-top: 20px; border: solid">
+  <div class="modal-header row " style=" padding-top: 10px">
+    <h4 class="modal-title text-center" id="modal-basic-title2" style="padding-left:40% ">Add eligible voters</h4>
+
+
+  </div>
+
+  <div [ngClass]="{'active': main}" class="modal-body container" style="">
+    <form (ngSubmit)="onSubmit()" [formGroup]="form2"> <!--[formGroup]="loginForm" (ngSubmit)="onSubmit()-->
+
+      <div class="container">
+
+        <table #voters [hidden]="isEmptyV()" class="table table-striped table-bordered">
+          <thead>
+          <tr>
+            <th>Voter name</th>
+            <th>Voter email</th>
+            <th style="width: 10px">Action</th>
+          </tr>
+          </thead>
+          <tbody>
+
+          <tr #tableRowElement *ngFor="let dynamic of dynamicVotersArray; let i = index;">
+            <ng-container *ngIf="dynamicVotersArray.length>0">
+              <td>
+                {{dynamicVotersArray[i].title1}}
+              </td>
+              <td>
+                {{dynamicVotersArray[i].title2}}
+              </td>
+              <td (click)="deleteVoterRow(i)">
+                <i class="fa fa-trash fa-2x"></i>
+              </td>
+            </ng-container>
+          </tr>
+
+          </tbody>
+        </table>
+        <br>
+        <div class="row">
+          <div class="col form-group" style="padding-left: 0">
+            <label class="font-weight-bold" for="voter_name">Voter name</label>
+            <input class="form-control shadow-sm bg-white rounded" formControlName="voter_name" id="voter_name" name="voter_name"
+                   type="text"
+            > <!--[ngClass]="{'border-danger':voters_error,'border-info':!voters_error}"-->
+            <p #error_message_v class="text-danger"></p>
+          </div>
+          <div class="col form-group" style="padding-right: 0">
+            <label class="font-weight-bold" for="voter_email">Voter email</label>
+            <input class="form-control float-right shadow-sm bg-white rounded" formControlName="voter_email" id="voter_email" name="voter_email"
+                   style="; padding-right: 0"
+                   type="text">
+          </div>
+
+        </div>
+        <div class="row">
+          <div class="col form-group">
+            <button (click)="addVoter()" class="btn font-weight-bold float-right" routerLinkActive="active"
+                    type="submit">ADD
+            </button>
+          </div>
+        </div>
+
+      </div>
+      <br>
+
+      <!--<div class="modal-footer" style="">
+        &lt;!&ndash;        <a (click)="resetPassword()" class="btn-link text-primary" type="button">*Reset password</a>&ndash;&gt;
+        <button routerLinkActive="active" (click)="continue1()" class="btn btn-outline-dark rounded-pill font-weight-bold" type="submit">CONTINUE</button>
+      </div>-->
+
+    </form>
+
+  </div>
+
+</div>
+<!--Form for adding candidates-->
+<br><br>
+<div #addVotersContainer class="container" style="padding-top: 20px; border: solid">
+  <div class="modal-header row " style=" padding-top: 10px">
+    <h4 class="modal-title text-center" id="modal-basic-title3" style="padding-left:40% ">Add voting candidates</h4>
+
+
+  </div>
+
+  <div [ngClass]="{'active': main}" class="modal-body container" style="">
+    <form (ngSubmit)="onSubmit()" [formGroup]="form3"> <!--[formGroup]="loginForm" (ngSubmit)="onSubmit()-->
+
+      <div class="container">
+
+        <table #candidates [hidden]="isEmptyC()" class="table table-striped table-bordered">
+          <thead>
+          <tr>
+            <th>Candidate name</th>
+            <th>Candidate email</th>
+            <th style="width: 10px">Action</th>
+          </tr>
+          </thead>
+          <tbody>
+
+          <tr *ngFor="let dynamic of dynamicCandidatesArray; let i = index;">
+            <ng-container *ngIf="dynamicCandidatesArray.length>0">
+              <td>
+                {{dynamicCandidatesArray[i].title1}}
+              </td>
+              <td>
+                {{dynamicCandidatesArray[i].title2}}
+              </td>
+              <td (click)="deleteCandidateRow(i)">
+                <i class="fa fa-trash fa-2x"></i>
+              </td>
+            </ng-container>
+          </tr>
+
+          </tbody>
+        </table>
+        <br>
+        <div class="row">
+          <div class="col form-group" style="padding-left: 0">
+            <label class="font-weight-bold" for="candidate_name">Candidate name</label>
+            <input class="form-control shadow-sm bg-white rounded" formControlName="candidate_name" id="candidate_name" name="candidate_name"
+                   type="text"
+            > <!--[ngClass]="{'border-danger':voters_error,'border-info':!voters_error}"-->
+            <p #error_message_c class="text-danger"></p>
+          </div>
+          <div class="col form-group" style="padding-right: 0">
+            <label class="font-weight-bold" for="candidate_email">Candidate email</label>
+            <input class="form-control float-right shadow-sm bg-white rounded" formControlName="candidate_email" id="candidate_email" name="candidate_email"
+                   style="; padding-right: 0"
+                   type="text">
+          </div>
+
+        </div>
+        <div class="row">
+          <div class="col form-group">
+            <button (click)="addCandidate()" class="btn font-weight-bold float-right" routerLinkActive="active"
+                    type="submit">ADD
+            </button>
+          </div>
+        </div>
+
+      </div>
+      <br>
+
+      <!--<div class="modal-footer" style="">
+        &lt;!&ndash;        <a (click)="resetPassword()" class="btn-link text-primary" type="button">*Reset password</a>&ndash;&gt;
+        <button routerLinkActive="active" (click)="continue1()" class="btn btn-outline-dark rounded-pill font-weight-bold" type="submit">CONTINUE</button>
+      </div>-->
+
+    </form>
+
+  </div>
+
+
+</div>
+
+</div>
+<div [ngClass]="{'active': main}" class="modal-body container" style="">
+  <form (ngSubmit)="onSubmit()" [formGroup]="form3"> <!--[formGroup]="loginForm" (ngSubmit)="onSubmit()-->
+
+    <div class="container">
+
+      <div class="row text-center">
+        <div class="col form-group">
+          <button (click) = "show()" class="btn font-weight-bold " routerLinkActive="active"
+                  type="submit">START NEW VOTING SESSION
+          </button>
+        </div>
+      </div>
+
+
+
+    </div>
+    <br>
+
+    <!--<div class="modal-footer" style="">
+      &lt;!&ndash;        <a (click)="resetPassword()" class="btn-link text-primary" type="button">*Reset password</a>&ndash;&gt;
+      <button routerLinkActive="active" (click)="continue1()" class="btn btn-outline-dark rounded-pill font-weight-bold" type="submit">CONTINUE</button>
+    </div>-->
+
+  </form>
+
+</div>
+</body>
+
+
+<app-footer></app-footer>
+
+
+
+<!--CONFIRMATION POP UP -->
+<!--<div class="container">-->
+<!--  <h1 class="text-center">Login with bootstrap popup</h1>-->
+<!--  <button type="button" class="btn btn-primary" (click) = "show()">Login</button>-->
+<!--</div>-->
+<!-- Creates the bootstrap modal where the image will appear -->
+<div *ngIf="isFormValid()" [style.display]="showModal ? 'block' : 'none'" aria-hidden="true" aria-labelledby="myModalLabel" class="modal" id="imagemodal" role="dialog" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">Voting information</h4>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="onSubmitConfirmation()" [formGroup]="confirmationForm">
+          <div class="container">
+         <div class="form-group row">
+            <label class="col">Number of voters</label>
+            <label class="col" >{{getVotersNumber()}}</label>
+          </div>
+          <div class="form-group row">
+            <label class="col">Number of candidates</label>
+            <label class="col" >{{getCandidatesNumber()}}</label>
+          </div>
+          <div class="form-group row">
+            <label class="col">Start date and time</label>
+            <label class="col" >{{getStartDateTime()}}</label>
+          </div>
+          <div class="form-group row">
+            <label class="col">End date and time</label>
+            <label class="col">{{getEndDateTime()}}</label>
+          </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+
+        <button (click) = "hide()" class="btn btn-danger float-left mr-auto" data-dismiss="modal" type="button">Close</button>
+        <button (click)="onSubmitConfirmation()" class="btn btn-success rounded-pill float-right" type="submit">FINISH</button>
+
+      </div>
+    </div>
+  </div>
+</div>

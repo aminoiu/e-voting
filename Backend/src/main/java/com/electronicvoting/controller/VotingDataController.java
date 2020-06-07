@@ -1,6 +1,8 @@
 package com.electronicvoting.controller;
 
+import com.electronicvoting.domain.dto.NewVotingDTO;
 import com.electronicvoting.domain.dto.VotingDataDTO;
+import com.electronicvoting.entity.VotingData;
 import com.electronicvoting.service.votingdata.VotingDataService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -16,9 +18,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class VotingDataController {
     private final VotingDataService votingDataService;
 
-    @PostMapping(path = "/create-voting",consumes = "application/json")
+    @PostMapping(path = "/",consumes = "application/json")
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<VotingDataDTO> saveVoteData(@RequestBody VotingDataDTO votingDataDTO) {
+    public ResponseEntity<VotingDataDTO> saveVoteData(@RequestBody NewVotingDTO newVotingDTO) {
+
+        VotingDataDTO votingDataDTO=new VotingDataDTO();
         votingDataService.saveVotingSession(votingDataDTO);
         return ResponseEntity.accepted().build();
     }

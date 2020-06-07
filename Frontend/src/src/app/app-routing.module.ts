@@ -10,8 +10,8 @@ import {AuthGuard} from "./core/helpers/guard/auth-guard.guard";
 const routes: Routes = [
   {path: 'admin',
     loadChildren: '../../projects/Admin/src/app/app.module#AppModuleAdmin', canActivate:[AuthGuard]},
-  {path: 'admin',
-    loadChildren: '../../projects/app2/src/app/app.module#App2SharedModule'},
+ /* {path: 'admin',
+    loadChildren: '../../projects/app2/src/app/app.module#App2SharedModule'},*/
   {path: 'login', component: LoginComponent },
   {path: '', component:ViewMainComponent}  ];
 

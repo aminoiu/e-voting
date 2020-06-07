@@ -1,0 +1,25 @@
+<admin-app-nav></admin-app-nav>
+<br>
+<section style="background:#efefe9;">
+  <div class="container">
+    <div class="board">
+      <!-- Navigation Area (Circular Tabs) -->
+      <new-voting-navbar></new-voting-navbar>
+      <!-- End Navigation Area (Circular Tabs) -->
+
+      <!-- Content Area -->
+      <div class="tab-content">
+        <!-- Nested view  -->
+        <router-outlet></router-outlet>
+      </div>
+      <!-- End Content Area -->
+    </div>
+
+    <!-- For Debugging: show our valid formData -->
+    <pre>{{ formData | json }}</pre>
+  </div>
+</section>
+
+
+<br>
+<app-footer></app-footer>

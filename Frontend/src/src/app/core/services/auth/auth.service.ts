@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import {BehaviorSubject, Observable} from "rxjs";
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
-import {map} from "rxjs/operators";
-import {AlertService} from "../alert/alert.service";
 import {HttpStatus} from "../../models/http-status.enum";
 import {Router} from "@angular/router";
 import {User} from "../../models/user.model";
@@ -41,22 +39,23 @@ export class AuthService {
     this.getRole(loginDto.email).toPromise()
       .then(role => {
         this.role = role;
-        console.log(loginDto.email + " has role: " + role);
+        console.log(loginDto.email + " has role: " + this.role);
+        sessionStorage.setItem('userRole', this.role);
       })
       .catch(error => {
         this.handleError(error, loginDto.email);
       });
 
 
-    return this.http.post<any>('http://localhost:8080/evoting/users/', loginDto)
-      .pipe(map(user => {
+    return this.http.post<any>('http://localhost:8080/evoting/users/login', loginDto);
+      /*.pipe(map(user => {
         // store user details and jwt token in local storage to keep user logged in between page refreshes
         sessionStorage.setItem('currentUser', JSON.stringify(user));
         sessionStorage.setItem('userRole', this.role);
         this.currentUserSubject.next(user);
         this.authenticated = true;
         return user;
-      }));
+      }));*/
 
   }
 
@@ -74,8 +73,8 @@ export class AuthService {
   }
 
   private getRole(email: string) {
-    console.log("url: " + 'http://localhost:8080/evoting/users/{' + email + '}');
-    return this.http.get<string>('http://localhost:8080/evoting/users/{' + email + '}');
+    console.log("url: " + 'http://localhost:8080/evoting/users/login/' + email );
+    return this.http.get<string>('http://localhost:8080/evoting/users/login/' + email);
   }
 
   private handleError(httpError: HttpErrorResponse, email: string) {

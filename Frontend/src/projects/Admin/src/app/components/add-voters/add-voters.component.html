@@ -1,0 +1,113 @@
+<admin-app-nav></admin-app-nav>
+<head>
+  <title>Bootstrap Example</title>
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+
+<body style="padding-bottom: 20%;">
+<br><br>
+<div #main class="container" style="padding-top: 20px; border: solid">
+  <div class="modal-header row " style=" padding-top: 10px">
+    <h4  class="modal-title text-center" id="modal-basic-title" style="padding-left:40% ">Add eligible voters</h4>
+    <button aria-label="Close" class="close " routerLink="/" type="button">
+      <span aria-hidden="true">&times;</span>
+    </button>
+
+  </div>
+
+  <div [ngClass]="{'active': main}" class="modal-body container" style="">
+    <form (ngSubmit)="onSubmit()" [formGroup]="form2"> <!--[formGroup]="loginForm" (ngSubmit)="onSubmit()-->
+
+      <div class="form-group" >
+        <label class="font-weight-bold">{{title}}</label>
+      </div>
+
+      <div  class="form-group">
+        <label class="font-weight-bold" for="voting_type">Voting type</label>
+        <input class="form-control shadow-sm bg-white rounded" formControlName="voting_type" id="voting_type" name="voting_type" type="text">
+        <!--        <p *ngIf="password.hasError('invalid')">Invalid username or password!</p>-->
+      </div>
+
+      <div  class="form-group">
+        <label class="font-weight-bold" for="categories">Categories</label>
+        <select class="form-control bg-light" formControlName="categories" id="categories">
+          <option>Management</option>
+          <option>Education</option>
+        </select>
+        <!--        <p *ngIf="password.hasError('invalid')">Invalid username or password!</p>-->
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col form-group" style="padding-left: 0">
+            <label class="font-weight-bold" for="start_date">Voting start date</label>
+            <input class="form-control shadow-sm bg-white rounded" formControlName="start_date" id="start_date" name="start_date" style=""
+                   type="date">
+            <!--        <p *ngIf="password.hasError('invalid')">Invalid username or password!</p>-->
+          </div>
+          <div class="col form-group" style="padding-right: 0">
+            <label class="font-weight-bold" for="start_time">Voting start time</label>
+            <input class="form-control float-right shadow-sm bg-white rounded" formControlName="start_time" id="start_time" name="start_time"
+                   style="; padding-right: 0"
+                   type="time">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col  form-group" style="padding-left: 0">
+            <label class="font-weight-bold"  for="end_date">Voting end date</label>
+            <input class="form-control shadow-sm bg-white rounded" formControlName="end_date" id="end_date" name="end_date" style=""
+                   type="date">
+            <!--        <p *ngIf="password.hasError('invalid')">Invalid username or password!</p>-->
+          </div>
+          <div class="col form-group" style="padding-right: 0">
+            <label class="font-weight-bold"  for="end_time">Voting end time</label>
+            <input class="form-control float-right shadow-sm bg-white rounded" formControlName="end_time" id="end_time" name="end_time" style="; padding-right: 0"
+                   type="time">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col dropdown show  form-group" style="padding-left: 0">
+            <label class="font-weight-bold" for="add_voters">Choose how to add voters</label>
+            <select class="form-control bg-light" formControlName="add_voters" id="add_voters">
+              <option>Manual</option>
+              <option>Import</option>
+            </select>
+            <!--        <p *ngIf="password.hasError('invalid')">Invalid username or password!</p>-->
+          </div>
+
+          <div class="col  dropdown show float-right form-group" style="padding-right: 0;">
+            <label class="font-weight-bold" for="add_candidates">Choose how to add candidates</label>
+            <select class="form-control bg-light" formControlName="add_candidates" id="add_candidates">
+              <option>Manual</option>
+              <option>Import</option>
+            </select>
+          </div>
+
+        </div>
+
+      </div>
+      <br>
+
+      <div class="modal-footer" style="">
+        <!--        <a (click)="resetPassword()" class="btn-link text-primary" type="button">*Reset password</a>-->
+        <button (click)="back()" class="btn btn-outline-dark rounded-pill font-weight-bold float-left" routerLink="add-voters" routerLinkActive="active" type="submit">BACK</button>
+        <button (click)="continue1()" class="btn btn-outline-dark rounded-pill font-weight-bold" routerLink="add-voters" routerLinkActive="active" type="submit">CONTINUE</button>
+
+      </div>
+
+    </form>
+  </div>
+
+</div>
+</body>
+
+
+<app-footer></app-footer>
+
+

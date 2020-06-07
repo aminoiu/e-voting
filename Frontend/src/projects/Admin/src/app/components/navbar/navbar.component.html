@@ -1,0 +1,56 @@
+<head>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" id="bootstrap-css" rel="stylesheet">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+  <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+</head>
+
+<div class="board-inner" id="status-buttons">
+  <ul class="nav nav-tabs" id="myTab">
+<!--    <div class="liner"></div>-->
+
+    <!-- circular user icon -->
+    <li>
+      <a [routerLinkActiveOptions]="{ exact: true }" data-toggle="tab" routerLink="/admin/start-new-voting/main-info" routerLinkActive="active" title="personal">
+                <span class="round-tabs one">
+<!--                    <img src="../../../assets/images/one-icon.png" alt="One">-->
+                </span>
+      </a>
+    </li>
+
+    <!-- circular tasks icon -->
+    <li>
+      <a data-toggle="tab" routerLink="/work" routerLinkActive="active" title="work">
+                <span class="round-tabs two">
+<!--                    <img src="../../../assets/images/two-icon.png">-->
+                </span>
+      </a>
+    </li>
+
+    <!-- circular home icon -->
+    <li>
+      <a data-toggle="tab" routerLink="/address" routerLinkActive="active" title="address">
+                <span class="round-tabs three">
+<!--                  <i class="ui-icon-minus"></i>-->
+                </span>
+      </a>
+    </li>
+
+    <!-- circular ok icon -->
+    <li>
+      <a data-toggle="tab" routerLink="/result" routerLinkActive="active" title="completed">
+                <span class="round-tabs four">
+<!--                    <img src="../../../assets/images/four-icon.png">-->
+                </span>
+      </a>
+    </li>
+    <!--<li>
+      <a routerLink="/result" routerLinkActive="active" data-toggle="tab" title="completed">
+                <span class="round-tabs four">
+                    <em class="glyphicon glyphicon-ok"></em>
+                </span>
+      </a>
+    </li>-->
+
+  </ul>
+  <div class="clearfix"></div>
+</div>

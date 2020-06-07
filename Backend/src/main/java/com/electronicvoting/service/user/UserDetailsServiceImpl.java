@@ -25,4 +25,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
         return UserDetailsImpl.build(users);
     }
+        @Transactional(readOnly = true)
+    public Users loadUserByEmail(String email){
+        Users users = userRepository.findByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException("Users Not Found with email: " + email));
+
+        return users;
+    }
 }

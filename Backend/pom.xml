@@ -12,7 +12,6 @@
 	<artifactId>Backend</artifactId>
 
 	<properties>
-<!--		<java.version>11</java.version>-->
 		<defaultSchemaName>voting_data</defaultSchemaName>
 		<changelogSchemaName>voting_data</changelogSchemaName>
 		<java.version>11</java.version>
@@ -227,5 +226,15 @@
 			</plugin>-->
 		</plugins>
 	</build>
-
+	<profiles>
+		<profile>
+			<id>development</id>
+			<properties>
+				<spring.profiles.active>development</spring.profiles.active>
+			</properties>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+		</profile>
+	</profiles>
 </project>

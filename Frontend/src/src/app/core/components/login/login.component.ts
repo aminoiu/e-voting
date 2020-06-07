@@ -58,9 +58,13 @@ export class LoginComponent implements OnInit {
 
     this.authenticationService.login(loginDto)
       .toPromise()
-      .then(tokenDto=>{
-        sessionStorage.setItem(this.authenticationService.TOKEN_KEY, tokenDto.token);
-        if (sessionStorage.getItem(this.authenticationService.curentUserRole)==="Admin") //TODO: Enums for roles
+      .then(user=>{
+        console.log(user.token);
+        console.log("role: "+sessionStorage.getItem(this.authenticationService.curentUserRole));
+        // sessionStorage.setItem(this.authenticationService.TOKEN_KEY, tokenDto.token);
+        // sessionStorage.setItem('CurrentUser', tokenDto.username);
+
+        if (sessionStorage.getItem(this.authenticationService.curentUserRole)==="ADMIN") //TODO: Enums for roles
         {this.router.navigate(['/admin'])}
       })
       .catch(error => {
