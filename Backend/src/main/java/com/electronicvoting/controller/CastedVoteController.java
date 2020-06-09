@@ -19,7 +19,7 @@ public class CastedVoteController {
     @PostMapping(consumes = "application/json")
     @PreAuthorize("hasRole('VOTER')")
     public ResponseEntity<CastedVoteDTO> saveVote(@RequestBody CastedVoteDTO castedVoteDTO) {
-        castedVotesService.saveVote(castedVoteDTO);
+        castedVotesService.saveVote(CastedVoteDTO.dtoToEntity(castedVoteDTO));
         return ResponseEntity.accepted().build();
     }
 }

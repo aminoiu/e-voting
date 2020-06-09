@@ -2,6 +2,7 @@ package com.electronicvoting.service.voter;
 
 import com.electronicvoting.domain.dto.VoterDto;
 import com.electronicvoting.entity.Voter;
+import com.electronicvoting.exceptions.UserNotFoundException;
 import com.electronicvoting.repository.UserRepository;
 import com.electronicvoting.repository.VoterRepository;
 import lombok.RequiredArgsConstructor;
@@ -27,11 +28,9 @@ public class VoterServiceImpl implements VoterService {
 
     @Override
     @Transactional
-    public void saveUserVoter(VoterDto voterDto) {
-        userRepository.findByEmail(voterDto.getEmail()).ifPresentOrElse(users -> voterDto.setUserId(users.getId()), () -> {
-            throw new RuntimeException("Error: User doesn't exist.");
-        });
-        Voter voter = VoterDto.dtoToEntity(voterDto);
+    public void saveUserVoter(Voter voter) {
+        userRepository.findByEmail(voter.getEmail()).ifPresentOrElse(users -> voter.setUserId(users.getId()), () -> new UserNotFoundException("Error: User doesn't exist."));
+
         voter.setVoterId(UUID.randomUUID().toString());
         this.voterRepository.save(voter);
     }

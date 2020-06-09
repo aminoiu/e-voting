@@ -4,6 +4,7 @@ import com.electronicvoting.domain.dto.CandidateDTO;
 import com.electronicvoting.domain.dto.MessageDTO;
 import com.electronicvoting.domain.dto.SignUpDTO;
 import com.electronicvoting.entity.Candidate;
+import com.electronicvoting.exceptions.EmailExistsException;
 import com.electronicvoting.helper.HashPasswordWithSaltEncoder;
 import com.electronicvoting.service.auth.AuthService;
 import com.electronicvoting.service.candidate.CandidateService;
@@ -39,15 +40,17 @@ public class CandidateController {
 
         ResponseEntity<MessageDTO> responseEntity = authService.registerUser(signUpDTO);
         if (responseEntity.getStatusCode() != HttpStatus.BAD_REQUEST) {
-            this.candidateService.saveUserCandidate(candidateDTO);
+            candidateDTO.setProfileId("profileId"); //TODO:Add profile entity. After candidate user was created, should be created a default profile
+            Candidate candidate = CandidateDTO.dtoToEntity(candidateDTO);
+            this.candidateService.saveUserCandidate(candidate);
             return ResponseEntity.status(HttpStatus.CREATED).build();
         } else return responseEntity;
     }
 
     @PutMapping(path = "/{email}")
     @PreAuthorize("hasAnyRole('ADMIN','CANDIDATE')")
-    public ResponseEntity<Candidate> updateEmail(@RequestParam(name = "email") String newEmail, CandidateDTO candidateDTO) {
-        this.candidateService.updateEmail(candidateDTO, newEmail);
+    public ResponseEntity<Candidate> updateEmail(@RequestParam(name = "email") String newEmail, CandidateDTO candidateDTO) throws EmailExistsException {
+        this.candidateService.updateEmail(CandidateDTO.dtoToEntity(candidateDTO), newEmail);
         return ResponseEntity.noContent().build();
     }
 

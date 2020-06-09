@@ -6,5 +6,5 @@ import com.electronicvoting.entity.Voter;
 public interface VoterService {
     Voter findByEmail(String email);
 
-    void saveUserVoter(VoterDto voterDto);
+    void saveUserVoter(Voter voter);
 }

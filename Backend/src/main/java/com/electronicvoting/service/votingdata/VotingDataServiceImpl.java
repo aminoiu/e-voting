@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class VotingDataServiceImpl implements VotingDataService {
     private final VotingDataRepository votingDataRepository;
-    private final AdminService adminService;
+//    private final AdminService adminService;
 
     @Override
     @Transactional(readOnly = true)
@@ -25,9 +25,8 @@ public class VotingDataServiceImpl implements VotingDataService {
 
     @Override
     @Transactional
-    public void saveVotingSession(VotingDataDTO votingDataDTO) {
-        VotingData votingData = VotingDataDTO.dtoToEntity(votingDataDTO);
-        votingData.setVotingId(votingDataDTO.getVotingTitle());
+    public void saveVotingSession(VotingData votingData) {
+        votingData.setVotingId(votingData.getVotingTitle());
         votingDataRepository.save(votingData);
     }
 

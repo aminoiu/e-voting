@@ -2,12 +2,17 @@ package com.electronicvoting.service.admin;
 
 import com.electronicvoting.domain.dto.AdminDTO;
 import com.electronicvoting.entity.Admin;
+import com.electronicvoting.entity.Users;
+import com.electronicvoting.exceptions.UserNotFoundException;
 import com.electronicvoting.repository.AdminRepository;
 import com.electronicvoting.repository.UserRepository;
+import com.electronicvoting.service.user.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,11 +30,14 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     @Transactional(readOnly = true)
-    public Admin findByEmail(String email) {
+    public Admin findByEmail(String email) throws UserNotFoundException {
         Admin admin;
+        if (email == null) {
+            throw new UserNotFoundException("E-mail is not specified.");
+        }
         log.info("Find admin by e-mail[{}]", email);
         admin = adminRepository.findByEmail(email).orElseThrow(() ->
-                new RuntimeException("Error: Admin is not found."));
+                new UserNotFoundException("Error: Admin is not found.", email));
         return admin;
     }
 
@@ -53,6 +61,7 @@ public class AdminServiceImpl implements AdminService {
             return authentication.getName().equals(email);
         }
     }
+
 
     @Override
     public Authentication getAdminAuthentication() {

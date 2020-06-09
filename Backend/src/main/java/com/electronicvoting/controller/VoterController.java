@@ -37,7 +37,7 @@ public class VoterController {
 
         ResponseEntity<MessageDTO> responseEntity = authService.registerUser(signUpDTO);
         if (responseEntity.getStatusCode() != HttpStatus.BAD_REQUEST) {
-            this.voterService.saveUserVoter(voterDto);
+            this.voterService.saveUserVoter(VoterDto.dtoToEntity(voterDto));
             return ResponseEntity.status(HttpStatus.CREATED).build();
         } else return responseEntity;
     }

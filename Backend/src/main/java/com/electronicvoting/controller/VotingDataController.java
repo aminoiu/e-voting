@@ -23,7 +23,7 @@ public class VotingDataController {
     public ResponseEntity<VotingDataDTO> saveVoteData(@RequestBody NewVotingDTO newVotingDTO) {
 
         VotingDataDTO votingDataDTO=new VotingDataDTO();
-        votingDataService.saveVotingSession(votingDataDTO);
+        votingDataService.saveVotingSession(VotingDataDTO.dtoToEntity(votingDataDTO));
         return ResponseEntity.accepted().build();
     }
 }

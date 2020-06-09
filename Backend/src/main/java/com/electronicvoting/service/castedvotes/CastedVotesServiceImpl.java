@@ -22,8 +22,7 @@ public class CastedVotesServiceImpl implements CastedVotesService {
 
     @Override
     @Transactional
-    public void saveVote(CastedVoteDTO castedVoteDTO) {
-        CastedVote castedVote = CastedVoteDTO.dtoToEntity(castedVoteDTO);
+    public void saveVote(CastedVote castedVote) {
         castedVote.setVoteId(UUID.randomUUID().toString());
         castedVoteRepository.save(castedVote);
 

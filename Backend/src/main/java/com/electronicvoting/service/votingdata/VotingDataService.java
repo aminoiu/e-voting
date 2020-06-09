@@ -6,7 +6,7 @@ import com.electronicvoting.entity.VotingData;
 public interface VotingDataService {
     VotingData findByVotingTitle(String votingTitle);
 
-    void saveVotingSession(VotingDataDTO votingDataDTO);
+    void saveVotingSession(VotingData votingData);
 
     String findTitleById(String id);
 }

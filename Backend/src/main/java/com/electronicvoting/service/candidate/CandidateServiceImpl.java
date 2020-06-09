@@ -3,6 +3,8 @@ package com.electronicvoting.service.candidate;
 
 import com.electronicvoting.domain.dto.CandidateDTO;
 import com.electronicvoting.entity.Candidate;
+import com.electronicvoting.exceptions.EmailExistsException;
+import com.electronicvoting.exceptions.UserNotFoundException;
 import com.electronicvoting.repository.CandidateRepository;
 import com.electronicvoting.repository.UserRepository;
 import com.electronicvoting.service.votingdata.VotingDataService;
@@ -31,24 +33,21 @@ public class CandidateServiceImpl implements CandidateService {
 
     @Override
     @Transactional
-    public void saveUserCandidate(CandidateDTO candidateDTO) {
-        userRepository.findByEmail(candidateDTO.getEmail()).ifPresentOrElse(users -> candidateDTO.setUserId(users.getId()), () -> {
-            throw new RuntimeException("Error: User doesn't exist.");
-        });
-        candidateDTO.setProfileId("profileId"); //TODO:Add profile entity. After candidate user was created, should be created a default profile
-        Candidate candidate = CandidateDTO.dtoToEntity(candidateDTO);
+    public void saveUserCandidate(Candidate candidate) {
+        userRepository.findByEmail(candidate.getEmail()).ifPresentOrElse(users -> candidate.setUserId(users.getId()), () -> new UserNotFoundException("Error: User doesn't exist."));
         candidate.setCandidateId(UUID.randomUUID().toString());
         this.candidateRepository.save(candidate);
     }
 
     @Override
     @Transactional
-    public void updateEmail(CandidateDTO candidateDTO, String newEmail) {
+    public void updateEmail(Candidate candidate, String newEmail) throws EmailExistsException {
         boolean emailExists = candidateRepository.existsByEmail(newEmail);
         if (emailExists) {
-            return; //TODO: Create exception for it, and if it exists, throw it
+            throw new EmailExistsException("Error: This e-mail is already reserved");
         }
-        candidateDTO.setEmail(newEmail);
+        candidate.setEmail(newEmail);
+        candidateRepository.save(candidate);
     }
 
     @Override
