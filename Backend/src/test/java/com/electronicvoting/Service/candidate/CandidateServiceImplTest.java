@@ -5,21 +5,17 @@ import com.electronicvoting.entity.Candidate;
 import com.electronicvoting.entity.Role;
 import com.electronicvoting.entity.Users;
 import com.electronicvoting.exceptions.EmailExistsException;
-import com.electronicvoting.exceptions.UserNotFoundException;
 import com.electronicvoting.repository.CandidateRepository;
 import com.electronicvoting.repository.UserRepository;
 import com.electronicvoting.service.candidate.CandidateServiceImpl;
 import com.electronicvoting.service.votingdata.VotingDataService;
-import liquibase.pro.packaged.A;
-import org.h2.engine.User;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.mockito.stubbing.Answer;
 
 import java.util.Optional;
 

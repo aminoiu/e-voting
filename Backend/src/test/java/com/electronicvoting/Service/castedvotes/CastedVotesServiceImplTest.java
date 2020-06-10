@@ -1,6 +1,5 @@
 package com.electronicvoting.Service.castedvotes;
 
-import com.electronicvoting.domain.dto.CastedVoteDTO;
 import com.electronicvoting.entity.CastedVote;
 import com.electronicvoting.repository.CastedVoteRepository;
 import com.electronicvoting.service.castedvotes.CastedVotesServiceImpl;
@@ -12,9 +11,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.Instant;
-import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 @ExtendWith(MockitoExtension.class)

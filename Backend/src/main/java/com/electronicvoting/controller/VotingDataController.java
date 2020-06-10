@@ -1,8 +1,6 @@
 package com.electronicvoting.controller;
 
-import com.electronicvoting.domain.dto.NewVotingDTO;
 import com.electronicvoting.domain.dto.VotingDataDTO;
-import com.electronicvoting.entity.VotingData;
 import com.electronicvoting.service.votingdata.VotingDataService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

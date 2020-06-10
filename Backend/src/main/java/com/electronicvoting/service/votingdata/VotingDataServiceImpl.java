@@ -1,9 +1,7 @@
 package com.electronicvoting.service.votingdata;
 
-import com.electronicvoting.domain.dto.VotingDataDTO;
 import com.electronicvoting.entity.VotingData;
 import com.electronicvoting.repository.VotingDataRepository;
-import com.electronicvoting.service.admin.AdminService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

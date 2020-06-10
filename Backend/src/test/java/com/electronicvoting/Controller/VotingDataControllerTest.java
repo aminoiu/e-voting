@@ -1,13 +1,8 @@
 package com.electronicvoting.Controller;
 
-import com.electronicvoting.controller.CandidateController;
 import com.electronicvoting.controller.VotingDataController;
-import com.electronicvoting.domain.dto.CandidateDTO;
 import com.electronicvoting.entity.VotingData;
-import com.electronicvoting.helper.HashPasswordWithSaltEncoder;
 import com.electronicvoting.security.jwt.JwtUtils;
-import com.electronicvoting.service.auth.AuthService;
-import com.electronicvoting.service.candidate.CandidateService;
 import com.electronicvoting.service.user.UserDetailsServiceImpl;
 import com.electronicvoting.service.votingdata.VotingDataServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,9 +16,7 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(controllers = VotingDataController.class)

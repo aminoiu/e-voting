@@ -1,16 +1,11 @@
 package com.electronicvoting.Service.voter;
 
-import com.electronicvoting.domain.dto.CandidateDTO;
-import com.electronicvoting.entity.Candidate;
 import com.electronicvoting.entity.Role;
 import com.electronicvoting.entity.Users;
 import com.electronicvoting.entity.Voter;
-import com.electronicvoting.repository.CandidateRepository;
 import com.electronicvoting.repository.UserRepository;
 import com.electronicvoting.repository.VoterRepository;
-import com.electronicvoting.service.candidate.CandidateServiceImpl;
 import com.electronicvoting.service.voter.VoterServiceImpl;
-import com.electronicvoting.service.votingdata.VotingDataService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -21,7 +16,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
