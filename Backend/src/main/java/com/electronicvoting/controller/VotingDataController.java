@@ -18,12 +18,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class VotingDataController {
     private final VotingDataService votingDataService;
 
-    @PostMapping(path = "/",consumes = "application/json")
+    @PostMapping(consumes = "application/json")
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<VotingDataDTO> saveVoteData(@RequestBody NewVotingDTO newVotingDTO) {
-
-        VotingDataDTO votingDataDTO=new VotingDataDTO();
-        votingDataService.saveVotingSession(VotingDataDTO.dtoToEntity(votingDataDTO));
+    public ResponseEntity<VotingDataDTO> saveVoteData(@RequestBody VotingDataDTO newVotingDTO) {
+//TODO: Adjust this part for newVotingDTO
+        votingDataService.saveVotingSession(VotingDataDTO.dtoToEntity(newVotingDTO));
         return ResponseEntity.accepted().build();
     }
 }

@@ -27,9 +27,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class UserController {
 
-    private final CandidateService candidateService;
-    private final VoterService voterService;
-    private final AdminService adminService;
+
     private final UserDetailsServiceImpl userDetailsService;
 
     private final AuthService authService;

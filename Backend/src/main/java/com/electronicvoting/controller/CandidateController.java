@@ -47,17 +47,16 @@ public class CandidateController {
         } else return responseEntity;
     }
 
-    @PutMapping(path = "/{email}")
+    @PutMapping(path = "/update/{email}",consumes = "application/json")
     @PreAuthorize("hasAnyRole('ADMIN','CANDIDATE')")
-    public ResponseEntity<Candidate> updateEmail(@RequestParam(name = "email") String newEmail, CandidateDTO candidateDTO) throws EmailExistsException {
-        this.candidateService.updateEmail(CandidateDTO.dtoToEntity(candidateDTO), newEmail);
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<Candidate> updateEmail(@PathVariable String email, @RequestBody CandidateDTO candidateDTO) throws EmailExistsException {
+        return ResponseEntity.ok(this.candidateService.updateEmail(CandidateDTO.dtoToEntity(candidateDTO), email));
     }
 
-    @DeleteMapping
+    @DeleteMapping(path = "{email}")
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity deleteCandidate(@RequestParam(name = "email") String email) {
-        this.candidateService.deleteCandidate(email);
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<String> deleteCandidate(@PathVariable String email) {
+
+        return ResponseEntity.ok(this.candidateService.deleteCandidate(email));
     }
 }
