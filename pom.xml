@@ -6,7 +6,7 @@
 
     <groupId>com.electronicvoting</groupId>
     <description>E-Voting project</description>
-    <artifactId>EVoting</artifactId>
+    <artifactId>E-Voting</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <parent>

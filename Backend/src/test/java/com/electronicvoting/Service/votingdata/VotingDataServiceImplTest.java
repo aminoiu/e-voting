@@ -1,7 +1,9 @@
 package com.electronicvoting.Service.votingdata;
 
 import com.electronicvoting.entity.*;
+import com.electronicvoting.exceptions.UserNotFoundException;
 import com.electronicvoting.repository.VotingDataRepository;
+import com.electronicvoting.service.admin.AdminService;
 import com.electronicvoting.service.votingdata.VotingDataServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,6 +25,8 @@ class VotingDataServiceImplTest {
     VotingDataServiceImpl votingDataService;
     @Mock
     VotingDataRepository votingDataRepository;
+    @Mock
+    AdminService adminService;
 
     VotingData votingData;
     Candidate candidate;
@@ -35,7 +39,7 @@ class VotingDataServiceImplTest {
 
     @BeforeEach
     void setUp() {
-        votingDataService = new VotingDataServiceImpl(votingDataRepository);
+        votingDataService = new VotingDataServiceImpl(votingDataRepository,adminService);
 
         user = new Users();
         user.setId(101);
@@ -94,7 +98,7 @@ class VotingDataServiceImplTest {
     }
 
     @Test
-    void saveVotingSession_whenInvoked_saveOnce() {
+    void saveVotingSession_whenInvoked_saveOnce() throws UserNotFoundException {
         votingDataService.saveVotingSession(votingData);
         verify(votingDataRepository, times(1)).save(votingData);
     }

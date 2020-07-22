@@ -1,8 +1,7 @@
 package com.electronicvoting.controller;
 
-import com.electronicvoting.domain.dto.AdminDTO;
-import com.electronicvoting.domain.dto.MessageDTO;
-import com.electronicvoting.domain.dto.SignUpDTO;
+import com.electronicvoting.domain.dto.*;
+import com.electronicvoting.exceptions.UserNotFoundException;
 import com.electronicvoting.service.admin.AdminService;
 import com.electronicvoting.service.auth.AuthService;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/evoting/admins")
@@ -28,5 +29,11 @@ public class AdminController {
             this.adminService.saveUserAdmin(adminDTO);
             return ResponseEntity.status(HttpStatus.CREATED).build();
         } else return responseEntity;
+    }
+
+    @GetMapping(path = "/user-details/{email}", produces = "application/json")
+    public ResponseEntity<AdminDTOForMobile> getUserDetails(@PathVariable String email) throws UserNotFoundException {
+        AdminDTOForMobile votingDataDTO=adminService.getAdminByEmail(email);
+        return ResponseEntity.ok(votingDataDTO);
     }
 }

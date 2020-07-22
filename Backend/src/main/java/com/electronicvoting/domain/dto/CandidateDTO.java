@@ -3,8 +3,6 @@ package com.electronicvoting.domain.dto;
 import com.electronicvoting.entity.Candidate;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 
 import javax.validation.constraints.NotNull;
 

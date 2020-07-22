@@ -1,14 +1,15 @@
 package com.electronicvoting.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.TypeDef;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.sql.Timestamp;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -33,4 +34,16 @@ public class VotingData {
     private Integer votesNumber;
     @Column(name = "voting_winner")
     private String votingWinner;
+    @Column(name ="start_date")
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm")
+    private Timestamp startDate;
+    @Column(name="end_date")
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm", timezone = "Europe/Chisinau")
+    private Timestamp endDate;
+    @Column(name = "status")
+    private String status;
+    @Column(name="voters_list")
+    private String votersList;
+    @Column(name="candidates_list")
+    private String candidatesList;
 }

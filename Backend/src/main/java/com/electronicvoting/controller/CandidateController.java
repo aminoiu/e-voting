@@ -8,6 +8,7 @@ import com.electronicvoting.exceptions.EmailExistsException;
 import com.electronicvoting.helper.HashPasswordWithSaltEncoder;
 import com.electronicvoting.service.auth.AuthService;
 import com.electronicvoting.service.candidate.CandidateService;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

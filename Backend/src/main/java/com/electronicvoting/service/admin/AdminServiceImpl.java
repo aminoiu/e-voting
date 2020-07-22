@@ -1,22 +1,20 @@
 package com.electronicvoting.service.admin;
 
 import com.electronicvoting.domain.dto.AdminDTO;
+import com.electronicvoting.domain.dto.AdminDTOForMobile;
 import com.electronicvoting.entity.Admin;
-import com.electronicvoting.entity.Users;
 import com.electronicvoting.exceptions.UserNotFoundException;
 import com.electronicvoting.repository.AdminRepository;
 import com.electronicvoting.repository.UserRepository;
-import com.electronicvoting.service.user.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.constraints.NotNull;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -60,6 +58,17 @@ public class AdminServiceImpl implements AdminService {
         } else {
             return authentication.getName().equals(email);
         }
+    }
+
+    @Override
+    public Optional<Admin> findById(String id) {
+        return adminRepository.findById(id);
+    }
+
+    @Override
+    public AdminDTOForMobile getAdminByEmail(String email) throws UserNotFoundException {
+        return AdminDTOForMobile.toDto(adminRepository.findByEmail(email).orElseThrow(() ->
+                new UserNotFoundException("Error: Admin is not found.", email)));
     }
 
 
