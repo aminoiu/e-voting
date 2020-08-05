@@ -17,6 +17,16 @@ The Backend module has the most basic business logic implemented. The Frontend m
 For the backend must be implemented the blockchain algorithm, implement business logic for voters and candidates, implement business logic for polls and surveys.
 For the Frontend must be implemented the module for each type of user, the business logic for voting process, statistics.
 
+## IoT part:
+The IoT part of this project consists of a fingerprint sensor, integrated with the main project for authentication purposes.
+
+This module is used only when a new Admin user is registered or when he/she wants to authenticate within the e-voting system.
+In both cases, a small UI will pop-up, where will be listed all the instructions for scanning the finger.
+
+At the moment, not the entire IoT system is developed. Currently, the hardware part works with the Serial Monitor, tool from Arduino IDE, and, also, is implemented the connection between Java UI and Arduino, through serial port communication. 
+
+Now, it's needed to complete with the sending and receiving data between UI and Arduino.
+  
 # More information:
 <ul>
   <li>
@@ -35,4 +45,7 @@ For the Frontend must be implemented the module for each type of user, the busin
      <a href="https://github.com/aminoiu/e-voting/wiki/Informational-viewpoints"> Informational viewpoint
  
  
+ 
+
+  
   
