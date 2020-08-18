@@ -20,7 +20,7 @@
     </modules>-->
 <properties>
     <start-class>com.electronicvoting.BackendApplication</start-class>
-    <java.version>11</java.version>
+    <java.version>9</java.version>
 </properties>
     <profiles>
         <profile>
