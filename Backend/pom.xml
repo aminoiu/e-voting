@@ -14,7 +14,7 @@
     <properties>
         <defaultSchemaName>voting_data</defaultSchemaName>
         <changelogSchemaName>voting_data</changelogSchemaName>
-        <java.version>11</java.version>
+        <java.version>8</java.version>
     </properties>
     <repositories>
         <repository>
