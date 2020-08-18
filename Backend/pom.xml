@@ -155,6 +155,27 @@
             <artifactId>springfox-data-rest</artifactId>
             <version>3.0.0-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-graphics</artifactId>
+            <version>14</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>14</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-fxml</artifactId>
+            <version>14</version>
+        </dependency>
+        <dependency>
+            <groupId>org.rxtx</groupId>
+            <artifactId>rxtx</artifactId>
+            <version>2.1.7</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -164,50 +185,61 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
             <plugin>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-maven-plugin</artifactId>
+                <version>0.0.2</version>
+            </plugin>
+            <plugin>
+<!--                <groupId>org.liquibase</groupId>-->
+<!--                <artifactId>liquibase-maven-plugin</artifactId>-->
+<!--                <version>3.5.3</version>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <id>db1</id>-->
+<!--                        <phase>generate-resources</phase>-->
+<!--                        <configuration>-->
+<!--                            <changeLogFile>-->
+<!--                                D:\JTOM\Project\e-voting\Backend\src\main\resources\db\changelog\voting_data\liquibase-changeLog-master-schema1.xml-->
+<!--                            </changeLogFile>-->
+<!--                            <driver>org.postgresql.Driver</driver>-->
+<!--                            <url>jdbc:postgresql://localhost:5432/evoting</url>-->
+<!--                            <username>db_user</username>-->
+<!--                            <password>Artbnu4192201*</password>-->
+<!--                            <defaultSchemaName>voting_data</defaultSchemaName>-->
+<!--                        </configuration>-->
+<!--                        <goals>-->
+<!--                            <goal>clearCheckSums</goal>-->
+<!--                            <goal>dropAll</goal>-->
+<!--                            <goal>update</goal>-->
+<!--                        </goals>-->
+<!--                    </execution>-->
+<!--                    <execution>-->
+<!--                        <id>db2</id>-->
+<!--                        <phase>generate-resources</phase>-->
+<!--                        <configuration>-->
+<!--                            <changeLogFile>-->
+<!--                                D:\JTOM\Project\e-voting\Backend\src\main\resources\db\changelog\blockchain\liquibase-changeLog-master-schema2.xml-->
+<!--                            </changeLogFile>-->
+<!--                            <driver>org.postgresql.Driver</driver>-->
+<!--                            <url>jdbc:postgresql://localhost:5432/evoting</url>-->
+<!--                            <username>db_user</username>-->
+<!--                            <password>Artbnu4192201*</password>-->
+<!--                            <defaultSchemaName>blockchain</defaultSchemaName>-->
+<!--                        </configuration>-->
+<!--                        <goals>-->
+<!--                            <goal>clearCheckSums</goal>-->
+<!--                            <goal>dropAll</goal>-->
+<!--                            <goal>update</goal>-->
+<!--                        </goals>-->
+<!--                    </execution>-->
+<!--                </executions>-->
                 <groupId>org.liquibase</groupId>
                 <artifactId>liquibase-maven-plugin</artifactId>
                 <version>3.5.3</version>
-                <executions>
-                    <execution>
-                        <id>db1</id>
-                        <phase>generate-resources</phase>
-                        <configuration>
-                            <changeLogFile>
-                                D:\JTOM\Project\e-voting\Backend\src\main\resources\db\changelog\voting_data\liquibase-changeLog-master-schema1.xml
-                            </changeLogFile>
-                            <driver>org.postgresql.Driver</driver>
-                            <url>jdbc:postgresql://localhost:5432/evoting</url>
-                            <username>db_user</username>
-                            <password>Artbnu4192201*</password>
-                            <defaultSchemaName>voting_data</defaultSchemaName>
-                        </configuration>
-                        <goals>
-                            <goal>clearCheckSums</goal>
-                            <goal>dropAll</goal>
-                            <goal>update</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>db2</id>
-                        <phase>generate-resources</phase>
-                        <configuration>
-                            <changeLogFile>
-                                D:\JTOM\Project\e-voting\Backend\src\main\resources\db\changelog\blockchain\liquibase-changeLog-master-schema2.xml
-                            </changeLogFile>
-                            <driver>org.postgresql.Driver</driver>
-                            <url>jdbc:postgresql://localhost:5432/evoting</url>
-                            <username>db_user</username>
-                            <password>Artbnu4192201*</password>
-                            <defaultSchemaName>blockchain</defaultSchemaName>
-                        </configuration>
-                        <goals>
-                            <goal>clearCheckSums</goal>
-                            <goal>dropAll</goal>
-                            <goal>update</goal>
-                        </goals>
-                    </execution>
-                </executions>
-
+                <configuration>
+                    <driver>org.postgresql.Driver</driver>
+                    <promptOnNonLocalDatabase>false</promptOnNonLocalDatabase>
+                </configuration>
             </plugin>
 
             <plugin>
