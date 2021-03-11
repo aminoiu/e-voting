@@ -1,9 +1,11 @@
 package com.electronicvoting.controller;
 
+import com.electronicvoting.ArduinoFingerprint.ArduinoFingerprintRegister;
 import com.electronicvoting.domain.dto.*;
 import com.electronicvoting.exceptions.UserNotFoundException;
 import com.electronicvoting.service.admin.AdminService;
 import com.electronicvoting.service.auth.AuthService;
+import javafx.application.Application;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +17,7 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/evoting/admins")
 @RequiredArgsConstructor
+@CrossOrigin("*")
 public class AdminController {
 
     private final AdminService adminService;
@@ -23,12 +26,13 @@ public class AdminController {
     @PostMapping(path = "/register",consumes = "application/json")
     public ResponseEntity<MessageDTO> createAdmin(@RequestBody AdminDTO adminDTO) {
         SignUpDTO signUpDTO = SignUpDTO.adminDtoToSignUpDto(adminDTO);
-
+//        Application.launch(ArduinoFingerprintRegister.class);
         ResponseEntity<MessageDTO> responseEntity = authService.registerUser(signUpDTO);
         if (responseEntity.getStatusCode() != HttpStatus.BAD_REQUEST) {
             this.adminService.saveUserAdmin(adminDTO);
-            return ResponseEntity.status(HttpStatus.CREATED).build();
-        } else return responseEntity;
+//            return ResponseEntity.status(HttpStatus.CREATED).build();
+        }
+        return responseEntity;
     }
 
     @GetMapping(path = "/user-details/{email}", produces = "application/json")

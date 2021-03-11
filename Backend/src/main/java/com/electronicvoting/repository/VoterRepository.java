@@ -10,5 +10,6 @@ public interface VoterRepository extends JpaRepository<Voter, String> {
 
     Voter findByName(String name);
 
+    Boolean existsByEmail(String email);
 
 }

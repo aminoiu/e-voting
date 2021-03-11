@@ -10,16 +10,16 @@ import {AdminElectionsComponent} from "./components/admin-elections/admin-electi
 
 
 const routes: Routes = [
-  { path: 'admin/one', component: AdminHomeComponent },
-  { path: 'admin', redirectTo: 'admin/one' },
-  { path: 'admin/start-new-voting', component: VotingMainComponent },
-/*  { path: 'admin/start-new-voting/main-info', component: VotingMainComponent },
-  { path: 'admin/start-new-voting/add-voters', component: AddVotersComponent },
-  { path: 'admin/start-new-voting/add-candidates', component: AddCandidatesComponent },*/
-  // { path: 'admin/start-new-voting/final-information', component: FinalInformationComponent },
-  { path: 'admin/start-new-voting/**', component: VotingMainComponent },
-  { path: 'admin/elections', component: AdminElectionsComponent },
-  {path:'admin/home-admin', component:AdminHomeComponent}
+  { path: 'evoting/admin/one', component: AdminHomeComponent },
+  { path: 'evoting/admin', redirectTo: 'evoting/admin/one' },
+  { path: 'evoting/admin/create-voting-session', component: VotingMainComponent },
+/*  { path: 'admin/create-voting-session/main-info', component: VotingMainComponent },
+  { path: 'admin/create-voting-session/add-votersList', component: AddVotersComponent },
+  { path: 'admin/create-voting-session/add-candidatesList', component: AddCandidatesComponent },*/
+  // { path: 'admin/create-voting-session/final-information', component: FinalInformationComponent },
+  { path: 'evoting/admin/create-voting-session/**', component: VotingMainComponent },
+  { path: 'evoting/admin/elections', component: AdminElectionsComponent },
+  {path: 'evoting/admin/home-admin', component: AdminHomeComponent}
 ];
 
 @NgModule({

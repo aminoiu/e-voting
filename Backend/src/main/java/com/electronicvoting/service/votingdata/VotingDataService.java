@@ -10,9 +10,15 @@ import java.util.List;
 public interface VotingDataService {
     VotingData findByVotingTitle(String votingTitle);
 
-    void saveVotingSession(VotingData votingData) throws UserNotFoundException;
+    VotingData saveVotingSession(VotingData votingData) throws UserNotFoundException;
 
     String findTitleById(String id);
 
     List<VotingDataForMobileDTO> getVotingDataByEmail(String email) throws UserNotFoundException;
+
+    List<VotingDataForMobileDTO> getVotingDataByCandidateEmail(String email);
+
+    List<VotingDataForMobileDTO> getVotingDataByVoterEmail(String email);
+
+    VotingData getVotingDataByVotingCode(String votingCode);
 }

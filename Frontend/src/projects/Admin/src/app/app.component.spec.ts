@@ -26,7 +26,7 @@ describe('AppComponent', () => {
     expect(app.title).toEqual('Admin');
   });
 
-  it('should render title', () => {
+  it('should render votingTitle', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement;

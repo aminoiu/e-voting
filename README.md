@@ -14,7 +14,7 @@ The scope of this project is to provide a software solution for an easier and a 
 At the moment project has 2 modules: Frontend and Backend. 
 The Backend module has the most basic business logic implemented. The Frontend module has done the Home page, Log In page and partially the Admin module.
 ## To Do
-For the backend must be implemented the blockchain algorithm, implement business logic for voters and candidates, implement business logic for polls and surveys.
+For the backend must be implemented the blockchain algorithm, implement business logic for votersList and candidatesList, implement business logic for polls and surveys.
 For the Frontend must be implemented the module for each type of user, the business logic for voting process, statistics.
 
 ## IoT part:

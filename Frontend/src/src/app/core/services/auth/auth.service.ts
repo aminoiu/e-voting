@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject, Observable} from "rxjs";
-import {HttpClient, HttpErrorResponse} from "@angular/common/http";
-import {HttpStatus} from "../../models/http-status.enum";
-import {Router} from "@angular/router";
-import {User} from "../../models/user.model";
-import {LoginDto} from "../../models/login-dto.model";
+import {BehaviorSubject, Observable} from 'rxjs';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {HttpStatus} from '../../models/http-status.enum';
+import {Router} from '@angular/router';
+import {User} from '../../models/user.model';
+import {LoginDto} from '../../models/login-dto.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,6 @@ export class AuthService {
   authenticated = false;
   public readonly TOKEN_KEY: string = 'E-voting-SecretKeyToGenJWTs';
   private currentUserSubject: BehaviorSubject<User>;
-  private role: string;
 /*  private readonly BASE_URL: string = 'http://localhost:8080';
   private readonly SING_IN_URL: string = '';
   private readonly SING_UP_URL: string = '';
@@ -30,23 +29,27 @@ export class AuthService {
     return this.currentUserSubject.value;
   }
 
-  public get curentUserRole(): string {
-    return this.role;
-  }
+
 
   login(loginDto: LoginDto) {
+    // console.log('Get role for: ' + loginDto.email);
+    // this.getRole(loginDto.email)
+    //   .toPromise()
+    //   .then(role => {
+    //     console.log(loginDto.email + ' has role: ' + role.json().results);
+    //     this.role = role;
+    //     console.log(loginDto.email + ' has role: ' + this.role);
+    //     sessionStorage.setItem('curentUserRole', this.role);
+    //   })
+    //   .catch(error => {
+    //     this.handleError(error, loginDto.email);
+    //   })
+    //   .finally(() => {
+    //     console.log('In finall block!!!');
+    //   });
 
-    this.getRole(loginDto.email).toPromise()
-      .then(role => {
-        this.role = role;
-        console.log(loginDto.email + " has role: " + this.role);
-        sessionStorage.setItem('userRole', this.role);
-      })
-      .catch(error => {
-        this.handleError(error, loginDto.email);
-      });
 
-
+    console.log('Login url: ' + 'http://localhost:8080/evoting/users/login' );
     return this.http.post<any>('http://localhost:8080/evoting/users/login', loginDto);
       /*.pipe(map(user => {
         // store user details and jwt token in local storage to keep user logged in between page refreshes
@@ -59,6 +62,10 @@ export class AuthService {
 
   }
 
+  private getRole(email: string) {
+    console.log('get Role url: ' + 'http://localhost:8080/evoting/users/login/' + email );
+    return this.http.get<string>('http://localhost:8080/evoting/users/login/' + email);
+  }
   logout() {
 
   }
@@ -72,10 +79,6 @@ export class AuthService {
     return token;
   }
 
-  private getRole(email: string) {
-    console.log("url: " + 'http://localhost:8080/evoting/users/login/' + email );
-    return this.http.get<string>('http://localhost:8080/evoting/users/login/' + email);
-  }
 
   private handleError(httpError: HttpErrorResponse, email: string) {
     if (httpError.status === HttpStatus.NOT_FOUND) {

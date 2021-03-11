@@ -10,6 +10,7 @@ import com.electronicvoting.service.user.UserDetailsServiceImpl;
 import com.electronicvoting.service.voter.VoterService;
 import io.swagger.annotations.Authorization;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.bouncycastle.jcajce.provider.asymmetric.dsa.DSASigner;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +26,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping(value = "/evoting/users")
 @RequiredArgsConstructor
+@Slf4j
 public class UserController {
 
 
@@ -39,14 +41,18 @@ public class UserController {
                     .collect(Collectors.toList());*/
         Set<Role> roles = userDetailsService.loadUserByEmail(email).getRoles();
             if (!roles.isEmpty()) {
-                if (roles.toString().contains(Roles.ADMIN.toString())) {
-                    return ResponseEntity.ok(Roles.ADMIN.toString());
-                } else if (roles.toString().contains(Roles.CANDIDATE.toString())) {
-                    return ResponseEntity.ok(Roles.CANDIDATE.toString());
-                } else if (roles.toString().contains(Roles.VOTER.toString())) {
-                    return ResponseEntity.ok(Roles.VOTER.toString());
+                if (roles.toString().contains(Roles.ROLE_ADMIN.toString())) {
+                    log.info("User with e-mail [{}] has role ADMIN",email);
+                    return ResponseEntity.ok(Roles.ROLE_ADMIN.toString());
+                } else if (roles.toString().contains(Roles.ROLE_CANDIDATE.toString())) {
+                    log.info("User with e-mail [{}] has role CANDIDATE",email);
+                    return ResponseEntity.ok(Roles.ROLE_CANDIDATE.toString());
+                } else if (roles.toString().contains(Roles.ROLE_VOTER.toString())) {
+                    log.info("User with e-mail [{}] has role VOTER",email);
+                    return ResponseEntity.ok(Roles.ROLE_VOTER.toString());
                 }
             }
+        log.info("Not found");
             return ResponseEntity.notFound().build();
 
     }

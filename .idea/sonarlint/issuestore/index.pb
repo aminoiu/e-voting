@@ -95,8 +95,6 @@ i
 9Frontend/src/src/app/core/components/login/login-pages.ts,e\a\eac7faa7775141d209ac32976573a9972ab33569
 R
 "Frontend/src/src/app/app.module.ts,7\3\739c6cb8f357942d7df7b5a2cfc7b1b815286d49
-
-OBackend/src/main/java/com/electronicvoting/controller/CastedVoteController.java,a\0\a0bca7a862f72e5d1218a62ab7504c6bb7a126a6
 z
 JBackend/src/main/java/com/electronicvoting/controller/VoterController.java,1\a\1a4734a3628723212f0291373c2dddb6279e72fa
 
@@ -223,10 +221,6 @@ ZFrontend/src/projects/Admin/src/app/components/add-candidates/add-candidates.co
 ^Frontend/src/projects/Admin/src/app/components/add-candidates/add-candidates.component.spec.ts,f\3\f370a3adf76676b1aeef85e3279b87ea80364853
 †
 VFrontend/src/projects/Admin/src/app/components/add-voters/add-voters.component.spec.ts,8\0\803515eb86551d795dbdf4446a7796218cadd313
-m
-=Frontend/src/projects/Admin/src/app/data/form-data.service.ts,b\4\b42b18acd3173400d1420d0efccca1e2a0719324
-r
-BFrontend/src/projects/Admin/src/app/data/form-data.service.spec.ts,7\9\794fd0927be75e57f1350c8bfbf7ccfea2084d2f
 ‚
 RFrontend/src/projects/Admin/src/app/components/add-voters/add-voters.component.css,7\6\76a2cdc20829c624cc7a3acd1ef8d8fcd949f857
 ‰
@@ -259,10 +253,6 @@ y
 IFrontend/src/projects/Admin/src/app/components/navbar/navbar.component.ts,e\c\ec6612ffcbfd6312f023fcf84d788f72dcad1229
 „
 TFrontend/src/projects/Admin/src/app/components/voting-main/voting-main.component.css,c\3\c35209b9749314e7953106c9cbcb7e664eb76b5f
-t
-DFrontend/src/projects/Admin/src/app/model/dynamic-grid.model.spec.ts,3\5\35e15007559c5e556cc4827e60e940e4ccaef1c7
-o
-?Frontend/src/projects/Admin/src/app/model/dynamic-grid.model.ts,0\1\017e3f888a3d5f240bfad2b128dbc066ecf06b88
 {
 KFrontend/src/projects/Admin/src/app/constants/new-voting-multi-step-form.ts,d\4\d47d261be84f2f1967e4f1a9b40fa00f2f29f76c
 ˆ

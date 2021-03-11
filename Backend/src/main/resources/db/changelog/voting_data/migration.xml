@@ -2,8 +2,10 @@
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
-    <include file="changes\db_changelog-5.xml" relativeToChangelogFile="true" />
+    <include file="changes\db_changelog-5.xml" relativeToChangelogFile="true"/>
     <include file="changes\votingdata_aditional_columns.xml" relativeToChangelogFile="true"/>
-
-
+    <include file="changes\votingData_code.xml" relativeToChangelogFile="true"/>
+    <include file="changes\vote_code_constraints.xml" relativeToChangelogFile="true"/>
+    <include file="changes\temporarPassword_column.xml" relativeToChangelogFile="true"/>
+    <include file="changes\profile_table.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>

@@ -24,11 +24,11 @@
 
   <ul class="navbar-nav ml-auto">
     <a class="nav-link text-light" routerLink="login" routerLinkActive="active">LOGIN</a>
-    <button id="sign-up" class="nav-link text-dark my-0">SIGN UP</button>
+    <button class="nav-link text-dark my-0" id="sign-up" routerLink="register" routerLinkActive="active">SIGN UP</button>
   </ul>
 
 </nav>
-
+<section>
 <div class="flex:1 1 "
      style="background-image: url('assets/images/Background.png'); background-repeat: no-repeat; background-size: cover; background-position: center center; ">
 <!-- Mask & flexbox options-->
@@ -114,25 +114,9 @@
   </div>
 </div>
 <!-- Mask & flexbox options-->
+</section>
 
-
-
-<!-- Footer -->
-<footer>
-  <div class="row">
-    <div class="col-md-4">
-
-    </div>
-    <div class="col-md-4">
-      <p class="text-light text-center copyright">Copyright &copy; 2020 EVoting</p>
-    </div>
-    <div class="col text-right" style="padding-right: 30px">
-      <a class="" href="#">
-        <img alt="logo" src="assets/images/LOGO.jpg" style="width:60px;">
-      </a>
-    </div>
-  </div>
-</footer>
-<!-- Footer -->
+<br>
+<app-footer></app-footer>
 
 

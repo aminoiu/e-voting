@@ -1,0 +1,224 @@
+<app-voter-nav></app-voter-nav>
+
+<div class="flex:1 1 "
+     style="background-image: url('assets/images/Background.png'); background-repeat: no-repeat; background-size: cover; background-position: center center; ">
+  <!-- Mask & flexbox options-->
+  <div class="mask rgba-gradient ">
+    <!-- Content -->
+    <div class="container">
+      <!--Grid row-->
+      <div class="row ">
+        <!--Grid column-->
+        <div class="align-middle col-md-7 white-text text-center  mt-xl-5  p-xl-5  ">
+          <div class="center ">
+            <!--            <h1 class="h1-responsive font-weight-bold mt-lg-5 ">Electronic Voting System</h1>-->
+            <!--            <hr class="hr-light">-->
+            <!--            <h4 class="h6-responsive mb-5">with a big impact in your life</h4>-->
+            <form (ngSubmit)="onSubmit()" [formGroup]="codeForm">
+              <div>
+                <h4 class=" h6-responsive mb-5" style="color: red">Enter the voting CODE to submit your vote</h4>
+                <label>
+                  <input class="row form-control" formControlName="votingCode" id="votingCode" name="votingCode" type="text">
+                </label>
+                <br>
+                <br>
+                <button class="row btn rounded-pill  border-secondary">LET'S VOTE!</button>
+              </div>
+            </form>
+          </div>
+
+        </div>
+        <!--Grid column-->
+        <!--Grid column-->
+        <div class=" col-5 mt-5 col-md-5" style="padding-right: 0;
+    padding-left: 51px;">
+          <img alt="" class="img-fluid" src="assets/images/logo_transparent.png">
+        </div>
+        <div class=" col-5 mt-5 col-md-5" style="padding-right: 0;
+    padding-left: 51px;">
+          <br>
+          <br>
+          <br>
+        </div>
+
+        <!--Grid column-->
+      </div>
+    </div>
+    <!-- Content -->
+
+
+  </div>
+  <!-- Mask & flexbox options-->
+
+</div>
+
+<div class="flex:1 1 "
+     style="">
+  <!-- Mask & flexbox options-->
+  <div class="mask rgba-gradient ">
+    <!-- Content -->
+    <div class="container">
+      <!--Grid row-->
+      <div class="row ">
+        <!--Grid column-->
+        <div class=" col-5 mt-5 col-md-6" style="padding-right: 0;
+    padding-left: 51px;">
+
+        </div>
+
+        <div class="col-md-10 white-text text-center text-md-left mt-xl-5 mb-5 " style=" padding-left: 0;
+    padding-right: 0;">
+          <h1 class="h1-responsive font-weight-bold mt-sm-3"></h1>
+          <hr class="hr-light">
+          <h4 class="h6-responsive mb-5"></h4>
+          <h6>
+            .
+          </h6>
+
+        </div>
+        <!--Grid column-->
+        <!--Grid column-->
+
+
+        <!--Grid column-->
+      </div>
+    </div>
+    <!-- Content -->
+
+
+  </div>
+</div>
+<!-- Mask & flexbox options-->
+
+
+<!-- Footer -->
+<app-voter-footer></app-voter-footer>
+
+<div [style.display]="showModal ? 'block' : 'none'" aria-hidden="true"
+     aria-labelledby="myModalLabel" class="modal" id="imagemodal" role="dialog" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">Voting information</h4>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="onSave()" [formGroup]="confirmationForm">
+          <div class="container">
+            <div class="form-group row">
+              <label class="col" for="newPassword">Enter the new password</label>
+              <input class="col form-control" formControlName="newPassword" id="newPassword" name="newPassword"
+                     type="password">
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+
+        <button (click)="hide()" class="btn btn-danger float-left mr-auto" data-dismiss="modal" type="button">Close
+        </button>
+        <button (click)="onSave()" class="btn btn-success rounded-pill float-right" type="submit">SAVE
+        </button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div [style.display]="showCandidatesModal ? 'block' : 'none'" aria-hidden="true"
+     aria-labelledby="myModalLabel" class="modal" id="imagemodal2" role="dialog" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel2">Voting information</h4>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="onSave()" [formGroup]="submitVote">
+          <div class="container">
+
+            <table #candidatesList [hidden]="isEmptyC()" class="table table-striped table-bordered" >
+              <thead>
+              <tr>
+                <th style="width: 400px">Candidate personal information</th>
+                <th style="width: 400px">Profile</th>
+                <th style="width: 20px">Action</th>
+              </tr>
+              </thead>
+              <tbody >
+
+              <tr *ngFor="let dynamic of dynamicCandidatesArray; let i = index;">
+                <ng-container *ngIf="dynamicCandidatesArray.length>0">
+                  <td>
+                    <div class="row" style="padding-left: 10px">
+                      <div>
+                        <b>Name:</b>  {{dynamicCandidatesArray[i].title1}}
+                      </div>
+                      <div>
+                        <b>Email:</b>  {{dynamicCandidatesArray[i].title2}}
+                      </div>
+
+                    </div>
+                  </td>
+                  <td>
+                    <div class="row" style="padding-left: 10px">
+                      <div>
+                        <b>Position:</b>  {{dynamicCandidatesArray[i].title3}}
+                      </div>
+                      <div >
+                        <b>Education:</b>  {{dynamicCandidatesArray[i].title4}}
+                      </div>
+                      <div >
+                        <b>SelfDescription:</b>  {{dynamicCandidatesArray[i].title5}}
+                      </div>
+                    </div>
+
+                  </td>
+                  <td >
+                    <button (click)= castVote(i) class="btn font-weight-bold "
+                            id="vote" name="vote" routerLinkActive="active" style="padding-left: 10px" type="submit">
+                      VOTE ME
+                    </button>
+                  </td>
+                </ng-container>
+              </tr>
+
+              </tbody>
+            </table>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+
+        <button (click)="hideCand()" class="btn btn-danger float-left mr-auto" data-dismiss="modal" type="button">Close
+        </button>
+        <button (click)="onSaveCand()" class="btn btn-success rounded-pill float-right" type="submit">SAVE
+        </button>
+
+      </div>
+    </div>
+  </div>
+</div>
+<div [style.display]="showModalWithResult ? 'block' : 'none'" aria-hidden="true"
+     aria-labelledby="myModalLabel" class="modal" id="imagemodal3" role="dialog" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel3">RESULT</h4>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <div>
+            <h5 id="responseHeader"></h5>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+
+        <button (click)="hideModalWithResults()" class="btn btn-danger float-left mr-auto" data-dismiss="modal"
+                type="button">FINISH
+        </button>
+
+      </div>
+    </div>
+  </div>
+</div>

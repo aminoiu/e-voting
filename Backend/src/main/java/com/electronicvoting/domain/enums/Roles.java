@@ -1,7 +1,7 @@
 package com.electronicvoting.domain.enums;
 
 public enum Roles {
-    ADMIN,
-    VOTER,
-    CANDIDATE
+    ROLE_ADMIN,
+    ROLE_VOTER,
+    ROLE_CANDIDATE
 }

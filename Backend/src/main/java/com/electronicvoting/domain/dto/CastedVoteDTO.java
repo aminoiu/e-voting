@@ -1,6 +1,7 @@
 package com.electronicvoting.domain.dto;
 
 import com.electronicvoting.entity.CastedVote;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,6 +10,7 @@ import java.time.Instant;
 
 @Data
 @Builder
+@AllArgsConstructor
 public class CastedVoteDTO {
     String voterEmail;
     String vote;
@@ -33,6 +35,7 @@ public class CastedVoteDTO {
                 .timestamp(castedVoteDTO.getTimestamp())
                 .deviceIp(castedVoteDTO.getDeviceIp())
                 .candidateEmail(castedVoteDTO.getVote())
+                .votingId(castedVoteDTO.getVotingTitle())
                 .build();
     }
 
