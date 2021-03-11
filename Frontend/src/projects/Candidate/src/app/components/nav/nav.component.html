@@ -1,0 +1,87 @@
+<nav class="navbar navbar-expand-xl bg-dark navbar-dark" style="">
+  <!-- Brand/logo -->
+  <a class="navbar-brand">
+    <img alt="logo" src="assets/images/LOGO.jpg" style="width:60px;">
+  </a>
+
+  <!-- Links -->
+  <ul class="navbar-nav na-e ">
+    <li class="nav-item">
+      <a (click)="show()" class="nav-link text-light" style="font-size: 20px;">PROFILE</a>
+    </li>
+    <li class="nav-item">
+      <a [routerLink]="'/evoting/candidate/elections'" class="nav-link text-light" style="font-size: 20px;">MY ELECTIONS</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link text-light" style="font-size: 20px;">PRODUCTS</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link text-light" style="font-size: 20px;">FEATURES</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link text-light" style="font-size: 20px;">STATISTICS</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link text-light" style="font-size: 20px;">HELP</a>
+    </li>
+    <span class=""></span>
+
+  </ul>
+
+  <ul class="navbar-nav ml-auto mr-4">
+    <a (click)="logOut()" class="nav-link text-light" routerLink="logout" routerLinkActive="active"
+       style="font-size: 20px;">LOG OUT</a>
+  </ul>
+  <div class="text-center">
+    <img alt="Profile" class="img-fluid" src="assets/images/account.png" style="width:60px; ">
+    <div>
+      <p class="text-white" id="userEmail"></p>
+    </div>
+  </div>
+
+</nav>
+
+<div [style.display]="showModal ? 'block' : 'none'" aria-hidden="true"
+     aria-labelledby="myModalLabel" class="modal" id="imagemodal" role="dialog" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">Candidate information</h4>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="onSave()" [formGroup]="confirmationForm">
+          <div class="container">
+            <div class="form-group row">
+              <label class="col">Personal information</label>
+              <div class="col">
+                <p contenteditable="true" id="name">Data is not provided</p>
+                <p contenteditable="true" id="email">Data is not provided</p>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col">Position</label>
+              <p class="col" contenteditable="true" id="position">Data is not provided</p>
+            </div>
+            <div class="form-group row">
+              <label class="col">Education</label>
+              <p class="col" contenteditable="true" id="education">Data is not provided</p>
+            </div>
+            <div class="form-group row">
+              <label class="col">Self description</label>
+              <p class="col" contenteditable="true" id="selfDescription">Data is not provided</p>
+
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+
+        <button (click)="hide()" class="btn btn-danger float-left mr-auto" data-dismiss="modal" type="button">Close
+        </button>
+        <button (click)="onSave()" class="btn btn-success rounded-pill float-right" type="submit">SAVE
+        </button>
+
+      </div>
+    </div>
+  </div>
+</div>

@@ -73,7 +73,7 @@ public class AuthServiceImpl implements AuthService {
         if (userRepository.existsByUsername(signUpRequest.getUsername())) {
             return ResponseEntity
                     .badRequest()
-                    .body(new MessageDTO("Error: Username is already taken!"));
+                    .body(new MessageDTO("Error: E-mail is already in use!"));
         }
         if (userRepository.existsByEmail(signUpRequest.getEmail())) {
             return ResponseEntity
@@ -92,20 +92,20 @@ public class AuthServiceImpl implements AuthService {
         else {
             strRoles.forEach(role -> {
                 switch (role) {
-                    case "ADMIN":
-                        Role adminRole = roleRepository.findByName(Roles.ADMIN.name())
+                    case "ROLE_ADMIN":
+                        Role adminRole = roleRepository.findByName(Roles.ROLE_ADMIN.name())
                                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
                         roles.add(adminRole);
 
                         break;
-                    case "CANDIDATE":
-                        Role canRole = roleRepository.findByName(Roles.CANDIDATE.name())
+                    case "ROLE_CANDIDATE":
+                        Role canRole = roleRepository.findByName(Roles.ROLE_CANDIDATE.name())
                                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
                         roles.add(canRole);
 
                         break;
-                    case "VOTER":
-                        Role votRole = roleRepository.findByName(Roles.VOTER.name())
+                    case "ROLE_VOTER":
+                        Role votRole = roleRepository.findByName(Roles.ROLE_VOTER.name())
                                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
                         roles.add(votRole);
 

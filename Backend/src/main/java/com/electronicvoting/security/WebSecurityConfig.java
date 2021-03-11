@@ -19,7 +19,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(
-        prePostEnabled = true)
+        prePostEnabled = true,
+        securedEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private UserDetailsServiceImpl userDetailsService;
@@ -56,16 +57,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable()
                 .authorizeRequests().and()
-                .exceptionHandling().
-                authenticationEntryPoint(requestAutheticationEntryPoint).and()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+                .exceptionHandling()
+                .authenticationEntryPoint(requestAutheticationEntryPoint)
+                .and()
                 .authorizeRequests()
                 .antMatchers("/api/auth/**").permitAll()
-                .antMatchers("/evoting/**").permitAll()
+                .antMatchers("/evoting/**").permitAll().and().authorizeRequests()
                 .antMatchers("/actuator/**").permitAll()
 //                .antMatchers("/**").permitAll()
                 .antMatchers("swagger-ui.html").permitAll()
-                .anyRequest().authenticated().and();
+                .anyRequest().authenticated()
+                .and()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         ;
 
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);

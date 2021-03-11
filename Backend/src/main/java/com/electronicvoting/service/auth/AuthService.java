@@ -14,4 +14,5 @@ public interface AuthService {
      ResponseEntity<LoginResponseDTO> authenticateUser(@Valid @RequestBody LoginDTO loginRequest);
      UserDetails authenticateUsers(@Valid @RequestBody LoginDTO loginRequest);
      ResponseEntity<MessageDTO> registerUser(@Valid @RequestBody SignUpDTO signUpRequest);
+
 }

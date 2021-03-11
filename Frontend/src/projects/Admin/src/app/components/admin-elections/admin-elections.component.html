@@ -6,7 +6,7 @@
 <div class="container" style="padding-top: 20px; border: solid">
   <div class="modal-header bg-secondary" style=" padding-top: 10px">
     <h4 class="modal-title text-center " id="modal-basic-title" style="padding-left:41% ">My elections</h4>
-    <button aria-label="Close" class="close " routerLink="/admin" type="button">
+    <button aria-label="Close" class="close " routerLink="/evoting/admin" type="button">
       <span aria-hidden="true">&times;</span>
     </button>
 
@@ -23,8 +23,11 @@
        <div class="container border border-primary mt-3 shadow p-2 pl-3 bg-white rounded ">
         <div class="row ">
           <div class="col   mt-2 font-weight-bold">{{electionsArray[i].title1}}</div>
-          <div class="col   mt-2 font-weight-bold">Start date: {{electionsArray[i].title2}}</div>
-          <div class="col col-lg-2 mt-2 font-weight-bold " style="width: 20px">
+          <div class="col   mt-2 font-weight-bold">Number of voters: {{electionsArray[i].title2}}</div>
+          <div class="col   mt-2 font-weight-bold">Number of candidates: {{electionsArray[i].title4}}</div>
+          <div class="col   mt-2 font-weight-bold">Number of casted votes: {{electionsArray[i].title5}}</div>
+
+          <!--<div class="col col-lg-2 mt-2 font-weight-bold " style="width: 20px">
             <form (ngSubmit)="onSubmit()" [formGroup]="form1">
               <div class="d-inline-block dropright" display="dynamic" ngbDropdown placement="right">
                 <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Actions</button>
@@ -34,7 +37,7 @@
                 </div>
               </div>
             </form>
-          </div>
+          </div>-->
 
         </div>
          <div class="row">
@@ -48,40 +51,41 @@
 
     </div>
 
-    <div class="modal-header row " style=" padding-top: 10px">
-      <h4 class="modal-title text-center" id="modal-basic-title3" style="padding-left:42% ">Participated</h4>
-    </div>
+<!--    <div class="modal-header row " style=" padding-top: 10px">-->
+<!--      <h4 class="modal-title text-center" id="modal-basic-title3" style="padding-left:42% ">Participated</h4>-->
+<!--    </div>-->
 
-    <div [ngClass]="{'active': main}" class="modal-body container " style="">
-      <div *ngFor="let dynamic of participatedElectionsArray;let i = index;" class="row" >
-        <div class="container border border-primary mt-3 shadow p-2 pl-3 bg-white rounded">
-          <div class="row ">
-            <div class="col   mt-2 font-weight-bold">{{participatedElectionsArray[i].title1}}</div>
-            <div class="col   mt-2 font-weight-bold">Start date: {{participatedElectionsArray[i].title2}}</div>
-            <div class="col col-lg-2 mt-2 font-weight-bold " style="width: 20px">
-              <form (ngSubmit)="onSubmit()" [formGroup]="form1">
-                <div class="d-inline-block dropright" display="dynamic" ngbDropdown placement="right">
-                  <button class="btn btn-outline-primary" id="dropdownBasic2" ngbDropdownToggle>Actions</button>
-                  <div aria-labelledby="dropdownBasic1" ngbDropdownMenu>
-                    <button *ngIf="participatedElectionsArray[i].title3==='In progress'" ngbDropdownItem>Vote</button>
-                    <button ngbDropdownItem>Vote Record</button>
-                    <button ngbDropdownItem>Results</button>
-                  </div>
-                </div>
-              </form>
-            </div>
+<!--    <div [ngClass]="{'active': main}" class="modal-body container " style="">-->
+<!--      <div *ngFor="let dynamic of participatedElectionsArray;let i = index;" class="row" >-->
+<!--        <div class="container border border-primary mt-3 shadow p-2 pl-3 bg-white rounded">-->
+<!--          <div class="row ">-->
+<!--            <div class="col   mt-2 font-weight-bold">{{participatedElectionsArray[i].title1}}</div>-->
+<!--            <div class="col   mt-2 font-weight-bold">Start date: {{participatedElectionsArray[i].title2}}</div>-->
+<!--            <div class="col   mt-2 font-weight-bold">End date: {{participatedElectionsArray[i].title4}}</div>-->
+<!--            <div class="col col-lg-2 mt-2 font-weight-bold " style="width: 20px">-->
+<!--              <form (ngSubmit)="onSubmit()" [formGroup]="form1">-->
+<!--                <div class="d-inline-block dropright" display="dynamic" ngbDropdown placement="right">-->
+<!--                  <button class="btn btn-outline-primary" id="dropdownBasic2" ngbDropdownToggle>Actions</button>-->
+<!--                  <div aria-labelledby="dropdownBasic1" ngbDropdownMenu>-->
+<!--                    <button *ngIf="participatedElectionsArray[i].title3==='In progress'" ngbDropdownItem>Vote</button>-->
+<!--                    <button ngbDropdownItem>Vote Record</button>-->
+<!--                    <button ngbDropdownItem>Results</button>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </form>-->
+<!--            </div>-->
 
-          </div>
-          <div class="row">
-            <div class="col mt-2 text-info">Status: {{participatedElectionsArray[i].title3}}</div>
-          </div>
-        </div>
-      </div>
+<!--          </div>-->
+<!--          <div class="row">-->
+<!--            <div class="col mt-2 text-info">Status: {{participatedElectionsArray[i].title3}}</div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
 
-      <br>
+<!--      <br>-->
 
 
-    </div>
+<!--    </div>-->
     <br>
 
     <!--<div class="modal-footer" style="">

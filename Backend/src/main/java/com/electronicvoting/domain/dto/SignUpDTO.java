@@ -1,5 +1,6 @@
 package com.electronicvoting.domain.dto;
 
+import com.electronicvoting.domain.enums.Roles;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -35,7 +36,7 @@ public class SignUpDTO {
                 .username(candidateDTO.getEmail())
                 .email(candidateDTO.getEmail())
                 .password(candidateDTO.getPassword())
-                .role(Set.of("CANDIDATE"))
+                .role(Set.of(Roles.ROLE_CANDIDATE.toString()))
                 .build();
     }
 
@@ -44,7 +45,7 @@ public class SignUpDTO {
                 .username(adminDTO.getEmail())
                 .email(adminDTO.getEmail())
                 .password(adminDTO.getPassword())
-                .role(Set.of("ADMIN"))
+                .role(Set.of(Roles.ROLE_ADMIN.toString()))
                 .build();
     }
 
@@ -53,7 +54,7 @@ public class SignUpDTO {
                 .username(voterDto.getEmail())
                 .email(voterDto.getEmail())
                 .password(voterDto.getPassword())
-                .role(Set.of("VOTER"))
+                .role(Set.of(Roles.ROLE_VOTER.toString()))
                 .build();
     }
 }

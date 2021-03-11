@@ -28,5 +28,7 @@ public class Voter {
     private String email;
     @Column(name = "user_id")
     private long userId;
+    @Column(name = "temporar_password")
+    private boolean temporarPassword;
 
 }

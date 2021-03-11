@@ -18,6 +18,10 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {JwtInterceptor} from "./core/helpers/interceptor/jwt.interceptor";
 import {ErrorInterceptor} from "./core/helpers/interceptor/error.interceptor";
+import { SignUpComponent } from './core/components/sign-up/sign-up.component';
+import {FooterComponent} from "./core/components/footer/footer.component";
+import {AppModuleCandidate} from "../../projects/Candidate/src/app/app.module";
+import {AppModuleVoter} from "../../projects/Voter/src/app/app.module";
 
 
 @NgModule({
@@ -26,13 +30,17 @@ import {ErrorInterceptor} from "./core/helpers/interceptor/error.interceptor";
     ViewMainComponent,
     NavComponent,
     LoginComponent,
-    AlertComponent
+    AlertComponent,
+    SignUpComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
     MatToolbarModule,
     AppRoutingModule,
     AppModuleAdmin.forRoot(),
+    AppModuleCandidate.forRoot(),
+    AppModuleVoter.forRoot(),
     MatMenuModule,
     MatDialogModule,
     BrowserAnimationsModule,
@@ -42,8 +50,8 @@ import {ErrorInterceptor} from "./core/helpers/interceptor/error.interceptor";
     FormsModule,
     NgbModule
   ],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }, ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

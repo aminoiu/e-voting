@@ -2,7 +2,8 @@ package com.electronicvoting.service.castedvotes;
 
 import com.electronicvoting.domain.dto.CastedVoteDTO;
 import com.electronicvoting.entity.CastedVote;
+import org.springframework.http.ResponseEntity;
 
 public interface CastedVotesService {
-    void saveVote(CastedVote castedVote);
+    ResponseEntity saveVote(CastedVote castedVote);
 }

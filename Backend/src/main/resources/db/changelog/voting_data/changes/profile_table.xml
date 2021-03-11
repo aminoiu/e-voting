@@ -1,0 +1,23 @@
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="2c7cc4a8-059a-4208-b589-6912a471be40" author="aminoiu">
+        <createTable tableName="profile">
+            <column name="profile_id" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_PROFILE_TABLE"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+            </column>
+            <column name="email" type="VARCHAR(100)">
+                <constraints nullable="false" unique="true" validateUnique="true"/>
+            </column>
+            <column name="position" type="VARCHAR">
+            </column>
+            <column name="education" type="VARCHAR">
+            </column>
+            <column name="self_description" type="VARCHAR">
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

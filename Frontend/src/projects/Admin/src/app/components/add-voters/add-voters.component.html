@@ -13,7 +13,7 @@
 <br><br>
 <div #main class="container" style="padding-top: 20px; border: solid">
   <div class="modal-header row " style=" padding-top: 10px">
-    <h4  class="modal-title text-center" id="modal-basic-title" style="padding-left:40% ">Add eligible voters</h4>
+    <h4  class="modal-title text-center" id="modal-basic-title" style="padding-left:40% ">Add eligible votersList</h4>
     <button aria-label="Close" class="close " routerLink="/" type="button">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -73,7 +73,7 @@
 
         <div class="row">
           <div class="col dropdown show  form-group" style="padding-left: 0">
-            <label class="font-weight-bold" for="add_voters">Choose how to add voters</label>
+            <label class="font-weight-bold" for="add_voters">Choose how to add votersList</label>
             <select class="form-control bg-light" formControlName="add_voters" id="add_voters">
               <option>Manual</option>
               <option>Import</option>
@@ -82,7 +82,7 @@
           </div>
 
           <div class="col  dropdown show float-right form-group" style="padding-right: 0;">
-            <label class="font-weight-bold" for="add_candidates">Choose how to add candidates</label>
+            <label class="font-weight-bold" for="add_candidates">Choose how to add candidatesList</label>
             <select class="form-control bg-light" formControlName="add_candidates" id="add_candidates">
               <option>Manual</option>
               <option>Import</option>
@@ -96,8 +96,8 @@
 
       <div class="modal-footer" style="">
         <!--        <a (click)="resetPassword()" class="btn-link text-primary" type="button">*Reset password</a>-->
-        <button (click)="back()" class="btn btn-outline-dark rounded-pill font-weight-bold float-left" routerLink="add-voters" routerLinkActive="active" type="submit">BACK</button>
-        <button (click)="continue1()" class="btn btn-outline-dark rounded-pill font-weight-bold" routerLink="add-voters" routerLinkActive="active" type="submit">CONTINUE</button>
+        <button (click)="back()" class="btn btn-outline-dark rounded-pill font-weight-bold float-left" routerLink="add-votersList" routerLinkActive="active" type="submit">BACK</button>
+        <button (click)="continue1()" class="btn btn-outline-dark rounded-pill font-weight-bold" routerLink="add-votersList" routerLinkActive="active" type="submit">CONTINUE</button>
 
       </div>
 

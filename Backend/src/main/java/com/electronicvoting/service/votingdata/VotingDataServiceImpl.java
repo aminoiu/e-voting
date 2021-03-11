@@ -4,9 +4,12 @@ import com.electronicvoting.domain.dto.VotingDataDTO;
 import com.electronicvoting.domain.dto.VotingDataForMobileDTO;
 import com.electronicvoting.entity.VotingData;
 import com.electronicvoting.exceptions.UserNotFoundException;
+import com.electronicvoting.helper.RandomString;
 import com.electronicvoting.repository.AdminRepository;
 import com.electronicvoting.repository.VotingDataRepository;
 import com.electronicvoting.service.admin.AdminService;
+import com.electronicvoting.service.candidate.CandidateService;
+import com.electronicvoting.service.voter.VoterService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -32,12 +35,25 @@ public class VotingDataServiceImpl implements VotingDataService {
 
     @Override
     @Transactional
-    public void saveVotingSession(VotingData votingData) throws UserNotFoundException {
+    public VotingData saveVotingSession(VotingData votingData) throws UserNotFoundException {
 
         String adminUUID = adminService.findByEmail(votingData.getAdminId()).getAdminId();
         votingData.setAdminId(adminUUID);
         votingData.setVotingId(votingData.getVotingTitle());
-        votingDataRepository.save(votingData);
+        votingData.setVotingWinner(null);
+        votingData.setVoteCode(getVoteCode());
+
+        return votingDataRepository.save(votingData);
+    }
+
+    private String getVoteCode() {
+        String voteCodeRandom = null;
+        boolean existsCode = true;
+        while (existsCode) {
+            voteCodeRandom = RandomString.getAlphaNumericString(6);
+            if (votingDataRepository.countByVoteCode(voteCodeRandom) == 0) existsCode = false;
+        }
+        return voteCodeRandom;
     }
 
     @Override
@@ -57,5 +73,32 @@ public class VotingDataServiceImpl implements VotingDataService {
             votingDataDTOS.add(VotingDataForMobileDTO.toDto(votingData));
         });
         return votingDataDTOS;
+    }
+
+    @Override
+    public List<VotingDataForMobileDTO> getVotingDataByCandidateEmail(String email) {
+        List<VotingDataForMobileDTO> votingDataForMobileDTOS= new ArrayList<>();
+        votingDataRepository.findByCandidateId(email).forEach(votingData -> {
+
+            adminService.findById(votingData.getAdminId()).ifPresent(admin -> votingData.setAdminId(admin.getEmail()));
+            votingDataForMobileDTOS.add(VotingDataForMobileDTO.toDto(votingData));
+        });
+        return votingDataForMobileDTOS;
+    }
+
+    @Override
+    public List<VotingDataForMobileDTO> getVotingDataByVoterEmail(String email) {
+        List<VotingDataForMobileDTO> votingDataForMobileDTOS= new ArrayList<>();
+        votingDataRepository.findByVoterId(email).forEach(votingData -> {
+
+            adminService.findById(votingData.getAdminId()).ifPresent(admin -> votingData.setAdminId(admin.getEmail()));
+            votingDataForMobileDTOS.add(VotingDataForMobileDTO.toDto(votingData));
+        });
+        return votingDataForMobileDTOS;
+    }
+
+    @Override
+    public VotingData getVotingDataByVotingCode(String votingCode) {
+        return votingDataRepository.findByVoteCode(votingCode);
     }
 }

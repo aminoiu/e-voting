@@ -18,12 +18,14 @@ public class VoterDto {
     String email;
     String password;
     long userId;
+    boolean temporarPassword;
 
     public static VoterDto toDto(@NotNull Voter voter) {
         return VoterDto.builder()
                 .name(voter.getName())
                 .email(voter.getEmail())
                 .userId(voter.getUserId())
+                .temporarPassword(voter.isTemporarPassword())
                 .build();
     }
 
@@ -32,6 +34,7 @@ public class VoterDto {
                 .name(voterDto.getName())
                 .email(voterDto.getEmail())
                 .userId(voterDto.getUserId())
+                .temporarPassword(voterDto.isTemporarPassword())
                 .build();
     }
 }

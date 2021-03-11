@@ -10,12 +10,6 @@
                              referencedColumnNames="admin_id"
                              referencedTableName="admin"
                              onDelete="CASCADE"/>
-    <addForeignKeyConstraint baseColumnNames="voting_winner"
-                             baseTableName="voting_data"
-                             constraintName="fk_winner_id"
-                             referencedColumnNames="candidate_id"
-                             referencedTableName="candidate"
-                             onDelete="CASCADE"/>
     <addForeignKeyConstraint baseColumnNames="voting_id"
                              baseTableName="casted_vote"
                              constraintName="fk_voting_id"

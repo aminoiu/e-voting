@@ -46,4 +46,6 @@ public class VotingData {
     private String votersList;
     @Column(name="candidates_list")
     private String candidatesList;
+    @Column(name="vote_code")
+    private String voteCode;
 }

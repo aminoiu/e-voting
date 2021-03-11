@@ -23,6 +23,8 @@ import {NewVotingModule} from "./module/new-voting/new-voting.module";
 import {FormatTitlePipe} from "./pipes/format-title";
 import { AdminElectionsComponent } from './components/admin-elections/admin-elections.component';
 import {NgbDropdownModule} from "@ng-bootstrap/ng-bootstrap";
+import {AutoFormatModule, ButtonsModule, FileInputModule, WavesModule} from "ng-uikit-pro-standard";
+import {MatDatepickerModule} from "@angular/material/datepicker";
 
 @NgModule({
   declarations: [
@@ -43,7 +45,7 @@ import {NgbDropdownModule} from "@ng-bootstrap/ng-bootstrap";
     BrowserModule,
     AppRoutingModule,
     MatFormFieldModule,
-    FormsModule, ReactiveFormsModule, MatStepperModule, MatTabsModule, MatIconModule, MatInputModule, NewVotingModule, NgbDropdownModule
+    FormsModule, ReactiveFormsModule, MatStepperModule, MatTabsModule, MatIconModule, MatInputModule, NewVotingModule, NgbDropdownModule, FileInputModule, WavesModule, ButtonsModule, AutoFormatModule, MatDatepickerModule
   ],
   providers: [{ provide: FormDataService, useClass: FormDataService }],
   exports: [
@@ -65,6 +67,6 @@ export class AppModuleAdmin {
     return {
       ngModule: AppModule,
       providers: []
-    }
+    };
   }
 }

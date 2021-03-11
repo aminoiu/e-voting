@@ -1,11 +1,16 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {Router} from "@angular/router";
-import {DynamicGrid} from "../../model/DynamicGrid/dynamic-grid.model";
-import {NewVotingDto} from "../../model/NewVoting/new-voting.dto";
-import {NewVotingService} from "../../services/NewVoting/new-voting.service";
-import {HttpErrorResponse} from "@angular/common/http";
-import {HttpStatus} from "../../../../../../src/app/core/models/http-status.enum";
+import {Component, ElementRef, EventEmitter, OnInit, ViewChild} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
+import {DynamicGrid} from '../../model/DynamicGrid/dynamic-grid.model';
+import {NewVotingDto} from '../../model/NewVoting/new-voting.dto';
+import {NewVotingService} from '../../services/NewVoting/new-voting.service';
+import {HttpErrorResponse} from '@angular/common/http';
+import {HttpStatus} from '../../../../../../src/app/core/models/http-status.enum';
+import {UploadFile, UploadInput, UploadOutput} from 'ng-uikit-pro-standard';
+import {humanizeBytes} from 'ng-uikit-pro-standard';
+import xml2js from 'xml2js';
+import {Time} from '@angular/common';
+
 
 @Component({
   selector: 'app-voting-main',
@@ -19,19 +24,34 @@ export class VotingMainComponent implements OnInit {
   showModal: boolean;
   confirmationForm: FormGroup;
   submitted = false;
-  state: boolean = false;
-  voters_error: boolean = false;
+  state = false;
+  votersError = false;
+  titleError = false;
   dynamicVotersArray: Array<DynamicGrid> = [];
   newDynamicVoter: any = {};
   dynamicCandidatesArray: Array<DynamicGrid> = [];
   newDynamicCandidate: any = {};
-  candidate_error: boolean;
-  private formValid: boolean = true;
-  @ViewChild('error_message_v', {static: false}) private error_message_v: ElementRef<HTMLElement>;
-  @ViewChild('error_message_c', {static: false}) private error_message_c: ElementRef<HTMLElement>;
+  candidateError: boolean;
+  formData: FormData;
+  files: UploadFile[];
+  uploadInput: EventEmitter<UploadInput>;
+  humanizeBytes: Function;
+  dragOver: boolean;
+  showAddFile = false;
+  addFileHidden = true;
+  addFile2Hidden = true;
+  showModalWithResult: boolean;
+  private formValid = true;
+  @ViewChild('errorMessageVoters', {static: false}) private errorMessageVoters: ElementRef<HTMLElement>;
+  @ViewChild('errorMessageTitle', {static: false}) private errorMessageTitle: ElementRef<HTMLElement>;
+
+  @ViewChild('error_message_candidates', {static: false}) private error_message_candidates: ElementRef<HTMLElement>;
   @ViewChild('tableRowElement', {static: false}) private table_row: ElementRef<HTMLElement>;
 
-  constructor(private formBuilder: FormBuilder, private newVotingService: NewVotingService, private router:Router) {
+  constructor(private formBuilder: FormBuilder, private newVotingService: NewVotingService, private router: Router) {
+    this.files = [];
+    this.uploadInput = new EventEmitter<UploadInput>();
+    this.humanizeBytes = humanizeBytes;
   }
 
   get f1() {
@@ -50,18 +70,22 @@ export class VotingMainComponent implements OnInit {
     return this.confirmationForm.controls;
   }
 
+  get title() {
+    return this.form1.get('title');
+  }
+
   ngOnInit(): void {
     this.form1 = this.formBuilder.group(
       {
         title: ['', [Validators.required]],
         voting_type: ['', [Validators.required]],
-        categories: [],
-        start_date: [],
-        start_time: [],
-        end_date: [],
-        end_time: [],
-        add_voters: [],
-        add_candidates: []
+        categories: ['', [Validators.required]],
+        start_date: ['', [Validators.required]],
+        start_time: ['', [Validators.required]],
+        end_date: ['', [Validators.required]],
+        end_time: ['', [Validators.required]],
+        add_voters: ['', [Validators.required]],
+        add_candidates: ['', [Validators.required]]
       });
     this.form2 = this.formBuilder.group(
       {
@@ -82,15 +106,15 @@ export class VotingMainComponent implements OnInit {
       password: ['', [Validators.required, Validators.minLength(6)]]
     });
 
-    this.newDynamicVoter = {title1: "", title2: ""};
-    this.newDynamicCandidate = {title1: "", title2: ""};
+    this.newDynamicVoter = {title1: '', title2: ''};
+    this.newDynamicCandidate = {title1: '', title2: ''};
 
   }
 
   /*  continue1() {
-      console.log("Title: " + this.f1.title.value)
+      console.log("Title: " + this.f1.votingTitle.value)
 
-      this.router.navigateByUrl('admin/start-new-voting/add-voters');
+      this.router.navigateByUrl('admin/create-voting-session/add-votersList');
     }*/
 
   onSubmit() {
@@ -98,34 +122,62 @@ export class VotingMainComponent implements OnInit {
   }
 
   onSubmitConfirmation() {
+    this.validateForms();
+    // tslint:disable-next-line:prefer-const
+    let startDate = new Date(this.f1.start_date.value);
+    const timeS = this.f1.start_time.value;
+    const hoursS = timeS.substr(0, 2);
+    const minutesS = timeS.substr(3, 5);
+    startDate.setHours(hoursS, minutesS, 0);
+
+    const endDate = new Date(this.f1.end_date.value);
+    const timeE = this.f1.end_time.value;
+    const hoursE = timeE.substr(0, 2);
+    const minutesE = timeE.substr(3, 5);
+    endDate.setHours(hoursE, minutesE, 0);
+    const listOfVoters: Array<string> = new Array<string>();
+    const listOfCandidates: Array<string> = new Array<string>();
+
+    for (let i = 0; i < this.dynamicVotersArray.length; i++) {
+      listOfVoters.push(this.dynamicVotersArray[i].title1 + ',' + this.dynamicVotersArray[i].title2);
+    }
+
+    for (let i = 0; i < this.dynamicCandidatesArray.length; i++) {
+      listOfCandidates.push(this.dynamicCandidatesArray[i].title1 + ',' + this.dynamicCandidatesArray[i].title2);
+    }
     const newVotingDto: NewVotingDto = {
-      title: this.f1.title.value,
+      votingTitle: this.f1.title.value,
+      votersNumber: this.getVotersNumber(),
+      votesNumber: 0,
+      votingWinner: '',
+      candidatesNumber: this.getCandidatesNumber(),
+      adminId: sessionStorage.getItem('currentUser'),
+      startDateAndTime: startDate,
+      endDateAndTime: endDate,
       voting_type: this.f1.voting_type.value,
       categories: this.f1.categories.value,
-      voting_start_date: this.f1.start_date.value,
-      voting_start_time: this.f1.start_time.value,
-      voting_end_date: this.f1.end_date.value,
-      voting_end_time: this.f1.end_time.value,
-      voters: this.dynamicVotersArray,
-      candidates: this.dynamicCandidatesArray
+      status: this.setStatus(),
+      votersList: listOfVoters,
+      candidatesList: listOfCandidates
     };
-
     this.submitted = true;
     // stop here if form is invalid
-    if (this.confirmationForm.invalid) {
-      return;
-    }
+    // if (this.confirmationForm.invalid) {
+    //   return;
+    // }
     if (this.submitted) {
       this.showModal = false;
     }
     this.newVotingService.startNewVoting(newVotingDto).toPromise()
       .then(response => {
-      this.router.navigateByUrl('/admin')
-        .then(value => console.log('moved to dashboard'))
-        .catch(reason => console.error('Could not navigate to dashboard:' + reason));
-    })
+        this.showModalWithResult = true;
+        document.getElementById('responseHeader').innerText = 'Voting session was registered!';
+      })
       .catch(error => {
+        this.showModalWithResult = true;
+        document.getElementById('responseHeader').innerText = error.error.message;
         this.handleError(error);
+
       });
   }
 
@@ -138,11 +190,11 @@ export class VotingMainComponent implements OnInit {
   }
 
   getStartDateTime() {
-    return this.f1.start_date.value + ", " + this.f1.start_time.value;
+    return this.f1.start_date.value + ', ' + this.f1.start_time.value;
   }
 
   getEndDateTime() {
-    return this.f1.end_date.value + ", " + this.f1.end_time.value;
+    return this.f1.end_date.value + ', ' + this.f1.end_time.value;
   }
 
   show() {
@@ -150,9 +202,22 @@ export class VotingMainComponent implements OnInit {
 
   }
 
-  //Bootstrap Modal Close event
+  // Bootstrap Modal Close event
   hide() {
     this.showModal = false;
+  }
+
+  addVoter() {
+    console.log('name ' + this.f2.voter_name.value);
+    if (this.f2.voter_name.value === '' || this.f2.voter_name.value === null || this.f2.voter_email.value === '' || this.f2.voter_email.value === null) {
+      this.errorMessageVoters.nativeElement.innerText = 'Input is required!';
+      this.votersError = true;
+    } else {
+      this.addVoterRow(this.f2.voter_name.value, this.f2.voter_email.value);
+      this.errorMessageVoters.nativeElement.innerText = '';
+    }
+
+
   }
 
 
@@ -165,20 +230,8 @@ export class VotingMainComponent implements OnInit {
       this.nextStepClicked.emit();
     }*/
 
-  addVoter() {
-    console.log("name " + this.f2.voter_name.value);
-    if (this.f2.voter_name.value === "" || this.f2.voter_name.value === null || this.f2.voter_email.value === "" || this.f2.voter_email.value === null) {
-      this.error_message_v.nativeElement.innerText = "Input is required!";
-      this.voters_error = true;
-    } else {
-      this.addVoterRow(this.f2.voter_name.value, this.f2.voter_email.value);
-      this.error_message_v.nativeElement.innerText = "";
-    }
-
-  }
-
   addVoterRow(name: string, email: string) {
-    console.log("name " + name, "email " + email);
+    console.log('name ' + name, 'email ' + email);
     this.newDynamicVoter = {title1: name, title2: email};
     this.dynamicVotersArray.push(this.newDynamicVoter);
     console.log('New row added successfully', 'New Row');
@@ -196,19 +249,19 @@ export class VotingMainComponent implements OnInit {
   }
 
   addCandidate() {
-    console.log("name " + this.f3.candidate_name.value);
-    if (this.f3.candidate_name.value === "" || this.f3.candidate_name.value === null || this.f3.candidate_email.value === "" || this.f3.candidate_email.value === null) {
-      this.error_message_c.nativeElement.innerText = "Input is required!";
-      this.candidate_error = true;
+    console.log('name ' + this.f3.candidate_name.value);
+    if (this.f3.candidate_name.value === '' || this.f3.candidate_name.value === null || this.f3.candidate_email.value === '' || this.f3.candidate_email.value === null) {
+      this.error_message_candidates.nativeElement.innerText = 'Input is required!';
+      this.candidateError = true;
     } else {
       this.addCandidateRow(this.f3.candidate_name.value, this.f3.candidate_email.value);
-      this.error_message_c.nativeElement.innerText = "";
+      this.error_message_candidates.nativeElement.innerText = '';
     }
 
   }
 
   addCandidateRow(name: string, email: string) {
-    console.log("name " + name, "email " + email);
+    console.log('name ' + name, 'email ' + email);
     this.newDynamicCandidate = {title1: name, title2: email};
     this.dynamicCandidatesArray.push(this.newDynamicCandidate);
     console.log('New row added successfully', 'New Row');
@@ -225,38 +278,175 @@ export class VotingMainComponent implements OnInit {
 
   }
 
-
-
   isAllowed = (optional) => {
     return optional === 0 ? true : this.state;
   }
 
   isNotEmpty() {
-    if (this.dynamicVotersArray.length > 0) this.state = true;
+    if (this.dynamicVotersArray.length > 0) {
+      this.state = true;
+    }
 
   }
 
   isEmptyV() {
     if (this.dynamicVotersArray.length < 1) {
-      console.log("Table is empty");
+      console.log('Table is empty');
       return true;
-    } else return false;
+    } else {
+      return false;
+    }
   }
 
   isEmptyC() {
     if (this.dynamicCandidatesArray.length < 1) {
-      console.log("Table is empty");
+      console.log('Table is empty');
       return true;
-    } else return false;
+    } else {
+      return false;
+    }
   }
 
   isFormValid() {
     return this.formValid;
   }
 
+  showFiles() {
+    let files = '';
+    for (let i = 0; i < this.files.length; i++) {
+      files += this.files[i].name;
+      if (!(this.files.length - 1 === i)) {
+        files += ',';
+      }
+    }
+    return files;
+  }
+
+  startUpload(): void {
+    //
+    // const event: UploadInput = {
+    //   type: 'uploadAll',
+    //   url: 'your-path-to-backend-endpoint',
+    //   method: 'POST',
+    //   data: {foo: 'bar'},
+    // };
+    // this.files = [];
+    // this.uploadInput.emit(event);
+  }
+
+  cancelUpload(id: string): void {
+    this.uploadInput.emit({type: 'cancel', id});
+  }
+
+  reset(): void {
+    this.files = [];
+  }
+
+  onUploadOutput(output: UploadOutput | any): void {
+
+    if (output.type === 'allAddedToQueue') {
+    } else if (output.type === 'addedToQueue') {
+      this.files.push(output.file); // add file to array when added
+    } else if (output.type === 'uploading') {
+      // update current data in files array for uploading file
+      const index = this.files.findIndex(file => file.id === output.file.id);
+      this.files[index] = output.file;
+    } else if (output.type === 'removed') {
+      // remove file from array when removed
+      this.files = this.files.filter((file: UploadFile) => file !== output.file);
+    } else if (output.type === 'dragOver') {
+      this.dragOver = true;
+    } else if (output.type === 'dragOut') {
+    } else if (output.type === 'drop') {
+      this.dragOver = false;
+    }
+    this.showFiles();
+  }
+
+  // For candidatesList
+  showFilesCandidates() {
+    let files = '';
+    for (let i = 0; i < this.files.length; i++) {
+      files += this.files[i].name;
+      if (!(this.files.length - 1 === i)) {
+        files += ',';
+      }
+    }
+    return files;
+  }
+
+  startUploadCandidates(): void {
+    const event: UploadInput = {
+      type: 'uploadAll',
+      url: 'your-path-to-backend-endpoint',
+      method: 'POST',
+      data: {foo: 'bar'},
+    };
+    this.files = [];
+    this.uploadInput.emit(event);
+  }
+
+  cancelUploadCandidates(id: string): void {
+    this.uploadInput.emit({type: 'cancel', id});
+  }
+
+  resetCandidates(): void {
+    this.files = [];
+  }
+
+  onUploadOutputCandidates(output: UploadOutput | any): void {
+
+    if (output.type === 'allAddedToQueue') {
+    } else if (output.type === 'addedToQueue') {
+      this.files.push(output.file); // add file to array when added
+    } else if (output.type === 'uploading') {
+      // update current data in files array for uploading file
+      const index = this.files.findIndex(file => file.id === output.file.id);
+      this.files[index] = output.file;
+    } else if (output.type === 'removed') {
+      // remove file from array when removed
+      this.files = this.files.filter((file: UploadFile) => file !== output.file);
+    } else if (output.type === 'dragOver') {
+      this.dragOver = true;
+    } else if (output.type === 'dragOut') {
+    } else if (output.type === 'drop') {
+      this.dragOver = false;
+    }
+    this.showFiles();
+  }
+
+  onOptionsSelected(type: string, value: string) {
+    console.log('The selected value is ' + value);
+    if (type === 'Voters') {
+      if (value === 'Import') {
+        this.addFileHidden = false;
+      } else {
+        this.addFileHidden = true;
+      }
+    } else if (type === 'Candidates') {
+      if (value === 'Import') {
+        this.addFile2Hidden = false;
+      } else {
+        this.addFile2Hidden = true;
+      }
+    }
+  }
+
+  hideModalWithResults() {
+    this.showModalWithResult = false;
+    document.getElementById('responseHeader').innerText = '';
+    this.router.navigateByUrl('/evoting/admin')
+      .then(value => console.log('moved to dashboard'))
+      .catch(reason => console.error('Could not navigate to dashboard:' + reason));
+  }
+
+  private setStatus() {
+    sessionStorage.setItem(this.f1.title.value, 'In progress');
+    return 'In progress';
+  }
 
   private handleError(httpError: HttpErrorResponse) {
-    console.error('Something went wrong! ->'+httpError.message);
+    console.error('Something went wrong! ->' + httpError.message);
 
     if (httpError.status === HttpStatus.INTERNAL_SERVER_ERROR) {
       console.error('Something went wrong!');
@@ -266,6 +456,16 @@ export class VotingMainComponent implements OnInit {
       console.error('Servers might be down');
     }
   }
+
+  private validateForms() {
+    if (this.f1.title.value === '' || this.f1.title.value === null) {
+      console.log('Input is required for votingTitle!');
+      this.errorMessageTitle.nativeElement.innerText = 'Input is required!';
+      this.titleError = true;
+    } else {
+      console.log('Title provided!');
+      this.errorMessageTitle.nativeElement.innerText = '';
+    }
+  }
+
 }
-
-

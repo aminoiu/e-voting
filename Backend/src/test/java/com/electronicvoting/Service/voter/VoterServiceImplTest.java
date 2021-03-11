@@ -3,8 +3,11 @@ package com.electronicvoting.Service.voter;
 import com.electronicvoting.entity.Role;
 import com.electronicvoting.entity.Users;
 import com.electronicvoting.entity.Voter;
+import com.electronicvoting.helper.HashPasswordWithSaltEncoder;
 import com.electronicvoting.repository.UserRepository;
 import com.electronicvoting.repository.VoterRepository;
+import com.electronicvoting.service.auth.AuthService;
+import com.electronicvoting.service.voter.VoterService;
 import com.electronicvoting.service.voter.VoterServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -27,6 +30,11 @@ class VoterServiceImplTest {
     private UserRepository userRepository;
     @Mock
     private VoterRepository voterRepository;
+    @Mock
+    private AuthService authService;
+    @Mock
+    private  HashPasswordWithSaltEncoder encoder;
+
 
     private Voter voter;
     private Users user;
@@ -34,7 +42,7 @@ class VoterServiceImplTest {
 
     @BeforeEach
     void setUp() {
-        voterService = new VoterServiceImpl(voterRepository, userRepository);
+        voterService = new VoterServiceImpl(voterRepository, userRepository, authService,encoder);
         user = new Users();
         user.setId(102);
         user.setUsername("voter@test.com");

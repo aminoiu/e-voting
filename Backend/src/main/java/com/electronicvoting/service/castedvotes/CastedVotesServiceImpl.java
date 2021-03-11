@@ -7,6 +7,7 @@ import com.electronicvoting.service.candidate.CandidateService;
 import com.electronicvoting.service.voter.VoterService;
 import com.electronicvoting.service.votingdata.VotingDataService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,9 +23,10 @@ public class CastedVotesServiceImpl implements CastedVotesService {
 
     @Override
     @Transactional
-    public void saveVote(CastedVote castedVote) {
+    public ResponseEntity saveVote(CastedVote castedVote) {
         castedVote.setVoteId(UUID.randomUUID().toString());
         castedVoteRepository.save(castedVote);
+        return ResponseEntity.ok().build();
 
     }
 }

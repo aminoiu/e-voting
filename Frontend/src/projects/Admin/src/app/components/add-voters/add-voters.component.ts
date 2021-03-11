@@ -30,7 +30,7 @@ voting_title:string;
         add_voters:[],
         add_candidates:[]
       })
-    console.log('Voting title: '+ sessionStorage.getItem('voting_title'));
+    console.log('Voting votingTitle: '+ sessionStorage.getItem('voting_title'));
     this.title=sessionStorage.getItem('voting_title');
 
   }
@@ -46,6 +46,6 @@ voting_title:string;
   }
 
   back() {
-    this.router.navigateByUrl('admin/start-new-voting');
+    this.router.navigateByUrl('admin/create-voting-session');
   }
 }

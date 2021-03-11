@@ -28,7 +28,7 @@ const FORM_STEP_1 = { //name: {type: '', validations: {}, errors: {}, placeholde
   },
   voting_title: {
     type: 'text', validations: {required: false}, errors: {},
-    placeholder: 'Voting title'
+    placeholder: 'Voting votingTitle'
   },
   voting_type: {
     type: 'select', options: VOTING_TYPE, validations: {required: true},
@@ -79,21 +79,21 @@ const FORM_STEP_1 = { //name: {type: '', validations: {}, errors: {}, placeholde
     options: ADD_VOTERS_MODE,
     validations: {required: true},
     errors: {required: 'This field can not be left blank'},
-    placeholder: 'Choose how to add voters'
+    placeholder: 'Choose how to add votersList'
   },
   add_candidates_mode: {
     type: 'select',
     options: ADD_CNDIDATES_MODE,
     validations: {required: true},
     errors: {required: 'This field can not be left blank'},
-    placeholder: 'Choose how to add candidates'
+    placeholder: 'Choose how to add candidatesList'
   }
 };
 
 const FORM_STEP_2 = {
   title: {
     type: 'text', validations: {required: false},
-    errors: {}, placeholder: 'Add eligible voters'
+    errors: {}, placeholder: 'Add eligible votersList'
   },
   voting_title: {
     type: 'text', validations: {required: false},
@@ -120,7 +120,7 @@ const FORM_STEP_2 = {
 const FORM_STEP_3 = {
   title: {
     type: 'text', validations: {required: false},
-    errors: {}, placeholder: 'Add voting candidates'
+    errors: {}, placeholder: 'Add voting candidatesList'
   },
   voting_title: {
     type: 'text', validations: {required: false},
@@ -156,13 +156,13 @@ const FORM_STEP_4 = {
   voters_number: {
     type: 'text', validations: {required: false},
     errors: {
-    }, placeholder: 'Number of voters'
+    }, placeholder: 'Number of votersList'
   },
   candidates_number: {
     type: 'text', validations: {
     },
     errors: {
-    }, placeholder: 'Number of candidates'
+    }, placeholder: 'Number of candidatesList'
   },
   start_details: {
     type: 'dateTime', validations: {
@@ -181,8 +181,8 @@ const FORM_STEP_4 = {
 
 const STEP_ITEMS = [
   {label: 'Create a voting session', data: FORM_STEP_1},
-  {label: 'Add eligible voters', data: FORM_STEP_2},
-  {label: 'Add voting candidates', data: FORM_STEP_3},
+  {label: 'Add eligible votersList', data: FORM_STEP_2},
+  {label: 'Add voting candidatesList', data: FORM_STEP_3},
   {label: 'Voting information', data: FORM_STEP_4},
   {label: 'Review & Submit', data: {}}
 ];

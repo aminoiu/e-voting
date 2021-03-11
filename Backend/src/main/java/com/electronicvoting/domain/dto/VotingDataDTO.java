@@ -1,6 +1,7 @@
 package com.electronicvoting.domain.dto;
 
 import com.electronicvoting.entity.VotingData;
+import com.sun.xml.bind.v2.runtime.unmarshaller.XsiNilLoader;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -8,9 +9,7 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 @Data
 @NoArgsConstructor
@@ -23,11 +22,14 @@ public class VotingDataDTO {
     String votingWinner;
     Integer candidatesNumber;
     String adminId;
-    Timestamp startDate;
-    Timestamp endDate;
+    Date startDate;
+    Date endDate;
+    String voting_type;
+    String categories;
     String status;
     List<String> votersList;
     List<String> candidatesList;
+    String voteCode;
 
     public static VotingDataDTO toDto(@NotNull VotingData votingData) {
         return VotingDataDTO.builder()
@@ -42,11 +44,13 @@ public class VotingDataDTO {
                 .status(votingData.getStatus())
                 .votersList(parseToList(votingData.getVotersList()))
                 .candidatesList(parseToList(votingData.getCandidatesList()))
+                .voteCode(votingData.getVoteCode())
                 .build();
     }
 
 
     public static VotingData dtoToEntity(@NotNull VotingDataDTO votingDataDTO) {
+
         return VotingData.builder()
                 .votingTitle(votingDataDTO.getVotingTitle())
                 .votersNumber(votingDataDTO.getVotersNumber())
@@ -54,21 +58,35 @@ public class VotingDataDTO {
                 .votingWinner(votingDataDTO.getVotingWinner())
                 .candidatesNumber(votingDataDTO.getCandidatesNumber())
                 .adminId(votingDataDTO.getAdminId())
-                .startDate(votingDataDTO.getStartDate())
-                .endDate(votingDataDTO.getEndDate())
+                .startDate((Timestamp) votingDataDTO.getStartDate())
+                .endDate((Timestamp) votingDataDTO.getEndDate())
                 .status(votingDataDTO.getStatus())
-                .votersList(String.valueOf(votingDataDTO.getVotersList()))
-                .candidatesList(String.valueOf(votingDataDTO.getCandidatesList()))
+                .votersList(String.valueOf(getEmailsListOnly(votingDataDTO.getVotersList())))
+                .candidatesList(String.valueOf(getEmailsListOnly(votingDataDTO.getCandidatesList())))
+                .voteCode(votingDataDTO.getVoteCode())
                 .build();
     }
 
 
-    private static List<String> parseToList(String listToParse) {
+
+    private static List getEmailsListOnly(List<String> votersList) {
+        String[] temp;
+        List<String> listParsed = new ArrayList<>();
+        for(String u:votersList){
+            temp=u.split(",");
+            listParsed.add(temp[1]);
+        }
+        return listParsed;
+
+    }
+
+
+    public static List<String> parseToList(String listToParse) {
         String temp;
         List<String> listParsed;
 
         temp = listToParse.replace("[", "").replace("]", "");
-        listParsed = Arrays.asList(temp.split(","));
+        listParsed = Arrays.asList(temp.trim().split(","));
         return listParsed;
     }
 }

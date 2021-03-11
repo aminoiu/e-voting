@@ -5,15 +5,15 @@
     <changeSet id="69ef4abd-2f33-40f9-a4db-f99156ecb426" author="aminoiu">
        <insert tableName="roles" schemaName="voting_data">
            <column name="id" valueNumeric="1"/>
-           <column name="name" value="ADMIN"/>
+           <column name="name" value="ROLE_ADMIN"/>
        </insert>
         <insert tableName="roles" schemaName="voting_data">
             <column name="id" valueNumeric="2"/>
-            <column name="name" value="VOTER"/>
+            <column name="name" value="ROLE_VOTER"/>
         </insert>
         <insert tableName="roles" schemaName="voting_data">
             <column name="id" valueNumeric="3"/>
-            <column name="name" value="CANDIDATE"/>
+            <column name="name" value="ROLE_CANDIDATE"/>
         </insert>
     </changeSet>
 </databaseChangeLog>

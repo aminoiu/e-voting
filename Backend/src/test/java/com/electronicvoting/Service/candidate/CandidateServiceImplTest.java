@@ -5,9 +5,12 @@ import com.electronicvoting.entity.Candidate;
 import com.electronicvoting.entity.Role;
 import com.electronicvoting.entity.Users;
 import com.electronicvoting.exceptions.EmailExistsException;
+import com.electronicvoting.helper.HashPasswordWithSaltEncoder;
 import com.electronicvoting.repository.CandidateRepository;
 import com.electronicvoting.repository.UserRepository;
+import com.electronicvoting.service.auth.AuthService;
 import com.electronicvoting.service.candidate.CandidateServiceImpl;
+import com.electronicvoting.service.profile.ProfileService;
 import com.electronicvoting.service.votingdata.VotingDataService;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -36,6 +39,12 @@ class CandidateServiceImplTest {
     private CandidateRepository candidateRepository;
     @Mock
     private VotingDataService votingDataService;
+    @Mock
+    private AuthService authService;
+    @Mock
+    private ProfileService profileService;
+    @Mock
+    private HashPasswordWithSaltEncoder encoder;
 
     private Candidate candidate;
     private Users user;
@@ -45,7 +54,7 @@ class CandidateServiceImplTest {
 
     @BeforeEach
     void setUp() {
-        candidateService = new CandidateServiceImpl(candidateRepository, userRepository);
+        candidateService = new CandidateServiceImpl(candidateRepository,userRepository,votingDataService,authService,profileService,encoder);
         user = new Users();
         user.setId(101);
         user.setUsername("candidate@test.com");
