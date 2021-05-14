@@ -6,4 +6,5 @@ import org.springframework.http.ResponseEntity;
 
 public interface CastedVotesService {
     ResponseEntity saveVote(CastedVote castedVote);
+    boolean hasVoterAlreadySubmittedVote(String votingCode, String voterEmail);
 }

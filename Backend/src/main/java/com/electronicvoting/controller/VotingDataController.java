@@ -3,18 +3,20 @@ package com.electronicvoting.controller;
 import com.electronicvoting.domain.dto.VotingDataDTO;
 import com.electronicvoting.domain.dto.VotingDataForMobileDTO;
 import com.electronicvoting.entity.Admin;
+import com.electronicvoting.entity.Chains;
 import com.electronicvoting.entity.VotingData;
 import com.electronicvoting.exceptions.UserNotFoundException;
 import com.electronicvoting.helper.SendMailSMTP;
 import com.electronicvoting.repository.AdminRepository;
+import com.electronicvoting.service.blockchain.ChainsService;
 import com.electronicvoting.service.candidate.CandidateService;
 import com.electronicvoting.service.voter.VoterService;
 import com.electronicvoting.service.votingdata.VotingDataService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -30,9 +32,10 @@ public class VotingDataController {
     private final CandidateService candidateService;
     private final VoterService voterService;
     private final AdminRepository adminRepository;
+    private final ChainsService chainsService;
 
     @PostMapping(path = "/create-voting-session", consumes = "application/json")
-    @PreAuthorize("hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<VotingDataDTO> saveVoteData(@RequestBody VotingDataDTO newVotingDTO) throws UserNotFoundException {
         List<String> votersList=newVotingDTO.getVotersList();
         List<String> candidatesList=newVotingDTO.getCandidatesList();
@@ -60,6 +63,15 @@ public class VotingDataController {
             String voterEmail=voter.split(",")[1];
             sendMailSMTP.sendEmailToVoterStart(voterEmail,savedVotingData.getVotingTitle(),savedVotingData.getVoteCode(),savedVotingData.getStartDate(),savedVotingData.getEndDate(),adminEmail.get(0),voterPassTemp.get(voterEmail));
         }
+
+        Chains chain=new Chains();
+        chain.setChainId(newVotingDTO.getVotingTitle());
+        chain.setNumberBlocks(0);
+        chain.setVotingTitle(newVotingDTO.getVotingTitle());
+        chain.setAdminEmail(adminRepository.findByEmail(newVotingDTO.getAdminId()).get().getEmail());
+        chain.setGendate(Instant.now());
+        chainsService.createBlockchainForVotingSession(chain);
+
         return ResponseEntity.accepted().build();
     }
 

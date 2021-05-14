@@ -3,6 +3,14 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
    <include file="ddl.xml" relativeToChangelogFile="true"/>
-   <include file="migration.xml" relativeToChangelogFile="true"/>
    <include file="ddl_constraint.xml" relativeToChangelogFile="true"/>
+   <include file="changes\db_changelog-5.xml" relativeToChangelogFile="true"/>
+   <include file="changes\votingdata_aditional_columns.xml" relativeToChangelogFile="true"/>
+   <include file="changes\votingData_code.xml" relativeToChangelogFile="true"/>
+   <include file="changes\vote_code_constraints.xml" relativeToChangelogFile="true"/>
+   <include file="changes\temporarPassword_column.xml" relativeToChangelogFile="true"/>
+   <include file="changes\profile_table.xml" relativeToChangelogFile="true"/>
+   <include file="changes\addUserIsEnabled.xml" relativeToChangelogFile="true"/>
+   <include file="changes\confirmationToken.xml" relativeToChangelogFile="true"/>
+   <include file="changes\refactor_castedvote_table.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>

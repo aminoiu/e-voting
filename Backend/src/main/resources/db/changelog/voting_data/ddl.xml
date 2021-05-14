@@ -3,8 +3,8 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
     <changeSet id="142b8ff9-cec3-4f2a-930a-fa3799f0e1d8" author="aminoiu">
-        <validCheckSum>8:a1a85475aa54688584b42351d20d789d</validCheckSum>
-        <createTable tableName="admin">
+        <validCheckSum>ANY</validCheckSum>
+       <createTable tableName="admin" schemaName="voting_data">
             <column name="admin_id" type="VARCHAR(255)">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="PK_ADMIN_TABLE"/>
             </column>
@@ -36,7 +36,7 @@
 
         </createTable>
 
-        <createTable tableName="voter">
+        <createTable tableName="voter" schemaName="voting_data">
             <column name="voter_id" type="VARCHAR(255)">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="PK_VOTERS_TABLE"/>
             </column>
@@ -52,7 +52,7 @@
 
         </createTable>
 
-        <createTable tableName="candidate">
+        <createTable tableName="candidate" schemaName="voting_data">
             <column name="candidate_id" type="VARCHAR(255)">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="PK_CANDIDATES_TABLE"/>
             </column>
@@ -70,7 +70,7 @@
 
         </createTable>
 
-        <createTable tableName="voting_data">
+        <createTable tableName="votings_data"  schemaName="voting_data">
             <column name="voting_id" type="VARCHAR(255)">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="PK_VOTING_DATA_TABLE"/>
             </column>
@@ -93,7 +93,7 @@
 
         </createTable>
 
-        <createTable tableName="casted_vote">
+        <createTable tableName="casted_vote" schemaName="voting_data">
             <column name="vote_id" type="VARCHAR(255)">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="PK_CASTED_VOTES_TABLE"/>
             </column>
@@ -138,7 +138,5 @@
             <column name="user_id" type="BIGINT"/>
             <column name="role_id" type="BIGINT"/>
         </createTable>
-
-
     </changeSet>
 </databaseChangeLog>

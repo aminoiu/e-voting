@@ -3,7 +3,8 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
     <changeSet id="2c7cc4a8-059a-4208-b589-6912a471be40" author="aminoiu">
-        <createTable tableName="profile">
+        <validCheckSum>ANY</validCheckSum>
+        <createTable tableName="profile" schemaName="voting_data">
             <column name="profile_id" type="VARCHAR(255)">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="PK_PROFILE_TABLE"/>
             </column>

@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface DataBlockRepository extends JpaRepository<DataBlock, String> {
+    DataBlock findByChainIdAndAndOrderNr(String chainId, Integer orderNr);
 }

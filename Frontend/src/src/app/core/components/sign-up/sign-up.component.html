@@ -7,16 +7,16 @@
   <!-- Links -->
   <ul class="navbar-nav na-e ">
     <li class="nav-item">
-      <a class="nav-link text-light" href="#">PRODUCTS</a>
+      <a class="nav-link text-light" href="#">PRODUSE</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link text-light" href="#">FEATURES</a>
+      <a class="nav-link text-light" href="#">CARACTERISTICI</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link text-light" href="#">STATISTICS</a>
+      <a class="nav-link text-light" href="#">STATISTICA</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link text-light" href="#">HELP</a>
+      <a class="nav-link text-light" href="#">AJUTOR</a>
     </li>
     <span class=""></span>
 
@@ -27,21 +27,21 @@
 <br>
 <div class="container" style="width: 70%;padding-top: 20px; border: solid">
   <div class="modal-header" style=" padding-top: 10px">
-    <h4 class="modal-title" id="modal-basic-title" style="alignment: center">Sign Up</h4>
+    <h4 class="modal-title" id="modal-basic-title" style="alignment: center">Înregistrare</h4>
     <button aria-label="Close" class="close" routerLink="/" type="button">
       <span aria-hidden="true">&times;</span>
     </button>
 
   </div>
   <div class="modal-header" style=" padding-top: 10px">
-    <h5 class="modal-title" id="modal-step-title" style="alignment: center">Step 1</h5>
+    <h5 class="modal-title" id="modal-step-title" style="alignment: center">Pasul 1</h5>
   </div>
 
   <div class="modal-body" style="">
     <form (ngSubmit)="onSubmit()" [formGroup]="signUpForm">
 
       <div class="form-group">
-        <label for="full_name">Full Name</label>
+        <label for="full_name">Numele complet</label>
         <input class="form-control" formControlName="full_name" id="full_name" name="full_name" type="text">
       </div>
       <div class="row">
@@ -57,7 +57,7 @@
           <!--          </div>-->
         </div>
         <div class="form-group col">
-          <label for="repeatEmail">Repeat E-mail</label>
+          <label for="repeatEmail">Repetă E-mail</label>
 
           <input class="form-control" formControlName="repeatEmail"
                  id="repeatEmail"
@@ -69,7 +69,7 @@
       </div>
       <div class="row">
         <div class="form-group col ">
-          <label for="password">Password</label>
+          <label for="password">Parola</label>
 
           <input class="form-control" formControlName="password"
                  id="password" name="password" type="password">
@@ -80,7 +80,7 @@
 
         </div>
         <div class="form-group col ">
-          <label for="repPassword">Repeat Password</label>
+          <label for="repPassword">Repetă Parola</label>
 
           <input class="form-control" formControlName="repPassword"
                  id="repPassword" name="repPassword" type="password">
@@ -94,19 +94,19 @@
       <br>
       <br>
       <div>
-        <h6 class="font-weight-bold">Personal information</h6>
+        <h6 class="font-weight-bold">Informații personale</h6>
       </div>
       <br>
       <div class="row">
         <div class=" form-group col">
-          <label for="birthDate">Date of Birth</label>
+          <label for="birthDate">Data nașterii</label>
           <input class="form-control float-right shadow-sm bg-white rounded" formControlName="birthDate"
                  id="birthDate"
 
                  type="date">
         </div>
         <div class="col form-group">
-          <label for="country">Country/Region</label>
+          <label for="country">Țară/Regiune</label>
           <input class="form-control float-right shadow-sm bg-white rounded" formControlName="country"
                  id="country"
                  type="text">
@@ -115,13 +115,13 @@
 
       <div class="row">
         <div class=" form-group col">
-          <label for="street">Street</label>
+          <label for="street">Strada</label>
           <input class="form-control float-right shadow-sm bg-white rounded" formControlName="street"
                  id="street"
                  type="text">
         </div>
         <div class="col form-group">
-          <label for="city">City</label>
+          <label for="city">Oraș</label>
           <input class="form-control float-right shadow-sm bg-white rounded" formControlName="city"
                  id="city"
                  type="text">
@@ -130,14 +130,14 @@
 
       <div class="row">
         <div class=" form-group col">
-          <label for="workPlace">Work place</label>
+          <label for="workPlace">Locul de muncă</label>
           <input class="form-control float-right shadow-sm bg-white rounded" formControlName="workPlace"
                  id="workPlace"
 
                  type="text">
         </div>
         <div class="col form-group">
-          <label for="phoneNumber">Phone number</label>
+          <label for="phoneNumber">Număr de telefon</label>
           <input class="form-control float-right shadow-sm bg-white rounded" formControlName="phoneNumber"
                  id="phoneNumber"
                  type="number">
@@ -148,7 +148,7 @@
         <div class="col form-group">
           <button (click)="show()" class="btn font-weight-bold" routerLinkActive="active"
                   style="background-color: grey; color: white"
-                  type="submit">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CONTINUE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  type="submit">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CONTINUĂ&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           </button>
         </div>
       </div>
@@ -159,27 +159,27 @@
 
 <div *ngIf="isFormValid()" [style.display]="showModal ? 'block' : 'none'" aria-hidden="true"
      aria-labelledby="myModalLabel" class="modal" id="imagemodal" role="dialog" tabindex="-1">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel">STEP 2</h4>
+      <div class="modal-header text-center ">
+        <h4 class="modal-title text-center" id="myModalLabel">STEP 2</h4>
       </div>
       <div class="modal-body">
         <div class="container">
           <div>
-            <h5> Click NEXT to register your finger into the system</h5>
+            <h5>Pe adresa introdusă de e-mail a fost expediat un mesaj. Confirmați înregistrarea în sistemul EVoting.</h5>
           </div>
         </div>
 
       </div>
-      <div class="modal-footer">
 
-        <button (click)="hide()" class="btn btn-danger float-left mr-auto" data-dismiss="modal" type="button">Close
-        </button>
-        <button (click)="sendRegisterData()" class="btn btn-success rounded-pill float-right" type="submit">NEXT
-        </button>
 
+      <div class="modal-body">
+        <button (click)="hideModalWithResults()" class="btn btn-info" data-dismiss="modal"
+                type="button">FINALIZARE
+        </button>
       </div>
+
     </div>
   </div>
 </div>
@@ -189,7 +189,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel2">RESULT</h4>
+        <h4 class="modal-title" id="myModalLabel2">RESULTATE</h4>
       </div>
       <div class="modal-body">
         <div class="container">
@@ -202,7 +202,7 @@
       <div class="modal-footer">
 
         <button (click)="hideModalWithResults()" class="btn btn-danger float-left mr-auto" data-dismiss="modal"
-                type="button">FINISH
+                type="button">FINALIZARE
         </button>
 
       </div>

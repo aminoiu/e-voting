@@ -36,7 +36,7 @@ public class SignUpDTO {
                 .username(candidateDTO.getEmail())
                 .email(candidateDTO.getEmail())
                 .password(candidateDTO.getPassword())
-                .role(Set.of(Roles.ROLE_CANDIDATE.toString()))
+                .role(Set.of(Roles.CANDIDATE.toString()))
                 .build();
     }
 
@@ -45,7 +45,7 @@ public class SignUpDTO {
                 .username(adminDTO.getEmail())
                 .email(adminDTO.getEmail())
                 .password(adminDTO.getPassword())
-                .role(Set.of(Roles.ROLE_ADMIN.toString()))
+                .role(Set.of(Roles.ADMIN.toString()))
                 .build();
     }
 
@@ -54,7 +54,7 @@ public class SignUpDTO {
                 .username(voterDto.getEmail())
                 .email(voterDto.getEmail())
                 .password(voterDto.getPassword())
-                .role(Set.of(Roles.ROLE_VOTER.toString()))
+                .role(Set.of(Roles.VOTER.toString()))
                 .build();
     }
 }

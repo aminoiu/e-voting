@@ -2,12 +2,14 @@
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 <changeSet id="3e576952-d6a1-4e30-bf65-42e2096d8ca5" author="aminoiu">
-    <addForeignKeyConstraint baseColumnNames="hashPrev"
+    <addForeignKeyConstraint schemaName="blockchain"
+                             baseColumnNames="hashPrev"
                              baseTableName="blocks"
                              constraintName="fk_hashPrev"
                              referencedColumnNames="hash"
                              referencedTableName="blocks"/>
-    <addForeignKeyConstraint baseColumnNames="hashBlock"
+    <addForeignKeyConstraint schemaName="blockchain"
+                             baseColumnNames="hashBlock"
                              baseTableName="transactions"
                              constraintName="fk_hashBlock"
                              referencedColumnNames="hash"

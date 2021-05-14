@@ -7,22 +7,22 @@
   <!-- Links -->
   <ul class="navbar-nav na-e ">
     <li class="nav-item">
-      <a (click)="show()" class="nav-link text-light" style="font-size: 20px;">PROFILE</a>
+      <a (click)="show()" class="nav-link text-light" style="font-size: 19px;">PROFIL</a>
     </li>
     <li class="nav-item">
-      <a [routerLink]="'/evoting/candidate/elections'" class="nav-link text-light" style="font-size: 20px;">MY ELECTIONS</a>
+      <a [routerLink]="'/evoting/candidate/elections'" class="nav-link text-light" style="font-size:19px;">SESIUNILE MELE</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link text-light" style="font-size: 20px;">PRODUCTS</a>
+      <a class="nav-link text-light" style="font-size: 19px;">PRODUSE</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link text-light" style="font-size: 20px;">FEATURES</a>
+      <a class="nav-link text-light" style="font-size: 19px;">CARACTERISTICI</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link text-light" style="font-size: 20px;">STATISTICS</a>
+      <a class="nav-link text-light" style="font-size: 19px;">STATISTICA</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link text-light" style="font-size: 20px;">HELP</a>
+      <a class="nav-link text-light" style="font-size: 19px;">AJUTOR</a>
     </li>
     <span class=""></span>
 
@@ -30,7 +30,7 @@
 
   <ul class="navbar-nav ml-auto mr-4">
     <a (click)="logOut()" class="nav-link text-light" routerLink="logout" routerLinkActive="active"
-       style="font-size: 20px;">LOG OUT</a>
+       style="font-size: 19px;">DECONECTARE</a>
   </ul>
   <div class="text-center">
     <img alt="Profile" class="img-fluid" src="assets/images/account.png" style="width:60px; ">
@@ -46,29 +46,29 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel">Candidate information</h4>
+        <h4 class="modal-title" id="myModalLabel">Informațiile candidatului</h4>
       </div>
       <div class="modal-body">
         <form (ngSubmit)="onSave()" [formGroup]="confirmationForm">
           <div class="container">
             <div class="form-group row">
-              <label class="col">Personal information</label>
+              <label class="col">Informații personale</label>
               <div class="col">
-                <p contenteditable="true" id="name">Data is not provided</p>
-                <p contenteditable="true" id="email">Data is not provided</p>
+                <p contenteditable="true" id="name">[Nu sunt date!]</p>
+                <p contenteditable="true" id="email">[Nu sunt date!]</p>
               </div>
             </div>
             <div class="form-group row">
-              <label class="col">Position</label>
-              <p class="col" contenteditable="true" id="position">Data is not provided</p>
+              <label class="col">Poziția</label>
+              <p class="col" contenteditable="true" id="position">[Nu sunt date!]</p>
             </div>
             <div class="form-group row">
-              <label class="col">Education</label>
-              <p class="col" contenteditable="true" id="education">Data is not provided</p>
+              <label class="col">Educație</label>
+              <p class="col" contenteditable="true" id="education">[Nu sunt date!]</p>
             </div>
             <div class="form-group row">
-              <label class="col">Self description</label>
-              <p class="col" contenteditable="true" id="selfDescription">Data is not provided</p>
+              <label class="col">Auto-Descriere</label>
+              <p class="col" contenteditable="true" id="selfDescription">[Nu sunt date!]</p>
 
             </div>
           </div>
@@ -76,9 +76,9 @@
       </div>
       <div class="modal-footer">
 
-        <button (click)="hide()" class="btn btn-danger float-left mr-auto" data-dismiss="modal" type="button">Close
+        <button (click)="hide()" class="btn btn-danger float-left mr-auto" data-dismiss="modal" type="button">Închide
         </button>
-        <button (click)="onSave()" class="btn btn-success rounded-pill float-right" type="submit">SAVE
+        <button (click)="onSave()" class="btn btn-success rounded-pill float-right" type="submit">SALVEAZĂ
         </button>
 
       </div>

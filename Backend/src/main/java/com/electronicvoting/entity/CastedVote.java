@@ -23,13 +23,10 @@ public class CastedVote {
     private String voteId;
     @Column(name ="voting_id",nullable = false)
     private String votingId;
-    @Column(name ="voter_email",nullable = false)
-    private String voterEmail;
     @Column(name = "timestamp",nullable = false)
     private Instant timestamp;
-    @Column(name ="device_ip",nullable = false)
-    private String deviceIp;
-    @Column(name ="candidate_email",nullable = false)
-    private String candidateEmail;
-
+    @Column(name ="casted_vote",nullable = false)
+    private String castedVote;
+    @Column(name ="vote_type",nullable = false)
+    private String voteType;
 }

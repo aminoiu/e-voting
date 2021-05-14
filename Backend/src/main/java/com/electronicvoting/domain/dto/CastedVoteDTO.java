@@ -12,30 +12,27 @@ import java.time.Instant;
 @Builder
 @AllArgsConstructor
 public class CastedVoteDTO {
-    String voterEmail;
-    String vote;
+    String voteType;
     Instant timestamp;
     String votingTitle;
-    String deviceIp;
+    String castedVote;
 
     public static CastedVoteDTO toDto(CastedVote castedVote) {
         return CastedVoteDTO.builder()
-                .voterEmail(castedVote.getVoterEmail())
-                .vote(castedVote.getCandidateEmail())
                 .timestamp(castedVote.getTimestamp())
                 .votingTitle(castedVote.getVotingId())
-                .deviceIp(castedVote.getDeviceIp())
+                .castedVote(castedVote.getCastedVote())
+                .voteType(castedVote.getVoteType())
                 .build();
     }
 
     public static CastedVote dtoToEntity(CastedVoteDTO castedVoteDTO) {
         return CastedVote.builder()
                 .voteId(castedVoteDTO.getVotingTitle())
-                .voterEmail(castedVoteDTO.getVoterEmail())
                 .timestamp(castedVoteDTO.getTimestamp())
-                .deviceIp(castedVoteDTO.getDeviceIp())
-                .candidateEmail(castedVoteDTO.getVote())
                 .votingId(castedVoteDTO.getVotingTitle())
+                .castedVote(castedVoteDTO.getCastedVote())
+                .voteType(castedVoteDTO.getVoteType())
                 .build();
     }
 

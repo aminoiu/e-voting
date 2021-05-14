@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, ElementRef, Inject, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {VoterService} from '../../services/Voter/voter.service';
 import {DOCUMENT} from '@angular/common';
@@ -6,8 +6,8 @@ import {Router} from '@angular/router';
 import {PassModel} from '../../../../../Candidate/src/app/model/Password/pass.model';
 import {DynamicGrid} from '../../../../../Admin/src/app/model/DynamicGrid/dynamic-grid.model';
 import {CastedVoteDto} from '../../model/CastedVote/casted-vote.dto';
-import {HttpErrorResponse} from "@angular/common/http";
-import {HttpStatus} from "../../../../../../src/app/core/models/http-status.enum";
+import {HttpErrorResponse} from '@angular/common/http';
+import {HttpStatus} from '../../../../../../src/app/core/models/http-status.enum';
 
 @Component({
   selector: 'app-voter-home',
@@ -27,6 +27,7 @@ export class VoterHomeComponent implements OnInit {
   showModalWithResult: boolean;
   castedVoteDto: CastedVoteDto;
   private formValid = true;
+  @ViewChild('info') inforef: ElementRef;
 
   constructor(private voterService: VoterService, @Inject(DOCUMENT) document,
               private formBuilder: FormBuilder, private router: Router) {
@@ -111,7 +112,7 @@ export class VoterHomeComponent implements OnInit {
 
 
   onSubmit() {
-    this.voterService.getCandidatesProfileByVotingCode(this.vf.votingCode.value).toPromise()
+    this.voterService.getCandidatesProfileByVotingCode(this.vf.votingCode.value, sessionStorage.getItem('currentUser')).toPromise()
       .then(response => {
         this.showCandidatesModal = true;
         response.forEach(value => {
@@ -119,7 +120,9 @@ export class VoterHomeComponent implements OnInit {
 
         });
       })
-      .catch();
+      .catch(error => {
+        this.handleError(error);
+      });
   }
 
   addCandidateRow(name: string, email: string, position: string, education: string, selfDescription: string) {
@@ -175,6 +178,7 @@ export class VoterHomeComponent implements OnInit {
     this.router.navigateByUrl('/evoting/voter')
       .then(value => console.log('moved to dashboard'))
       .catch(reason => console.error('Could not navigate to dashboard:' + reason));
+    this.hideCand();
   }
 
 
@@ -187,6 +191,12 @@ export class VoterHomeComponent implements OnInit {
 
     if (httpError.status === HttpStatus.ERR_CONNECTION_REFUSED) {
       console.error('Servers might be down');
+    }
+
+    if (httpError.status === HttpStatus.BAD_REQUESTS) {
+      console.error(httpError.error);
+      this.inforef.nativeElement.innerText = httpError.error + ' by you( ' + sessionStorage.getItem('currentUser') + ' )';
+      setTimeout(function() {  this.document.location.reload(); }, 3000);
     }
   }
 }

@@ -19,10 +19,10 @@ public class BlockchainTransaction {
     @Id
     @Column(name = "transaction_id")
     private String transactionId;
-    @Column(name = "hashBlock",nullable = false)
-    private String hashBlock;
+    @Column(name = "tx_hash",nullable = false)
+    private String txHash;
     @Column(name="version",nullable = false)
-    private String version;
+    private Integer version;
     @Column(name="timestamp",nullable = false)
     private Instant timestamp;
 }

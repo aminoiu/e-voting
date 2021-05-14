@@ -10,7 +10,7 @@ public class ApplicationContextProvider implements ApplicationContextAware {
 
     private ApplicationContext applicationContext;
 
-    ApplicationContext getApplicationContext() {
+    public ApplicationContext getApplicationContext() {
         return this.applicationContext;
     }
 

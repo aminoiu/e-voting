@@ -2,8 +2,8 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {IsTempDto} from '../../../../../Candidate/src/app/model/isTemp.dto';
 import {PassModel} from '../../../../../Candidate/src/app/model/Password/pass.model';
-import {ProfileDto} from "../../../../../Candidate/src/app/model/Profile/profile.dto";
-import {CastedVoteDto} from "../../model/CastedVote/casted-vote.dto";
+import {ProfileDto} from '../../../../../Candidate/src/app/model/Profile/profile.dto';
+import {CastedVoteDto} from '../../model/CastedVote/casted-vote.dto';
 
 @Injectable({
   providedIn: 'root'
@@ -21,8 +21,8 @@ export class VoterService {
     return this.http.put<any>('http://localhost:8080/evoting/voter/update-password/' + email, newPass);
   }
 
-  getCandidatesProfileByVotingCode(votingCode: string) {
-    return this.http.get<Array<ProfileDto>>('http://localhost:8080/evoting/voter/voting-candidates/' + votingCode);
+  getCandidatesProfileByVotingCode(votingCode: string, voterEmail: string) {
+    return this.http.put<Array<ProfileDto>>('http://localhost:8080/evoting/voter/voting-candidates/' + votingCode, voterEmail);
   }
 
   castVote(submittedVote: CastedVoteDto) {

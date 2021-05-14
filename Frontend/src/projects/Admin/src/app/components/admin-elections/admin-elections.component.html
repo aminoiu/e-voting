@@ -5,7 +5,7 @@
 <br><br>
 <div class="container" style="padding-top: 20px; border: solid">
   <div class="modal-header bg-secondary" style=" padding-top: 10px">
-    <h4 class="modal-title text-center " id="modal-basic-title" style="padding-left:41% ">My elections</h4>
+    <h4 class="modal-title text-center " id="modal-basic-title" style="padding-left:41% ">Sesiunile mele</h4>
     <button aria-label="Close" class="close " routerLink="/evoting/admin" type="button">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -15,7 +15,7 @@
   <div class="modal-body" style="">
 
     <div class="modal-header row " style=" padding-top: 10px">
-      <h4 class="modal-title text-center" id="modal-basic-title2" style="padding-left:40% ">Started by me</h4>
+      <h4 class="modal-title text-center" id="modal-basic-title2" style="padding-left:40% ">Create de mine</h4>
     </div>
 
     <div [ngClass]="{'active': main}" class="modal-body container " style="">
@@ -23,9 +23,9 @@
        <div class="container border border-primary mt-3 shadow p-2 pl-3 bg-white rounded ">
         <div class="row ">
           <div class="col   mt-2 font-weight-bold">{{electionsArray[i].title1}}</div>
-          <div class="col   mt-2 font-weight-bold">Number of voters: {{electionsArray[i].title2}}</div>
-          <div class="col   mt-2 font-weight-bold">Number of candidates: {{electionsArray[i].title4}}</div>
-          <div class="col   mt-2 font-weight-bold">Number of casted votes: {{electionsArray[i].title5}}</div>
+          <div class="col   mt-2 font-weight-bold">Număr de alegători: {{electionsArray[i].title2}}</div>
+          <div class="col   mt-2 font-weight-bold">Număr de candidați: {{electionsArray[i].title4}}</div>
+          <div class="col   mt-2 font-weight-bold">Număr de voturi: {{electionsArray[i].title5}}</div>
 
           <!--<div class="col col-lg-2 mt-2 font-weight-bold " style="width: 20px">
             <form (ngSubmit)="onSubmit()" [formGroup]="form1">

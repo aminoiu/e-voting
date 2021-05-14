@@ -1,21 +1,26 @@
 package com.electronicvoting.service.auth;
 
-import com.electronicvoting.domain.dto.LoginDTO;
-import com.electronicvoting.domain.dto.LoginResponseDTO;
-import com.electronicvoting.domain.dto.MessageDTO;
-import com.electronicvoting.domain.dto.SignUpDTO;
+import com.electronicvoting.domain.dto.*;
 import com.electronicvoting.domain.enums.Roles;
+import com.electronicvoting.entity.ConfirmationToken;
 import com.electronicvoting.entity.Role;
 import com.electronicvoting.entity.Users;
+import com.electronicvoting.helper.ApplicationContextProvider;
 import com.electronicvoting.helper.HashPasswordWithSaltEncoder;
+import com.electronicvoting.repository.ConfirmationTokenRepository;
 import com.electronicvoting.repository.RoleRepository;
 import com.electronicvoting.repository.UserRepository;
 import com.electronicvoting.security.jwt.JwtUtils;
+import com.electronicvoting.service.mail.MailService;
 import com.electronicvoting.service.user.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -41,22 +46,29 @@ public class AuthServiceImpl implements AuthService {
     private final JwtUtils jwtUtils;
 
     @Override
-    public ResponseEntity<LoginResponseDTO> authenticateUser(@Valid LoginDTO loginRequest) {
+    public ResponseEntity<Object> authenticateUser(@Valid LoginDTO loginRequest) {
+        String jwt = null;
+        UserDetailsImpl userDetails = null;
+        List<String> roles = null;
+        try {
+            Authentication authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+            jwt = jwtUtils.generateJwtToken(authentication);
+            userDetails = (UserDetailsImpl) authentication.getPrincipal();
+            roles = userDetails.getAuthorities().stream()
+                    .map(GrantedAuthority::getAuthority)
+                    .collect(Collectors.toList());
+            return ResponseEntity.ok(new LoginResponseDTO(jwt,
+                    userDetails.getId(),
+                    userDetails.getUsername(),
+                    userDetails.getEmail(),
+                    roles));
+        } catch (BadCredentialsException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
 
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        String jwt = jwtUtils.generateJwtToken(authentication);
-        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
-        List<String> roles = userDetails.getAuthorities().stream()
-                .map(GrantedAuthority::getAuthority)
-                .collect(Collectors.toList());
+        }
 
-        return ResponseEntity.ok(new LoginResponseDTO(jwt,
-                userDetails.getId(),
-                userDetails.getUsername(),
-                userDetails.getEmail(),
-                roles));
     }
 
     @Override
@@ -92,26 +104,26 @@ public class AuthServiceImpl implements AuthService {
         else {
             strRoles.forEach(role -> {
                 switch (role) {
-                    case "ROLE_ADMIN":
-                        Role adminRole = roleRepository.findByName(Roles.ROLE_ADMIN.name())
-                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                    case "ADMIN":
+                        Role adminRole = roleRepository.findByName(Roles.ADMIN.name())
+                                .orElseThrow(() -> new RuntimeException("Error: Role ADMIN is not found."));
                         roles.add(adminRole);
 
                         break;
-                    case "ROLE_CANDIDATE":
-                        Role canRole = roleRepository.findByName(Roles.ROLE_CANDIDATE.name())
-                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                    case "CANDIDATE":
+                        Role canRole = roleRepository.findByName(Roles.CANDIDATE.name())
+                                .orElseThrow(() -> new RuntimeException("Error: Role CANDIDATE is not found."));
                         roles.add(canRole);
 
                         break;
-                    case "ROLE_VOTER":
-                        Role votRole = roleRepository.findByName(Roles.ROLE_VOTER.name())
-                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                    case "VOTER":
+                        Role votRole = roleRepository.findByName(Roles.VOTER.name())
+                                .orElseThrow(() -> new RuntimeException("Error: Role VOTER is not found."));
                         roles.add(votRole);
 
                         break;
                     default:
-                        throw new RuntimeException("Error: Role is not found.");
+                        throw new RuntimeException("Error: Sent role is not found.");
 
                 }
             });
@@ -119,6 +131,8 @@ public class AuthServiceImpl implements AuthService {
         users.setRoles(roles);
         users.setId(UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE);
         userRepository.save(users);
-        return ResponseEntity.ok(new MessageDTO("Users registered successfully!"));
+
+
+        return ResponseEntity.ok(new MessageDTO("Users registered successfully! Need to confirm e-mail"));
     }
 }

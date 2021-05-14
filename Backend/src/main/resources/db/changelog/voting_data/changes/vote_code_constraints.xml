@@ -3,7 +3,7 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
     <changeSet id="f9e5920c-182c-4efe-ac3a-bd158a8dd7a8" author="aminoiu">
-        <addNotNullConstraint tableName="voting_data" schemaName="voting_data" columnName="vote_code"/>
-        <addUniqueConstraint tableName="voting_data" schemaName="voting_data" columnNames="vote_code"/>
+        <addNotNullConstraint tableName="votings_data" schemaName="voting_data" columnName="vote_code"/>
+        <addUniqueConstraint tableName="votings_data" schemaName="voting_data" columnNames="vote_code"/>
     </changeSet>
 </databaseChangeLog>

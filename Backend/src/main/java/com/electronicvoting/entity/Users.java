@@ -36,6 +36,9 @@ public class Users {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
+    @Column(name = "is_enabled")
+    private boolean isEnabled;
+
     public Users(String username, String email, String password) {
         this.email = email;
         this.password = password;

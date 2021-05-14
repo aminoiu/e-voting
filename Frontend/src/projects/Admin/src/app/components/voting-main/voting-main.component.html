@@ -15,8 +15,7 @@
   <br><br>
   <div #main class="container" style="padding-top: 20px; border: solid">
     <div class="modal-header row " style=" padding-top: 10px">
-      <h4 class="modal-title text-center" id="modal-basic-title" style="padding-left:35% ">Create a new voting
-        session</h4>
+      <h4 class="modal-title text-center" id="modal-basic-title" style="padding-left:35% ">Crearea unei sesiuni noi de vot</h4>
       <button aria-label="Close" class="close " routerLink="/evoting/admin" type="button">
         <span aria-hidden="true">&times;</span>
       </button>
@@ -27,40 +26,40 @@
       <form (ngSubmit)="onSubmit()" [formGroup]="form1"> <!--[formGroup]="loginForm" (ngSubmit)="onSubmit()-->
 
         <div class="form-group">
-          <label class="font-weight-bold" for="title">Title</label>
+          <label class="font-weight-bold" for="title">Titlu</label>
           <input class="form-control shadow-sm bg-white rounded" formControlName="title" id="title" required type="text"
                  >
           <p #errorMessageTitle class="text-danger"></p>
         </div>
 
         <div class="form-group">
-          <label class="font-weight-bold" for="voting_type">Voting type</label>
+          <label class="font-weight-bold" for="voting_type">Tipul de alegeri</label>
           <select class="form-control bg-light" formControlName="voting_type" id="voting_type">
-            <option>Candidate election</option>
-            <option>Option election</option>
+            <option>Alegeri candidați</option>
+            <option>Alegeri opțiuni</option>
           </select>
           <!--        <p *ngIf="password.hasError('invalid')">Invalid username or password!</p>-->
         </div>
 
         <div class="form-group">
-          <label class="font-weight-bold" for="categories">Categories</label>
+          <label class="font-weight-bold" for="categories">Categorii</label>
           <select class="form-control bg-light" formControlName="categories" id="categories">
-            <option>Management</option>
-            <option>Education</option>
+            <option>Administrativ</option>
+            <option>Educație</option>
           </select>
           <!--        <p *ngIf="password.hasError('invalid')">Invalid username or password!</p>-->
         </div>
         <div class="container">
           <div class="row">
             <div class="col form-group" style="padding-left: 0">
-              <label class="font-weight-bold" for="start_date">Voting start date</label>
+              <label class="font-weight-bold" for="start_date">Alegeri:data de început</label>
               <input class="form-control shadow-sm bg-white rounded" formControlName="start_date" id="start_date"
                      style=""
                      type="date">
               <!--        <p *ngIf="password.hasError('invalid')">Invalid username or password!</p>-->
             </div>
             <div class="col form-group" style="padding-right: 0">
-              <label class="font-weight-bold" for="start_time">Voting start time</label>
+              <label class="font-weight-bold" for="start_time">Alegeri:ora de început</label>
               <input class="form-control float-right shadow-sm bg-white rounded" formControlName="start_time"
                      id="start_time"
                      style="; padding-right: 0"
@@ -70,14 +69,14 @@
 
           <div class="row">
             <div class="col  form-group" style="padding-left: 0">
-              <label class="font-weight-bold" for="end_date">Voting end date</label>
+              <label class="font-weight-bold" for="end_date">Alegeri:data de încheiere</label>
               <input class="form-control shadow-sm bg-white rounded" formControlName="end_date" id="end_date"
                      style=""
                      type="date">
               <!--        <p *ngIf="password.hasError('invalid')">Invalid username or password!</p>-->
             </div>
             <div class="col form-group" style="padding-right: 0">
-              <label class="font-weight-bold" for="end_time">Voting end time</label>
+              <label class="font-weight-bold" for="end_time">Alegeri:ora de încheiere</label>
               <input class="form-control float-right shadow-sm bg-white rounded" formControlName="end_time"
                      id="end_time"
                      style="; padding-right: 0"
@@ -87,7 +86,7 @@
 
           <div class="row">
             <div class="col dropdown show  form-group" style="padding-left: 0">
-              <label class="font-weight-bold" for="add_voters">Choose how to add votersList</label>
+              <label class="font-weight-bold" for="add_voters">Modul de adăugare a listei de Alegători</label>
               <select (change)="onOptionsSelected('Voters',f1.add_voters.value)" class="form-control bg-light" formControlName="add_voters"
                       id="add_voters">
                 <option>Manual</option>
@@ -97,7 +96,7 @@
             </div>
 
             <div class="col  dropdown show float-right form-group" style="padding-right: 0;">
-              <label class="font-weight-bold " for="add_candidates">Choose how to add candidatesList</label>
+              <label class="font-weight-bold " for="add_candidates">Modul de adăugare a listei de Candidați</label>
               <select (change)="onOptionsSelected('Candidates',f1.add_candidates.value)" class="form-control bg-light" formControlName="add_candidates" id="add_candidates">>
                 <option>Manual</option>
                 <option>Import</option>
@@ -123,7 +122,7 @@
   <!--Form for adding votersList-->
   <div #addVotersContainer class="container" style="padding-top: 20px; border: solid">
     <div class="modal-header row " style=" padding-top: 10px">
-      <h4 class="modal-title text-center" id="modal-basic-title2" style="padding-left:40% ">Add eligible votersList</h4>
+      <h4 class="modal-title text-center" id="modal-basic-title2" style="padding-left:40% ">Adăugați lista de Alegători eligibili</h4>
 
 
     </div>
@@ -136,9 +135,9 @@
           <table #votersList [hidden]="isEmptyV()" class="table table-striped table-bordered">
             <thead>
             <tr>
-              <th>Voter name</th>
-              <th>Voter email</th>
-              <th style="width: 10px">Action</th>
+              <th>Nume</th>
+              <th>E-mail</th>
+              <th style="width: 10px">Acțiune</th>
             </tr>
             </thead>
             <tbody>
@@ -162,14 +161,14 @@
           <br>
           <div class="row">
             <div class="col form-group" style="padding-left: 0">
-              <label class="font-weight-bold" for="voter_name">Voter name</label>
+              <label class="font-weight-bold" for="voter_name">Nume alegător</label>
               <input [ngClass]="{'border-danger':votersError,'border-info':!votersError}" class="form-control shadow-sm bg-white rounded" formControlName="voter_name"
                      id="voter_name"
                      name="voter_name" type="text">
               <p #errorMessageVoters class="text-danger"></p>
             </div>
             <div class="col form-group" style="padding-right: 0">
-              <label class="font-weight-bold" for="voter_email">Voter email</label>
+              <label class="font-weight-bold" for="voter_email">E-mail alegător</label>
               <input class="form-control float-right shadow-sm bg-white rounded" formControlName="voter_email"
                      id="voter_email" name="voter_email"
                      style="; padding-right: 0"
@@ -187,15 +186,15 @@
           <form #chooseFile1 [hidden]="addFileHidden">
             <div class="file-field md-form">
               <div class="waves-light" color="grey" mdbBtn mdbWavesEffect size="sm">
-                <span>Choose file</span>
+                <span>Alege fișier</span>
                 <input (uploadOutput)="onUploadOutput($event)" [uploadInput]="uploadInput" mdbFileSelect type="file">
               </div>
               <div class="file-path-wrapper">
                 <input [value]="showFiles()" class="file-path" placeholder="Upload your .xml file" type="text">
               </div>
             </div>
-            <button (click)="startUpload()" color="grey" mdbBtn>Upload</button>
-            <button (click)="reset()" class="float-right" color="grey" mdbBtn>Reset</button>
+            <button (click)="startUpload()" color="grey" mdbBtn>Încărcați</button>
+            <button (click)="reset()" class="float-right" color="grey" mdbBtn>Resetați</button>
 
           </form>
         </div>
@@ -210,7 +209,7 @@
   <br><br>
   <div #addVotersContainer class="container" style="padding-top: 20px; border: solid">
     <div class="modal-header row " style=" padding-top: 10px">
-      <h4 class="modal-title text-center" id="modal-basic-title3" style="padding-left:40% ">Add voting candidatesList</h4>
+      <h4 class="modal-title text-center" id="modal-basic-title3" style="padding-left:40% ">Adăugați lista candidaților</h4>
 
 
     </div>
@@ -223,9 +222,9 @@
           <table #candidatesList [hidden]="isEmptyC()" class="table table-striped table-bordered">
             <thead>
             <tr>
-              <th>Candidate name</th>
-              <th>Candidate email</th>
-              <th style="width: 10px">Action</th>
+              <th>Nume</th>
+              <th>E-mail</th>
+              <th style="width: 10px">Acțiune</th>
             </tr>
             </thead>
             <tbody>
@@ -249,7 +248,7 @@
           <br>
           <div class="row">
             <div class="col form-group" style="padding-left: 0">
-              <label class="font-weight-bold" for="candidate_name">Candidate name</label>
+              <label class="font-weight-bold" for="candidate_name">Nume candidat</label>
               <input [ngClass]="{'border-danger':candidateError,'border-info':!candidateError}" class="form-control shadow-sm bg-white rounded"
                      formControlName="candidate_name" id="candidate_name"
                      name="candidate_name" type="text"
@@ -257,7 +256,7 @@
               <p #error_message_candidates class="text-danger"></p>
             </div>
             <div class="col form-group" style="padding-right: 0">
-              <label class="font-weight-bold" for="candidate_email">Candidate email</label>
+              <label class="font-weight-bold" for="candidate_email">E-mail candidat</label>
               <input class="form-control float-right shadow-sm bg-white rounded" formControlName="candidate_email"
                      id="candidate_email" name="candidate_email"
                      style="padding-right: 0"
@@ -268,22 +267,22 @@
           <div class="row">
             <div class="col form-group">
               <button (click)="addCandidate()" class="btn font-weight-bold float-right" routerLinkActive="active"
-                      type="submit">ADD
+                      type="submit">ADĂUGARE
               </button>
             </div>
           </div>
           <form #chooseFile2 [hidden]="addFile2Hidden">
             <div class="file-field md-form">
               <div class="waves-light" color="grey" mdbBtn mdbWavesEffect size="sm">
-                <span>Choose file</span>
+                <span>Alege fișier</span>
                 <input (uploadOutput)="onUploadOutputCandidates($event)" [uploadInput]="uploadInput" mdbFileSelect type="file">
               </div>
               <div class="file-path-wrapper">
                 <input [value]="showFilesCandidates()" class="file-path" placeholder="Upload your .xml file" type="text">
               </div>
             </div>
-            <button (click)="startUploadCandidates()" color="grey" mdbBtn>Upload</button>
-            <button (click)="resetCandidates()" class="float-right" color="grey" mdbBtn>Reset</button>
+            <button (click)="startUploadCandidates()" color="grey" mdbBtn>Încărcați</button>
+            <button (click)="resetCandidates()" class="float-right" color="grey" mdbBtn>Resetați</button>
 
           </form>
         </div>
@@ -306,7 +305,7 @@
       <div class="row text-center">
         <div class="col form-group">
           <button (click)="show()" class="btn font-weight-bold " routerLinkActive="active"
-                  type="submit">START NEW VOTING SESSION
+                  type="submit">START SESIUNII NOI DE VOT
           </button>
         </div>
       </div>
@@ -340,25 +339,25 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel">Voting information</h4>
+        <h4 class="modal-title" id="myModalLabel">Informații despre noile alegeri</h4>
       </div>
       <div class="modal-body">
         <form (ngSubmit)="onSubmitConfirmation()" [formGroup]="confirmationForm">
           <div class="container">
             <div class="form-group row">
-              <label class="col">Number of votersList</label>
+              <label class="col">Numărul de alegători</label>
               <label class="col">{{getVotersNumber()}}</label>
             </div>
             <div class="form-group row">
-              <label class="col">Number of candidatesList</label>
+              <label class="col">Numărul de candidați</label>
               <label class="col">{{getCandidatesNumber()}}</label>
             </div>
             <div class="form-group row">
-              <label class="col">Start date and time</label>
+              <label class="col">Data și ora de început</label>
               <label class="col">{{getStartDateTime()}}</label>
             </div>
             <div class="form-group row">
-              <label class="col">End date and time</label>
+              <label class="col">Data și ora de încheiere</label>
               <label class="col">{{getEndDateTime()}}</label>
             </div>
           </div>
@@ -366,9 +365,9 @@
       </div>
       <div class="modal-footer">
 
-        <button (click)="hide()" class="btn btn-danger float-left mr-auto" data-dismiss="modal" type="button">Close
+        <button (click)="hide()" class="btn btn-danger float-left mr-auto" data-dismiss="modal" type="button">Închide
         </button>
-        <button (click)="onSubmitConfirmation()" class="btn btn-success rounded-pill float-right" type="submit">FINISH
+        <button (click)="onSubmitConfirmation()" class="btn btn-success rounded-pill float-right" type="submit">FINISARE
         </button>
 
       </div>
@@ -381,7 +380,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel2">RESULT</h4>
+        <h4 class="modal-title" id="myModalLabel2">REZULTATE</h4>
       </div>
       <div class="modal-body">
         <div class="container">
@@ -394,7 +393,7 @@
       <div class="modal-footer">
 
         <button (click)="hideModalWithResults()" class="btn btn-danger float-left mr-auto" data-dismiss="modal"
-                type="button">FINISH
+                type="button">FINISARE
         </button>
 
       </div>

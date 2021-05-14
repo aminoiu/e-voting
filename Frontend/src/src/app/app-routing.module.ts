@@ -27,6 +27,7 @@ const routes: Routes = [
      loadChildren: '../../projects/app2/src/app/app.module#App2SharedModule'},*/
   {path: 'login', component: LoginComponent},
   {path: 'register', component: SignUpComponent},
+  {path: 'evoting/admins/confirm-account', component: LoginComponent},
   {path: '', component: ViewMainComponent}];
 
 @NgModule({

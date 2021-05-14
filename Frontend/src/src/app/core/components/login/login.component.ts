@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AlertService} from '../../services/alert/alert.service';
@@ -10,11 +10,6 @@ import {LoginDto} from '../../models/login-dto.model';
 
 @Component({templateUrl: 'login.component.html'})
 export class LoginComponent implements OnInit {
-  loginForm: FormGroup;
-  loading = false;
-  submitted = false;
-  returnUrl: string;
-  private role: string;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -44,6 +39,13 @@ export class LoginComponent implements OnInit {
   public get curentUserRole(): string {
     return this.role;
   }
+  loginForm: FormGroup;
+  loading = false;
+  submitted = false;
+  returnUrl: string;
+  private role: string;
+  error: string;
+  @ViewChild('info') inforef: ElementRef;
 
   // convenience getter for easy access to form fields
 
@@ -74,13 +76,13 @@ export class LoginComponent implements OnInit {
         sessionStorage.setItem('curentUserRole', user.roles[0]);
         sessionStorage.setItem(this.authenticationService.TOKEN_KEY, user.token);
         sessionStorage.setItem('currentUser', user.username);
-        if (sessionStorage.getItem('curentUserRole') === 'ROLE_ADMIN') // TODO: Enums for roles
+        if (sessionStorage.getItem('curentUserRole') === 'ADMIN') // TODO: Enums for roles
         {
           this.router.navigate(['/evoting/admin']);
-        } else if (sessionStorage.getItem('curentUserRole') === 'ROLE_CANDIDATE') // TODO: Enums for roles
+        } else if (sessionStorage.getItem('curentUserRole') === 'CANDIDATE') // TODO: Enums for roles
         {
           this.router.navigate(['/evoting/candidate']);
-        } else if (sessionStorage.getItem('curentUserRole') === 'ROLE_VOTER') // TODO: Enums for roles
+        } else if (sessionStorage.getItem('curentUserRole') === 'VOTER') // TODO: Enums for roles
         {
           this.router.navigate(['/evoting/voter']);
         }
@@ -90,6 +92,7 @@ export class LoginComponent implements OnInit {
         this.handleError(error);
       });
   }
+
   resetPassword() {
   }
 
@@ -97,14 +100,24 @@ export class LoginComponent implements OnInit {
     if (httpError.status === HttpStatus.NOT_FOUND) {
       this.email.setErrors({invalid: true});
       this.password.setErrors({invalid: true});
+      this.inforef.nativeElement.innerText = 'User not found!';
     }
-
+    if (httpError.status === HttpStatus.BAD_REQUESTS) {
+      console.error(httpError.error);
+      this.error = httpError.error;
+      this.inforef.nativeElement.innerText = httpError.error;
+    }
     if (httpError.status === HttpStatus.INTERNAL_SERVER_ERROR) {
       console.error('Something went wrong!');
+      this.inforef.nativeElement.innerText = 'Internal server error!';
     }
 
     if (httpError.status === HttpStatus.ERR_CONNECTION_REFUSED) {
       console.error('Servers might be down');
+      this.inforef.nativeElement.innerText = 'Connection error!';
     }
+
+    setTimeout(function() {  this.document.location.reload(); }, 3000);
+
   }
 }

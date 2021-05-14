@@ -25,3 +25,17 @@ background: #7f7f7f;
 .copyright{
   padding-top: 21px;
 }
+li a:hover {
+  background-color: #111;
+}
+li a:hover:not(.active) {
+  background-color: #181f3b;
+}
+
+ul a:hover {
+  background-color: #111;
+}
+ul a:hover:not(.active) {
+  background-color: #181f3b;
+}
+

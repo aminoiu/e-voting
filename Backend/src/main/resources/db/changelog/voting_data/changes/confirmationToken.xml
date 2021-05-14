@@ -1,0 +1,19 @@
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="71b13409-3cb5-461c-ac59-7290d115cb04" author="aminoiu">
+        <validCheckSum>ANY</validCheckSum>
+        <createTable tableName="confirmation_token" schemaName="voting_data">
+            <column name="token_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_CONFIRMTOKEN_TABLE"/>
+            </column>
+            <column name="confirmation_token" type="VARCHAR(255)">
+            </column>
+            <column name="created_date" type="timestamp">
+            </column>
+            <column name="user_id" type="BIGINT">
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

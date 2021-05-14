@@ -1,0 +1,37 @@
+<admin-app-nav></admin-app-nav>
+<head>
+  <title>Blockchain Visualisation</title>
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<body
+  style="padding-bottom: 20%; background-image: url('assets/images/Background.png'); background-repeat: no-repeat; background-size: cover; background-position: center center; ">
+
+<div class="supreme-container">
+  <br><br>
+  <div #main class="container" style="padding-top: 20px; ">
+    <div class="modal-header row " style=" padding-top: 10px">
+      <h4 class="modal-title text-center" id="modal-basic-title" style="padding-left:35% ">Vizualizarea blockchain</h4>
+
+    </div>
+  </div>
+  <form [formGroup]="form" style="padding-left:10% ">
+    <h4>Alege sesiunea de vot</h4>
+    <mat-form-field appearance="fill">
+      <mat-label>Favorite Food</mat-label>
+      <mat-select [formControl]="foodControl" >
+        <mat-option *ngFor="let food of foods" [value]="food.value">
+          {{food.viewValue}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <p>Selected: {{foodControl.value}}</p>
+
+  </form>
+
+</div>
+</body>

@@ -19,14 +19,14 @@ public interface VotingDataRepository extends JpaRepository<VotingData, String> 
 
     List<VotingData> findByAdminId(String id);
     @Query(
-            value = "select * from voting_data.voting_data where candidates_list like %?1% \n",
+            value = "select * from voting_data.votings_data where candidates_list like %?1% \n",
             nativeQuery = true)
     List<VotingData> findByCandidateId(String id);
 
     int countByVoteCode(String voteCode);
 
     @Query(
-            value = "select * from voting_data.voting_data where voters_list like %?1% \n",
+            value = "select * from voting_data.votings_data where voters_list like %?1% \n",
             nativeQuery = true)
     List<VotingData> findByVoterId(String id);
 

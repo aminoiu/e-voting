@@ -15,7 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "voting_data",schema = "voting_data")
+@Table(name = "votings_data",schema = "voting_data")
 @Builder
 public class VotingData {
 

@@ -24,8 +24,14 @@ public class DataBlock {
     private String hash;
     @Column(name="version",nullable = false)
     private Integer version;
-    @Column (name = "hashPrev",nullable = false)
+    @Column (name = "hash_prev",nullable = false)
     private String hashPrev;
-    @Column(name = "hashMerkelRoot",nullable = false)
-    private String hashMerkelRoot;
+    @Column(name = "hash_merkelroot",nullable = false)
+    private String hashMerkelroot;
+    @Column(name="order_nr", nullable = false, columnDefinition = "integer default 0")
+    private Integer orderNr;
+    @Column(name="transactions_list")
+    private String transactionList;
+    @Column(name="chain_id")
+    private String chainId;
 }

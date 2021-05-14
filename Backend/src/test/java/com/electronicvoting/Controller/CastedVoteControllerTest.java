@@ -43,11 +43,10 @@ class CastedVoteControllerTest {
     void setUp() {
         castedVote = new CastedVote();
         castedVote.setVoteId("voteId");
-        castedVote.setCandidateEmail("candidate2test.com");
-        castedVote.setVoterEmail("voter@test.com");
-        castedVote.setTimestamp(Instant.now());
         castedVote.setVotingId("votingId");
-        castedVote.setDeviceIp("deviceIp");
+        castedVote.setCastedVote("aminoiu@inthergroup.com");
+        castedVote.setTimestamp(Instant.now());
+        castedVote.setVoteType("candidate");
     }
 
     @Test

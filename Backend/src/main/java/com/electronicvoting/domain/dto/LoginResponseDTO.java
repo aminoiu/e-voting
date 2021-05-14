@@ -8,6 +8,7 @@ import java.util.List;
 
 @Data
 @AllArgsConstructor
+@RequiredArgsConstructor
 public class LoginResponseDTO {
     private String token;
     private Long id;

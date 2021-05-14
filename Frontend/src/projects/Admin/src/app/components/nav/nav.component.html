@@ -7,30 +7,34 @@
 
   <!-- Links -->
   <ul class="navbar-nav na-e ">
-    <li class="nav-item">
-      <a [routerLink]="'/evoting/admin/create-voting-session'" class="nav-link text-light"  style="font-size: 20px;">START NEW VOTING</a>
+    <li class="nav-item" id="firstL">
+      <a [routerLink]="'/evoting/admin/create-voting-session'" class="nav-link text-light"  style="font-size: 19px">SESIUNE DE VOT NOUĂ</a>
     </li>
     <li class="nav-item">
-      <a [routerLink]="'/evoting/admin/elections'" class="nav-link text-light"  style="font-size: 20px;">MY ELECTIONS</a>
+      <a [routerLink]="'/evoting/admin/elections'" class="nav-link text-light"  style="font-size: 19px;">SESIUNILE MELE</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link text-light" style="font-size: 20px;">PRODUCTS</a>
+      <a class="nav-link text-light" style="font-size: 19px;">PRODUSE</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link text-light"  style="font-size: 20px;">FEATURES</a>
+      <a class="nav-link text-light"  style="font-size: 19px;">CARACTERISTICI</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link text-light"  style="font-size: 20px;">STATISTICS</a>
+      <a class="nav-link text-light"  style="font-size: 19px;">STATISTICA</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link text-light"  style="font-size: 20px;">HELP</a>
+      <a [routerLink]="'/evoting/admin/blockchain'" class="nav-link text-light"  style="font-size: 19px;">BLOCKCHAIN</a>
     </li>
+    <li class="nav-item">
+      <a class="nav-link text-light"  style="font-size: 19px;">AJUTOR</a>
+    </li>
+
     <span class=""></span>
 
   </ul>
 
   <ul class="navbar-nav ml-auto mr-4">
-    <a (click)="logOut()" class="nav-link text-light" routerLink="logout" routerLinkActive="active"  style="font-size: 20px;">LOG OUT</a>
+    <a (click)="logOut()" class="nav-link text-light" routerLink="logout" routerLinkActive="active"  style="font-size: 19px;">DECONECTARE</a>
   </ul>
   <div  class="text-center">
     <img alt="Profile" class="img-fluid" src="assets/images/account.png" style="width:60px; ">

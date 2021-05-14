@@ -14,7 +14,7 @@
     <properties>
         <defaultSchemaName>voting_data</defaultSchemaName>
         <changelogSchemaName>voting_data</changelogSchemaName>
-        <java.version>9</java.version>
+        <java.version>11</java.version>
     </properties>
     <repositories>
         <repository>
@@ -192,11 +192,16 @@
             <artifactId>mail</artifactId>
             <version>1.5.0-b01</version>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>org.projectlombok</groupId>-->
-<!--            <artifactId>lombok</artifactId>-->
-<!--            <version>1.18.12</version>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.8.2</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -210,48 +215,48 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.2</version>
             </plugin>
-            <plugin>
-                <groupId>org.liquibase</groupId>
-                <artifactId>liquibase-maven-plugin</artifactId>
-                <version>3.5.3</version>
-                <executions>
-                    <execution>
-                        <id>db1</id>
-                        <phase>generate-resources</phase>
-                        <configuration>
-                            <changeLogFile>
-                                D:\ISD\JTOM\Project\e-voting\Backend\src\main\resources\db\changelog\voting_data\liquibase-changeLog-master-schema1.xml
-                            </changeLogFile>
-                            <driver>org.postgresql.Driver</driver>
-                            <url>jdbc:postgresql://localhost:5432/evoting</url>
-                            <username>db_user</username>
-                            <password>Artbnu4192201*</password>
-                            <defaultSchemaName>voting_data</defaultSchemaName>
-                        </configuration>
-                        <goals>
-                            <goal>update</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>db2</id>
-                        <phase>generate-resources</phase>
-                        <configuration>
-                            <changeLogFile>
-                                D:\ISD\JTOM\Project\e-voting\Backend\src\main\resources\db\changelog\blockchain\liquibase-changeLog-master-schema2.xml
-                            </changeLogFile>
-                            <driver>org.postgresql.Driver</driver>
-                            <url>jdbc:postgresql://localhost:5432/evoting</url>
-                            <username>db_user</username>
-                            <password>Artbnu4192201*</password>
-                            <defaultSchemaName>blockchain</defaultSchemaName>
-                        </configuration>
-                        <goals>
-                            <goal>update</goal>
-                        </goals>
-                    </execution>
-                </executions>
+<!--            <plugin>-->
+<!--                <groupId>org.liquibase</groupId>-->
+<!--                <artifactId>liquibase-maven-plugin</artifactId>-->
+<!--                <version>3.5.3</version>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <id>db1</id>-->
+<!--                        <phase>generate-resources</phase>-->
+<!--                        <configuration>-->
+<!--                            <changeLogFile>-->
+<!--                                D:\ISD\JTOM\Project\e-voting\Backend\src\main\resources\db\changelog\voting_data\liquibase-changeLog-master-schema1.xml-->
+<!--                            </changeLogFile>-->
+<!--                            <driver>org.postgresql.Driver</driver>-->
+<!--                            <url>jdbc:postgresql://localhost:5432/evoting</url>-->
+<!--                            <username>db_user</username>-->
+<!--                            <password>Artbnu4192201*</password>-->
+<!--                            <defaultSchemaName>voting_data</defaultSchemaName>-->
+<!--                        </configuration>-->
+<!--                        <goals>-->
+<!--                            <goal>update</goal>-->
+<!--                        </goals>-->
+<!--                    </execution>-->
+<!--                    <execution>-->
+<!--                        <id>db2</id>-->
+<!--                        <phase>generate-resources</phase>-->
+<!--                        <configuration>-->
+<!--                            <changeLogFile>-->
+<!--                                D:\ISD\JTOM\Project\e-voting\Backend\src\main\resources\db\changelog\blockchain\liquibase-changeLog-master-schema2.xml-->
+<!--                            </changeLogFile>-->
+<!--                            <driver>org.postgresql.Driver</driver>-->
+<!--                            <url>jdbc:postgresql://localhost:5432/evoting</url>-->
+<!--                            <username>db_user</username>-->
+<!--                            <password>Artbnu4192201*</password>-->
+<!--                            <defaultSchemaName>blockchain</defaultSchemaName>-->
+<!--                        </configuration>-->
+<!--                        <goals>-->
+<!--                            <goal>update</goal>-->
+<!--                        </goals>-->
+<!--                    </execution>-->
+<!--                </executions>-->
 
-            </plugin>
+<!--            </plugin>-->
 
 <!--            <plugin>-->
 <!--                <artifactId>maven-resources-plugin</artifactId>-->
@@ -281,6 +286,15 @@
 <!--                    <target>9</target>-->
 <!--                </configuration>-->
 <!--            </plugin>-->
+            <plugin>
+                <groupId>org.liquibase</groupId>
+                <artifactId>liquibase-maven-plugin</artifactId>
+                <version>3.6.3</version>
+                <configuration>
+                    <propertyFile>src/main/resources/db/changelog/liquibase.properties</propertyFile>
+                    <diffTypes>data</diffTypes>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>

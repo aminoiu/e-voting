@@ -23,7 +23,18 @@
     <java.version>11</java.version>
 </properties>
 
-
+    <repositories>
+        <repository>
+            <id>jcenter-snapshots</id>
+            <name>jcenter</name>
+            <url>http://oss.jfrog.org/artifactory/oss-snapshot-local/</url>
+        </repository>
+        <repository>
+            <id>central</id>
+            <name>Maven Central</name>
+            <url>https://repo1.maven.org/maven2/</url>
+        </repository>
+    </repositories>
 
     <profiles>
         <profile>
@@ -33,14 +44,14 @@
             </activation>
             <modules>
                 <module>Backend</module>
-                <module>Frontend</module>
+<!--                <module>Frontend</module>-->
             </modules>
         </profile>
         <profile>
             <id>prepare</id>
             <modules>
                 <module>Backend</module>
-                <module>Frontend</module>
+<!--                <module>Frontend</module>-->
             </modules>
         </profile>
     </profiles>

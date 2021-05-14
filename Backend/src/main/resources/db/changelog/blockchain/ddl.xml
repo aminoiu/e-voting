@@ -3,7 +3,7 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
     <changeSet id="ab21d46b-b42c-400c-80ec-8b1483c6c0cf" author="aminoiu">
-        <createTable tableName="blocks">
+        <createTable tableName="blocks" schemaName="blockchain">
             <column name="block_id" type="VARCHAR(255)">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="PK_BLOCKS_TABLE"/>
             </column>
@@ -20,7 +20,7 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
-        <createTable tableName="transactions">
+        <createTable tableName="transactions" schemaName="blockchain">
             <column name="transaction_id" type="VARCHAR(255)">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TRANSACTION_TABLE"/>
             </column>
@@ -35,5 +35,17 @@
             </column>
         </createTable>
 
+        <addForeignKeyConstraint schemaName="blockchain"
+                                 baseColumnNames="hashPrev"
+                                 baseTableName="blocks"
+                                 constraintName="fk_hashPrev"
+                                 referencedColumnNames="hash"
+                                 referencedTableName="blocks"/>
+        <addForeignKeyConstraint schemaName="blockchain"
+                                 baseColumnNames="hashBlock"
+                                 baseTableName="transactions"
+                                 constraintName="fk_hashBlock"
+                                 referencedColumnNames="hash"
+                                 referencedTableName="blocks"/>
     </changeSet>
 </databaseChangeLog>

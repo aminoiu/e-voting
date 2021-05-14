@@ -89,12 +89,11 @@ export class  SignUpComponent implements OnInit {
       this.showModal = false;
     }
 
-    // TODO: this should be done when from server was send a confirmation response that fingerprint is registered
     this.userService.register(registerDto)
       .subscribe(message => {
           console.log(message);
           this.showModalWithResult = true;
-          document.getElementById('responseHeader').innerText = 'Admin registered!';
+          document.getElementById('responseHeader').innerText = message.toString();
         },
         error => {
           this.showModalWithResult = true;
@@ -125,6 +124,7 @@ export class  SignUpComponent implements OnInit {
   }
 
   hideModalWithResults() {
+    this.sendRegisterData();
     this.showModalWithResult = false;
     document.getElementById('responseHeader').innerText = '';
     this.router.navigate(['/']);

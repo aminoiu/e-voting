@@ -7,16 +7,16 @@
   <!-- Links -->
   <ul class="navbar-nav na-e ">
     <li class="nav-item">
-      <a class="nav-link text-light" href="#">PRODUCTS</a>
+      <a class="nav-link text-light" href="#">PRODUSE</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link text-light" href="#">FEATURES</a>
+      <a class="nav-link text-light" href="#">CARACTERISTICI</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link text-light" href="#">STATISTICS</a>
+      <a class="nav-link text-light" href="#">STATISTICA</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link text-light" href="#">HELP</a>
+      <a class="nav-link text-light" href="#">AJUTOR</a>
     </li>
     <span class=""></span>
 
@@ -27,7 +27,7 @@
 <br>
 <div class="container" style="width: 30%;padding-top: 20px; border: solid">
   <div class="modal-header" style=" padding-top: 10px">
-    <h4 class="modal-title" id="modal-basic-title" style="alignment: center">Log In</h4>
+    <h4 class="modal-title" id="modal-basic-title" style="alignment: center">Autentificare</h4>
     <button aria-label="Close" class="close" routerLink="/" type="button">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -42,33 +42,32 @@
 
         <input [ngClass]="{ 'is-invalid': submitted && f.email.errors }" class="form-control" formControlName="email" id="email" name="email" type="email">
         <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-          <div *ngIf="f.email.errors.required">Email is required</div>
-          <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+          <div *ngIf="f.email.errors.required">Email-ul este obligatoriu.</div>
+          <div *ngIf="f.email.errors.email">Adresa de e-mail trebuie să fie una validă.</div>
         </div>
-        <p *ngIf="email.hasError('invalid')">Invalid username or password!</p>
+        <p *ngIf="email.hasError('invalid')">Nume utilizator sau parolă greșită!</p>
 
 
       </div>
 
       <div class="form-group ">
-        <label for="password">Password</label>
+        <label for="password">Parola</label>
 
         <input [ngClass]="{ 'is-invalid': submitted && f.password.errors }" class="form-control" formControlName="password" id="password" name="password" type="password">
         <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-          <div *ngIf="f.password.errors.required">Password is required</div>
-          <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+          <div *ngIf="f.password.errors.required">Parola este obligatoriu.</div>
+          <div *ngIf="f.password.errors.minlength">Parola trebuie să conțină minim 6 caractere.</div>
         </div>
-        <p *ngIf="password.hasError('invalid')">Invalid username or password!</p>
+        <p *ngIf="password.hasError('invalid')">Nume utilizator sau parolă greșită!</p>
 
       </div>
 
       <div class="form-group ">
-        <label class="text-info" for="password">* If you are an administrator, make sure you have the fingerprint
-          scanner connected</label>
+        <label class="text-info info" #info for="password" ></label>
       </div>
       <div class="modal-footer" style="">
-        <a (click)="resetPassword()" class="btn-link text-primary" type="button">*Reset password</a>
-        <button class="btn btn-outline-dark" type="submit">Submit</button>
+        <a (click)="resetPassword()" class="btn-link text-primary" type="button">*Resetați parola</a>
+        <button class="btn btn-outline-dark" type="submit">Trimite</button>
       </div>
     </form>
   </div>

@@ -16,13 +16,16 @@
             <!--            <h4 class="h6-responsive mb-5">with a big impact in your life</h4>-->
             <form (ngSubmit)="onSubmit()" [formGroup]="codeForm">
               <div>
-                <h4 class=" h6-responsive mb-5" style="color: red">Enter the voting CODE to submit your vote</h4>
+                <h4 class=" h6-responsive mb-5" style="color: red">Introduceți COD-ul sesiunii de vot</h4>
                 <label>
                   <input class="row form-control" formControlName="votingCode" id="votingCode" name="votingCode" type="text">
                 </label>
+                <div class="form-group ">
+                  <label class="text-info info" #info for="votingCode" > </label>
+                </div>
                 <br>
                 <br>
-                <button class="row btn rounded-pill  border-secondary">LET'S VOTE!</button>
+                <button class="row btn rounded-pill  border-secondary">SĂ VOTĂM!</button>
               </div>
             </form>
           </div>
@@ -132,7 +135,7 @@
         <h4 class="modal-title" id="myModalLabel2">Voting information</h4>
       </div>
       <div class="modal-body">
-        <form (ngSubmit)="onSave()" [formGroup]="submitVote">
+        <form [formGroup]="submitVote">
           <div class="container">
 
             <table #candidatesList [hidden]="isEmptyC()" class="table table-striped table-bordered" >

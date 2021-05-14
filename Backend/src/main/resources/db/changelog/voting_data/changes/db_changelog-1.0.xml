@@ -3,9 +3,7 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
     <changeSet id="7bc04a40-8830-47bb-827a-4cf87948f9f4" author="aminoiu">
-        <validCheckSum>8:273e2e9c29151e8887503487428b7348</validCheckSum>
-
-        <insert tableName="admin">
+        <insert tableName="admin" schemaName="voting_data">
             <column name="admin_id" value="197ff9d5-8e88-4143-8b67-49974034604e"/>
             <column name="name" value="Anna Minoiu"/>
             <column name="email" value="minoiuanna@gmail.com"/>

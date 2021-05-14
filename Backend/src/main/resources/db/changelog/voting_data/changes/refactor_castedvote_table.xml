@@ -1,0 +1,26 @@
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="32e3539b-a8d9-4a3a-800e-57ffa98c258b" author="aminoiu">
+        <dropColumn columnName="voter_email" tableName="casted_vote" schemaName="voting_data"/>
+        <dropColumn columnName="device_ip" tableName="casted_vote" schemaName="voting_data"/>
+        <renameColumn columnDataType="varchar(255)" newColumnName="casted_vote" oldColumnName="candidate_email"
+                      schemaName="voting_data"
+                      tableName="casted_vote"/>
+        <addColumn schemaName="voting_data" tableName="casted_vote">
+            <column name="vote_type" type="varchar(255)"/>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="953aa0e7-8e01-4f3c-83ff-80d04c0a18a7" author="aminoiu">
+        <createTable tableName="vote_evidence">
+            <column name="id" type="varchar(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_VOTE_EVIDENCE"/>
+            </column>
+            <column name="voting_id" type="varchar(255)"/>
+            <column name="voter_email" type="varchar(255)"/>
+            <column name="device_ip" type="varchar(255)"/>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

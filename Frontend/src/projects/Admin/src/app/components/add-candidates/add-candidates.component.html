@@ -5,7 +5,7 @@
 <br><br>
 <div class="container" style="padding-top: 20px; border: solid">
   <div class="modal-header" style=" padding-top: 10px">
-    <h4  class="modal-title text-center" style="padding-left:35% " id="modal-basic-title">Create a new voting session</h4>
+    <h4  class="modal-title text-center" style="padding-left:35% " id="modal-basic-title">Crearea unei sesiuni noi de vot</h4>
     <button type="button" class="close " aria-label="Close" routerLink="/">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -16,27 +16,27 @@
     <form> <!--[formGroup]="loginForm" (ngSubmit)="onSubmit()-->
 
       <div class="form-group">
-        <label class="font-weight-bold" for="title">Title</label>
+        <label class="font-weight-bold" for="title">Titlu</label>
         <input formControlName="Title" name="Title" id="title" class="form-control shadow-sm bg-white rounded" type="text">
         <!--        <p *ngIf="email.hasError('invalid')">Invalid username or password!</p>-->
       </div>
 
       <div class="form-group ">
-        <label class="font-weight-bold" for="voting-type">Voting type</label>
+        <label class="font-weight-bold" for="voting-type">Tipul de alegeri</label>
         <input formControlName="voting-type" name="voting-type" id="voting-type" type="text" class="form-control shadow-sm bg-white rounded">
         <!--        <p *ngIf="password.hasError('invalid')">Invalid username or password!</p>-->
       </div>
 
       <div class="form-group ">
-        <label class="font-weight-bold" for="categories">Categories</label>
+        <label class="font-weight-bold" for="categories">Categorii</label>
         <div class="dropdown" style=" ">
           <button style="border-color: #dddddd;width: 100% " class="btn dropdown-toggle text-left shadow-sm bg-white rounded" type="button"
                   id="categories" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Management
           </button>
           <div class="dropdown-menu" aria-labelledby="categories">
-            <a class="dropdown-item">Management</a>
-            <a class="dropdown-item">Education</a>
+            <a class="dropdown-item">Administrativ</a>
+            <a class="dropdown-item">Educație</a>
           </div>
         </div>
         <!--        <p *ngIf="password.hasError('invalid')">Invalid username or password!</p>-->
@@ -44,13 +44,13 @@
       <div class="container">
         <div class="row">
           <div class="col form-group" style="padding-left: 0">
-            <label class="font-weight-bold" for="start-date">Voting start date</label>
+            <label class="font-weight-bold" for="start-date">Alegeri:data de început </label>
             <input formControlName="start-date" name="start-date" id="start-date" type="date" class="form-control shadow-sm bg-white rounded"
                    style="">
             <!--        <p *ngIf="password.hasError('invalid')">Invalid username or password!</p>-->
           </div>
           <div class="col form-group " style="padding-right: 0">
-            <label class="font-weight-bold" for="start-time">Voting start time</label>
+            <label class="font-weight-bold" for="start-time">Alegeri:ora de început</label>
             <input formControlName="start-time" name="start-time" id="start-time" type="time"
                    class="form-control float-right shadow-sm bg-white rounded"
                    style="; padding-right: 0">
@@ -59,13 +59,13 @@
 
         <div class="row">
           <div class="col form-group" style="padding-left: 0">
-            <label class="font-weight-bold"  for="end-date">Voting end date</label>
+            <label class="font-weight-bold"  for="end-date">Alegeri:data de încheiere</label>
             <input formControlName="end-date" name="end-date" id="end-date" type="date" class="form-control shadow-sm bg-white rounded"
                    style="">
             <!--        <p *ngIf="password.hasError('invalid')">Invalid username or password!</p>-->
           </div>
           <div class="col form-group " style="padding-right: 0">
-            <label class="font-weight-bold"  for="end-time">Voting end time</label>
+            <label class="font-weight-bold"  for="end-time">Alegeri:ora de încheiere</label>
             <input formControlName="end-time" name="end-time" id="end-time" type="time" class="form-control float-right shadow-sm bg-white rounded"
                    style="; padding-right: 0">
           </div>
@@ -73,7 +73,7 @@
 
         <div class="row">
           <div class="col form-group  dropdown show" style="padding-left: 0">
-            <label class="font-weight-bold" for="add-voters">Choose how to add votersList</label>
+            <label class="font-weight-bold" for="add-voters">Modul de adăugare a listei de Alegători</label>
             <div class="dropdown" style=" ">
               <button style="border-color: #dddddd;width: 100% " class="btn dropdown-toggle text-left shadow-sm bg-white rounded" type="button"
                       id="add-voters" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -88,7 +88,7 @@
           </div>
 
           <div class="col form-group  dropdown show float-right" style="padding-right: 0;">
-            <label class="font-weight-bold "for="add-candidates">Choose how to add candidatesList</label>
+            <label class="font-weight-bold "for="add-candidates">Modul de adăugare a listei de Candidați</label>
             <div class="dropdown" style=" ">
               <button style="border-color: #dddddd;width: 100% " class="btn dropdown-toggle text-left shadow-sm bg-white rounded" type="button"
                       id="add-candidates" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -108,7 +108,7 @@
 
       <div class="modal-footer" style="">
         <!--        <a (click)="resetPassword()" class="btn-link text-primary" type="button">*Reset password</a>-->
-        <button (click)="continue2()" class="btn btn-outline-dark rounded-pill font-weight-bold" type="submit">CONTINUE</button>
+        <button (click)="continue2()" class="btn btn-outline-dark rounded-pill font-weight-bold" type="submit">CONTINUĂ</button>
       </div>
     </form>
   </div>
