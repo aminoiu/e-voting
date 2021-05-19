@@ -10,4 +10,5 @@ import java.util.List;
 
 @Repository
 public interface CastedVoteRepository extends JpaRepository<CastedVote, String>{
+long countByCastedVote(String castedVote);
 }

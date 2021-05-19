@@ -39,9 +39,10 @@ export class VoterElectionsComponent implements OnInit {
           console.log(response[i]);
           this.newDynamicElection = {
             title1: response[i].votingTitle,
-            title2: response[i].startDateAndTime,
+            title2: response[i].startDate,
             title3: response[i].status,
-            title4: response[i].endDateAndTime
+            title4: response[i].endDate,
+            title5: response[i].votingWinner
           };
           this.electionsArray.push(this.newDynamicElection);
         }

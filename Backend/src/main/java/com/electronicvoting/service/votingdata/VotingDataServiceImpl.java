@@ -1,15 +1,11 @@
 package com.electronicvoting.service.votingdata;
 
-import com.electronicvoting.domain.dto.VotingDataDTO;
 import com.electronicvoting.domain.dto.VotingDataForMobileDTO;
 import com.electronicvoting.entity.VotingData;
 import com.electronicvoting.exceptions.UserNotFoundException;
 import com.electronicvoting.helper.RandomString;
-import com.electronicvoting.repository.AdminRepository;
 import com.electronicvoting.repository.VotingDataRepository;
 import com.electronicvoting.service.admin.AdminService;
-import com.electronicvoting.service.candidate.CandidateService;
-import com.electronicvoting.service.voter.VoterService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -46,6 +42,12 @@ public class VotingDataServiceImpl implements VotingDataService {
         return votingDataRepository.save(votingData);
     }
 
+    @Override
+    @Transactional
+    public VotingData update(VotingData votingData) {
+        return votingDataRepository.save(votingData);
+    }
+
     private String getVoteCode() {
         String voteCodeRandom = null;
         boolean existsCode = true;
@@ -77,7 +79,7 @@ public class VotingDataServiceImpl implements VotingDataService {
 
     @Override
     public List<VotingDataForMobileDTO> getVotingDataByCandidateEmail(String email) {
-        List<VotingDataForMobileDTO> votingDataForMobileDTOS= new ArrayList<>();
+        List<VotingDataForMobileDTO> votingDataForMobileDTOS = new ArrayList<>();
         votingDataRepository.findByCandidateId(email).forEach(votingData -> {
 
             adminService.findById(votingData.getAdminId()).ifPresent(admin -> votingData.setAdminId(admin.getEmail()));
@@ -88,7 +90,7 @@ public class VotingDataServiceImpl implements VotingDataService {
 
     @Override
     public List<VotingDataForMobileDTO> getVotingDataByVoterEmail(String email) {
-        List<VotingDataForMobileDTO> votingDataForMobileDTOS= new ArrayList<>();
+        List<VotingDataForMobileDTO> votingDataForMobileDTOS = new ArrayList<>();
         votingDataRepository.findByVoterId(email).forEach(votingData -> {
 
             adminService.findById(votingData.getAdminId()).ifPresent(admin -> votingData.setAdminId(admin.getEmail()));
@@ -100,5 +102,10 @@ public class VotingDataServiceImpl implements VotingDataService {
     @Override
     public VotingData getVotingDataByVotingCode(String votingCode) {
         return votingDataRepository.findByVoteCode(votingCode);
+    }
+
+    @Override
+    public List<VotingData> getVotingDataByStatus(String status) {
+        return votingDataRepository.findByStatus(status);
     }
 }

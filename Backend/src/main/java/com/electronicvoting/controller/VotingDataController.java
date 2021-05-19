@@ -2,6 +2,7 @@ package com.electronicvoting.controller;
 
 import com.electronicvoting.domain.dto.VotingDataDTO;
 import com.electronicvoting.domain.dto.VotingDataForMobileDTO;
+import com.electronicvoting.domain.enums.Statuses;
 import com.electronicvoting.entity.Admin;
 import com.electronicvoting.entity.Chains;
 import com.electronicvoting.entity.VotingData;
@@ -16,11 +17,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @RestController
 @RequestMapping(value = "/evoting/admin")
@@ -36,35 +37,44 @@ public class VotingDataController {
 
     @PostMapping(path = "/create-voting-session", consumes = "application/json")
 //    @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<VotingDataDTO> saveVoteData(@RequestBody VotingDataDTO newVotingDTO) throws UserNotFoundException {
-        List<String> votersList=newVotingDTO.getVotersList();
-        List<String> candidatesList=newVotingDTO.getCandidatesList();
+    public ResponseEntity<VotingDataDTO> saveVoteData(@RequestBody VotingDataDTO newVotingDTO) throws UserNotFoundException, ParseException {
+        List<String> votersList = newVotingDTO.getVotersList();
+        List<String> candidatesList = newVotingDTO.getCandidatesList();
+        VotingData votingData = VotingDataDTO.dtoToEntity(newVotingDTO);
 
-        VotingData savedVotingData=votingDataService.saveVotingSession(VotingDataDTO.dtoToEntity(newVotingDTO));
+        Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
+        int compareTimestamps = currentTimestamp.compareTo(votingData.getStartDate());
+        if (compareTimestamps == 0) {
+            votingData.setStatus(Statuses.IN_PROGRESS_STATUS);
+        } else if (compareTimestamps > 0) {
+            votingData.setStatus(Statuses.IN_PROGRESS_STATUS);
+        } else votingData.setStatus(Statuses.INITIALISED_STATUS);
 
-        Map<String,String> candPassTemp=candidateService.createCandidatesAccounts(candidatesList);
-        Map<String,String> voterPassTemp=voterService.createVotersAccounts(votersList);
+        VotingData savedVotingData = votingDataService.saveVotingSession(votingData);
 
-        for (String candidate:candidatesList){
-            Optional<Admin> admin=adminRepository.findById(savedVotingData.getAdminId());
+        Map<String, String> candPassTemp = candidateService.createCandidatesAccounts(candidatesList);
+        Map<String, String> voterPassTemp = voterService.createVotersAccounts(votersList);
+
+        for (String candidate : candidatesList) {
+            Optional<Admin> admin = adminRepository.findById(savedVotingData.getAdminId());
             List<String> adminEmail = new ArrayList<>();
             admin.ifPresent(admin1 -> {
                 adminEmail.add(admin1.getEmail());
             });
-            String candidateEmail=candidate.split(",")[1];
-            sendMailSMTP.sendEmailToCandidateStart(candidateEmail,savedVotingData.getVotingTitle(),savedVotingData.getStartDate(),savedVotingData.getEndDate(),adminEmail.get(0),candPassTemp.get(candidateEmail));
+            String candidateEmail = candidate.split(",")[1];
+            sendMailSMTP.sendEmailToCandidateStart(candidateEmail, savedVotingData.getVotingTitle(), savedVotingData.getStartDate(), savedVotingData.getEndDate(), adminEmail.get(0), candPassTemp.get(candidateEmail));
         }
-        for (String voter:votersList){
-            Optional<Admin> admin=adminRepository.findById(savedVotingData.getAdminId());
+        for (String voter : votersList) {
+            Optional<Admin> admin = adminRepository.findById(savedVotingData.getAdminId());
             List<String> adminEmail = new ArrayList<>();
             admin.ifPresent(admin1 -> {
                 adminEmail.add(admin1.getEmail());
             });
-            String voterEmail=voter.split(",")[1];
-            sendMailSMTP.sendEmailToVoterStart(voterEmail,savedVotingData.getVotingTitle(),savedVotingData.getVoteCode(),savedVotingData.getStartDate(),savedVotingData.getEndDate(),adminEmail.get(0),voterPassTemp.get(voterEmail));
+            String voterEmail = voter.split(",")[1];
+            sendMailSMTP.sendEmailToVoterStart(voterEmail, savedVotingData.getVotingTitle(), savedVotingData.getVoteCode(), savedVotingData.getStartDate(), savedVotingData.getEndDate(), adminEmail.get(0), voterPassTemp.get(voterEmail));
         }
 
-        Chains chain=new Chains();
+        Chains chain = new Chains();
         chain.setChainId(newVotingDTO.getVotingTitle());
         chain.setNumberBlocks(0);
         chain.setVotingTitle(newVotingDTO.getVotingTitle());

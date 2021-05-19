@@ -162,7 +162,7 @@ export class VoterHomeComponent implements OnInit {
     this.voterService.castVote(submittedVote).toPromise()
       .then(response => {
         this.showModalWithResult = true;
-        document.getElementById('responseHeader').innerText = 'Your vote was saved! Thank you!';
+        document.getElementById('responseHeader').innerText = 'Votul tău a fost salvat! Îți mulțumim!';
       })
       .catch(error => {
         this.showModalWithResult = true;
@@ -183,20 +183,20 @@ export class VoterHomeComponent implements OnInit {
 
 
   private handleError(httpError: HttpErrorResponse) {
-    console.error('Something went wrong! ->' + httpError.message);
+    console.error('Ceva nu a mers bine! ->' + httpError.message);
 
     if (httpError.status === HttpStatus.INTERNAL_SERVER_ERROR) {
-      console.error('Something went wrong!');
+      console.error('Ceva nu a mers bine!');
     }
 
     if (httpError.status === HttpStatus.ERR_CONNECTION_REFUSED) {
-      console.error('Servers might be down');
+      console.error('Serverul poate fi deconectat!');
     }
 
     if (httpError.status === HttpStatus.BAD_REQUESTS) {
       console.error(httpError.error);
-      this.inforef.nativeElement.innerText = httpError.error + ' by you( ' + sessionStorage.getItem('currentUser') + ' )';
-      setTimeout(function() {  this.document.location.reload(); }, 3000);
+      this.inforef.nativeElement.innerText = httpError.error ;
+      setTimeout(function() {  this.document.location.reload(); }, 6000);
     }
   }
 }

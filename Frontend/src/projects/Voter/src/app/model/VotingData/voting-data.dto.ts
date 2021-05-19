@@ -6,6 +6,6 @@ export interface VotingDataDto {
   votingWinner: string;
   candidatesNumber: number;
   adminId: string;
-  startDateAndTime: Date;
-  endDateAndTime: Date;
-  status: string; }
+  startDate: string;
+  endDate: string;
+  status: string;}

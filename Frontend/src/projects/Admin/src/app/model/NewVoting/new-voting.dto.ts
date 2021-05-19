@@ -19,8 +19,10 @@ export interface NewVotingDto {
   votingWinner: string;
   candidatesNumber: number;
   adminId: string;
-  startDateAndTime: Date;
-  endDateAndTime: Date;
+  startDate: string;
+  endDate: string;
+  startTime: string;
+  endTime: string;
   voting_type: string;
   categories: string;
   status: string;

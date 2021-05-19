@@ -4,8 +4,10 @@ import com.electronicvoting.blockchain.Block;
 import com.electronicvoting.blockchain.Transaction;
 import com.electronicvoting.blockchain.Tx;
 import com.electronicvoting.domain.dto.*;
+import com.electronicvoting.domain.enums.Statuses;
 import com.electronicvoting.entity.*;
 import com.electronicvoting.exceptions.UserNotFoundException;
+import com.electronicvoting.repository.ChainsRepository;
 import com.electronicvoting.repository.VotingDataRepository;
 import com.electronicvoting.service.auth.AuthService;
 import com.electronicvoting.service.blockchain.BlockchainTransactionService;
@@ -43,6 +45,8 @@ public class VoterController {
     private final CastedVotesService castedVotesService;
     private final DataBlockService dataBlockService;
     private final ChainsService chainsService;
+    private final ChainsRepository chainsRepository;
+
     private final BlockchainTransactionService blockchainTransactionService;
     private final VoteEvidenceService voteEvidenceService;
 
@@ -97,8 +101,16 @@ public class VoterController {
 
     @PutMapping(path = "/voting-candidates/{votingCode}", produces = "application/json")
     public ResponseEntity<Object> getCandidatesProfileByVotingCode(@PathVariable String votingCode, @RequestBody String voterEmail) throws UserNotFoundException {
-        if (!castedVotesService.hasVoterAlreadySubmittedVote(votingCode, voterEmail)) {
-            VotingData votingData = votingDataService.getVotingDataByVotingCode(votingCode);
+        boolean hasVoterVote = castedVotesService.hasVoterAlreadySubmittedVote(votingCode, voterEmail);
+        VotingData votingData = votingDataService.getVotingDataByVotingCode(votingCode);
+        if (hasVoterVote) {
+            return ResponseEntity.badRequest().body("Deja ai votat în această sesiune!");
+        } else if (votingData.getStatus().equals(Statuses.INITIALISED_STATUS)) {
+            return ResponseEntity.badRequest().body("Sesiunea de vot încă nu a început. Revin-o pe: " + votingData.getStartDate().toString());
+        } else if (votingData.getStatus().equals(Statuses.FINISHED_STATUS)) {
+            return ResponseEntity.badRequest().body("Sesiunea de vot deja a finalizat pe: " + votingData.getEndDate().toString());
+
+        } else {
             List<ProfileDTO> candidatesProfiles = new ArrayList<>();
             List<String> candidatesList = VotingDataDTO.parseToList(votingData.getCandidatesList());
             candidatesList.forEach(s -> {
@@ -108,10 +120,9 @@ public class VoterController {
                 candidatesProfiles.add(ProfileDTO.toDto(profile));
             });
             return ResponseEntity.ok(candidatesProfiles);
-        } else {
-            return ResponseEntity.badRequest().body("Vote already submitted");
         }
     }
+
 
     @PostMapping(path = "/cast-vote", consumes = "application/json")
     public ResponseEntity castVote(@RequestBody SavedVoteDTO savedVoteDTO) throws UnknownHostException {
@@ -133,7 +144,6 @@ public class VoterController {
         blockchainTransactionService.saveNewTransaction(blockchainTransaction);
 
         Integer nrOfBlocksInChain = chainsService.getNumberOfBlocksInChain(votingData.getVotingTitle());
-
         if (nrOfBlocksInChain == 0) {
             List<String> transactionsList = new ArrayList<>();
             transactionsList.add(blockchainTransaction.getTransactionId());
@@ -152,49 +162,66 @@ public class VoterController {
             block.setOrderNr(1);
             block.setTransactionList(String.join(",", transactionsList));
             dataBlockService.saveBlock(block);
+            Optional<Chains> chains = chainsRepository.findById(votingData.getVotingTitle());
+            chains.ifPresent(chains1 -> {
+                chains1.setNumberBlocks(chains1.getNumberBlocks() + 1);
+                chainsRepository.save(chains1);
+            });
 
-        } else if (nrOfBlocksInChain < blockMaxTransactions) {
+        } else {
+            Integer numberOfTransInLastBlock = null;
             DataBlock lastBlock = dataBlockService.getLastBlock(votingData.getVotingTitle(), nrOfBlocksInChain);
-            List<String> transactionsList = new ArrayList<>(Arrays.asList(lastBlock.getTransactionList().split(",")));
-            transactionsList.add(blockchainTransaction.getTransactionId());
+            String[] transactions = lastBlock.getTransactionList().split(",");
+            List<String> txList;
+            txList = Arrays.asList(transactions);
+            numberOfTransInLastBlock = txList.size();
+            if (numberOfTransInLastBlock < blockMaxTransactions) {
 
-            Transaction tempTransaction = new Transaction(castedVoteMap);
-            Block<Tx> bl = new Block();
-            bl.add(tempTransaction);
+                List<String> transactionsList = new ArrayList<>(Arrays.asList(lastBlock.getTransactionList().split(",")));
+                transactionsList.add(blockchainTransaction.getTransactionId());
 
-            lastBlock.setHashMerkelroot(bl.getMerkleRoot());
-            lastBlock.setHash(bl.getHash());
-            lastBlock.setTransactionList(String.join(",", transactionsList));
-            lastBlock.setVersion(lastBlock.getVersion() + 1);
-            dataBlockService.saveBlock(lastBlock);
-        } else if (nrOfBlocksInChain == blockMaxTransactions) {
-            DataBlock lastBlock = dataBlockService.getLastBlock(votingData.getVotingTitle(), nrOfBlocksInChain);
-            String prevBlockHash = lastBlock.getHash();
+                Transaction tempTransaction = new Transaction(castedVoteMap);
+                Block<Tx> bl = new Block();
+                bl.add(tempTransaction);
 
-            List<String> transactionsList = new ArrayList<>();
-            transactionsList.add(blockchainTransaction.getTransactionId());
+                lastBlock.setHashMerkelroot(bl.getMerkleRoot());
+                lastBlock.setHash(bl.getHash());
+                lastBlock.setTransactionList(String.join(",", transactionsList));
+                lastBlock.setVersion(lastBlock.getVersion() + 1);
+                dataBlockService.saveBlock(lastBlock);
+            } else if (numberOfTransInLastBlock == blockMaxTransactions) {
+                String prevBlockHash = lastBlock.getHash();
 
-            Transaction tempTransaction = new Transaction(castedVoteMap);
-            Block<Tx> bl = new Block();
-            bl.add(tempTransaction);
+                List<String> transactionsList = new ArrayList<>();
+                transactionsList.add(blockchainTransaction.getTransactionId());
 
-            DataBlock block = new DataBlock();
-            block.setBlockId(UUID.randomUUID().toString());
-            block.setChainId(votingData.getVotingTitle());
-            block.setHashMerkelroot(bl.getMerkleRoot());
-            block.setHash(bl.getHash());
-            block.setHashPrev(prevBlockHash);
-            block.setVersion(0);
-            block.setOrderNr(lastBlock.getOrderNr() + 1);
-            block.setTransactionList(String.join(",", transactionsList));
-            dataBlockService.saveBlock(block);
+                Transaction tempTransaction = new Transaction(castedVoteMap);
+                Block<Tx> bl = new Block();
+                bl.add(tempTransaction);
+
+                DataBlock block = new DataBlock();
+                block.setBlockId(UUID.randomUUID().toString());
+                block.setChainId(votingData.getVotingTitle());
+                block.setHashMerkelroot(bl.getMerkleRoot());
+                block.setHash(bl.getHash());
+                block.setHashPrev(prevBlockHash);
+                block.setVersion(0);
+                block.setOrderNr(lastBlock.getOrderNr() + 1);
+                block.setTransactionList(String.join(",", transactionsList));
+                dataBlockService.saveBlock(block);
+                Optional<Chains> chains = chainsRepository.findById(votingData.getVotingTitle());
+                chains.ifPresent(chains1 -> {
+                    chains1.setNumberBlocks(chains1.getNumberBlocks() + 1);
+                    chainsRepository.save(chains1);
+                });
+            }
         }
-VoteEvidence voteEvidence= new VoteEvidence();
+        VoteEvidence voteEvidence = new VoteEvidence();
         voteEvidence.setId(UUID.randomUUID().toString());
         voteEvidence.setVoterEmail(savedVoteDTO.getVoterEmail());
         voteEvidence.setVotingId(votingData.getVotingTitle());
         voteEvidence.setDeviceIp(InetAddress.getLocalHost().toString());
-voteEvidenceService.saveEvidence(voteEvidence);
+        voteEvidenceService.saveEvidence(voteEvidence);
         return ResponseEntity.ok(this.castedVotesService.saveVote(CastedVoteDTO.dtoToEntity(castedVoteDTO)));
     }
 

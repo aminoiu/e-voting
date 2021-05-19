@@ -7,84 +7,55 @@ import {HttpStatus} from '../../../../../../src/app/core/models/http-status.enum
 import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
-  selector: 'app-candidate-elections',
-  templateUrl: './candidate-elections.component.html',
-  styleUrls: ['./candidate-elections.component.css']
+    selector: 'app-candidate-elections',
+    templateUrl: './candidate-elections.component.html',
+    styleUrls: ['./candidate-elections.component.css']
 })
 export class CandidateElectionsComponent implements OnInit {
-  electionsArray: Array<DynamicGrid> = [];
+    electionsArray: Array<DynamicGrid> = [];
+    newDynamicElection: any = {};
+    main: any;
+    form1: any;
 
-  newDynamicElection: any = {};
+    constructor(private formBuilder: FormBuilder, private router: Router, private votingDataService: VotigDataService) {
+    }
 
-  participatedElectionsArray: Array<DynamicGrid> = [];
+    ngOnInit(): void {
+        this.form1 = this.formBuilder.group(
+            {
+                election_actions: []
+            });
+        this.votingDataService.getVotingData(sessionStorage.getItem('currentUser')).toPromise()
+            .then(response => {
+                for (let i = 0; i < response.length; i++) {
+                    console.log(response[i]);
+                    this.newDynamicElection = {
+                        title1: response[i].votingTitle,
+                        title2: response[i].startDateAndTime,
+                        title3: response[i].status,
+                        title4: response[i].endDateAndTime,
+                        title5: response[i].votingWinner
+                    };
+                    this.electionsArray.push(this.newDynamicElection);
+                }
+            })
+            .catch(error => {
+                this.handleError(error);
+            });
+    }
 
-  newParticipatedDynamicElection: any = {};
+    onSubmit() {
+    }
 
-  form2: any;
-  main: any;
-  form1: any;
+    private handleError(httpError: HttpErrorResponse) {
+        console.error('Something went wrong! ->' + httpError.message);
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private votingDataService: VotigDataService) {
-  }
-
-  ngOnInit(): void {
-    this.form1 = this.formBuilder.group(
-      {
-        election_actions: []
-      });
-    this.votingDataService.getVotingData(sessionStorage.getItem('currentUser')).toPromise()
-      .then(response => {
-        for (let i = 0; i < response.length; i++) {
-          console.log(response[i]);
-          this.newDynamicElection = {
-            title1: response[i].votingTitle,
-            title2: response[i].startDateAndTime,
-            title3: response[i].status,
-            title4: response[i].endDateAndTime
-          };
-          this.electionsArray.push(this.newDynamicElection);
+        if (httpError.status === HttpStatus.INTERNAL_SERVER_ERROR) {
+            console.error('Something went wrong!');
         }
-      })
-      .catch(error => {
-        this.handleError(error);
-      });
 
-
-
-    /*this.newParticipatedDynamicElection = {
-      title1: "Title Test3",
-      title2: "DateTime Test3",
-      title3: "Finished",
-      title4: ' '
-    };
-    this.participatedElectionsArray.push(this.newParticipatedDynamicElection);
-    this.newParticipatedDynamicElection = {
-      title1: "Title Test3",
-      title2: "DateTime Test3",
-      title3: "In progress",
-      title4: ' '
-    };
-    this.participatedElectionsArray.push(this.newParticipatedDynamicElection);*/
-
-  }
-
-  isEmptyV() {
-
-  }
-
-  onSubmit() {
-
-  }
-
-  private handleError(httpError: HttpErrorResponse) {
-    console.error('Something went wrong! ->' + httpError.message);
-
-    if (httpError.status === HttpStatus.INTERNAL_SERVER_ERROR) {
-      console.error('Something went wrong!');
+        if (httpError.status === HttpStatus.ERR_CONNECTION_REFUSED) {
+            console.error('Servers might be down');
+        }
     }
-
-    if (httpError.status === HttpStatus.ERR_CONNECTION_REFUSED) {
-      console.error('Servers might be down');
-    }
-  }
 }

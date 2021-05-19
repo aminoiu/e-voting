@@ -10,6 +10,8 @@ import {UploadFile, UploadInput, UploadOutput} from 'ng-uikit-pro-standard';
 import {humanizeBytes} from 'ng-uikit-pro-standard';
 import xml2js from 'xml2js';
 import {Time} from '@angular/common';
+import {Timestamp} from "rxjs/internal-compatibility";
+import {StatusesEnum} from "../../../../../../src/app/core/models/statuses.enum";
 
 
 @Component({
@@ -124,17 +126,19 @@ export class VotingMainComponent implements OnInit {
   onSubmitConfirmation() {
     this.validateForms();
     // tslint:disable-next-line:prefer-const
-    let startDate = new Date(this.f1.start_date.value);
-    const timeS = this.f1.start_time.value;
-    const hoursS = timeS.substr(0, 2);
-    const minutesS = timeS.substr(3, 5);
-    startDate.setHours(hoursS, minutesS, 0);
+    let sDate = this.f1.start_date.value;
+    // const timeS = this.f1.start_time.value;
+    // const hoursS = timeS.substr(0, 2);
+    // const minutesS = timeS.substr(3, 5);
+    // startDate.setHours(hoursS, minutesS, 0);
 
-    const endDate = new Date(this.f1.end_date.value);
-    const timeE = this.f1.end_time.value;
-    const hoursE = timeE.substr(0, 2);
-    const minutesE = timeE.substr(3, 5);
-    endDate.setHours(hoursE, minutesE, 0);
+    let eDate = this.f1.end_date.value;
+    let sTime = this.f1.start_time.value;
+    let eTime = this.f1.end_time.value;
+    // const timeE = this.f1.end_time.value;
+    // const hoursE = timeE.substr(0, 2);
+    // const minutesE = timeE.substr(3, 5);
+    // endDate.setHours(hoursE, minutesE, 0);
     const listOfVoters: Array<string> = new Array<string>();
     const listOfCandidates: Array<string> = new Array<string>();
 
@@ -152,11 +156,13 @@ export class VotingMainComponent implements OnInit {
       votingWinner: '',
       candidatesNumber: this.getCandidatesNumber(),
       adminId: sessionStorage.getItem('currentUser'),
-      startDateAndTime: startDate,
-      endDateAndTime: endDate,
+      startDate: sDate,
+      endDate: eDate,
+      startTime: sTime,
+      endTime: eTime,
       voting_type: this.f1.voting_type.value,
       categories: this.f1.categories.value,
-      status: this.setStatus(),
+      status: ' ',
       votersList: listOfVoters,
       candidatesList: listOfCandidates
     };
@@ -171,7 +177,7 @@ export class VotingMainComponent implements OnInit {
     this.newVotingService.startNewVoting(newVotingDto).toPromise()
       .then(response => {
         this.showModalWithResult = true;
-        document.getElementById('responseHeader').innerText = 'Voting session was registered!';
+        document.getElementById('responseHeader').innerText = 'Sesiunea de vot înregistrată cu succes!';
       })
       .catch(error => {
         this.showModalWithResult = true;
@@ -441,8 +447,8 @@ export class VotingMainComponent implements OnInit {
   }
 
   private setStatus() {
-    sessionStorage.setItem(this.f1.title.value, 'In progress');
-    return 'In progress';
+    sessionStorage.setItem(this.f1.title.value, StatusesEnum.IN_PROGRESS_STATUS);
+    return StatusesEnum.IN_PROGRESS_STATUS;
   }
 
   private handleError(httpError: HttpErrorResponse) {

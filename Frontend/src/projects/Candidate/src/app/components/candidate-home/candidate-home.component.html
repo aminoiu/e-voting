@@ -87,25 +87,22 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel">Voting information</h4>
+        <h4 class="modal-title" id="myModalLabel">Securizare cont</h4>
       </div>
       <div class="modal-body">
         <form (ngSubmit)="onSave()" [formGroup]="confirmationForm">
           <div class="container">
             <div class="form-group row">
-              <label class="col" for="newPassword">Enter the new password</label>
-              <input class="col form-control" formControlName="newPassword" id="newPassword" name="newPassword" type="password" >
+              <label class="col" for="newPassword">Introdu o nouă parolă</label>
+              <input class="col form-control" formControlName="newPassword" id="newPassword" name="newPassword"
+                     type="password">
             </div>
           </div>
         </form>
       </div>
       <div class="modal-footer">
-
-        <button (click)="hide()" class="btn btn-danger float-left mr-auto" data-dismiss="modal" type="button">Close
+        <button (click)="onSave()" class="btn btn-success rounded-pill float-right" type="submit">SALVEAZĂ
         </button>
-        <button (click)="onSave()" class="btn btn-success rounded-pill float-right" type="submit">SAVE
-        </button>
-
       </div>
     </div>
   </div>

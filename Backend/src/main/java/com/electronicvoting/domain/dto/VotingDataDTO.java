@@ -8,7 +8,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
+import java.sql.Time;
 import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Data
@@ -22,8 +25,10 @@ public class VotingDataDTO {
     String votingWinner;
     Integer candidatesNumber;
     String adminId;
-    Date startDate;
-    Date endDate;
+    String startDate;
+    String endDate;
+    String startTime;
+    String endTime;
     String voting_type;
     String categories;
     String status;
@@ -32,6 +37,17 @@ public class VotingDataDTO {
     String voteCode;
 
     public static VotingDataDTO toDto(@NotNull VotingData votingData) {
+
+        Date sdate = new Date();
+        sdate.setTime(votingData.getStartDate().getTime());
+        String startDateString = new SimpleDateFormat("yyyy-MM-dd").format(sdate);
+        String startTimeString = new SimpleDateFormat("hh:mm").format(sdate);
+
+        Date edate = new Date();
+        edate.setTime(votingData.getEndDate().getTime());
+        String endDateString = new SimpleDateFormat("yyyy-MM-dd").format(edate);
+        String endTimeString = new SimpleDateFormat("hh:mm").format(edate);
+
         return VotingDataDTO.builder()
                 .votingTitle(votingData.getVotingTitle())
                 .votersNumber(votingData.getVotersNumber())
@@ -39,8 +55,10 @@ public class VotingDataDTO {
                 .votingWinner(votingData.getVotingWinner())
                 .candidatesNumber(votingData.getCandidatesNumber())
                 .adminId(votingData.getAdminId())
-                .startDate(votingData.getStartDate())
-                .endDate(votingData.getEndDate())
+                .startDate(startDateString)
+                .startTime(startTimeString)
+                .endDate(endDateString)
+                .endTime(endTimeString)
                 .status(votingData.getStatus())
                 .votersList(parseToList(votingData.getVotersList()))
                 .candidatesList(parseToList(votingData.getCandidatesList()))
@@ -49,7 +67,15 @@ public class VotingDataDTO {
     }
 
 
-    public static VotingData dtoToEntity(@NotNull VotingDataDTO votingDataDTO) {
+    public static VotingData dtoToEntity(@NotNull VotingDataDTO votingDataDTO) throws ParseException {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+        String startDateAndTime = votingDataDTO.startDate + " " + votingDataDTO.startTime;
+        Date startDateTime = dateFormat.parse(startDateAndTime);
+        String endDateAndTime = votingDataDTO.endDate + " " + votingDataDTO.endTime;
+        Date endDateTime = dateFormat.parse(endDateAndTime);
+
+        Timestamp startTimestamp = new Timestamp(startDateTime.getTime());
+        Timestamp endTimestamp = new Timestamp(endDateTime.getTime());
 
         return VotingData.builder()
                 .votingTitle(votingDataDTO.getVotingTitle())
@@ -58,8 +84,8 @@ public class VotingDataDTO {
                 .votingWinner(votingDataDTO.getVotingWinner())
                 .candidatesNumber(votingDataDTO.getCandidatesNumber())
                 .adminId(votingDataDTO.getAdminId())
-                .startDate((Timestamp) votingDataDTO.getStartDate())
-                .endDate((Timestamp) votingDataDTO.getEndDate())
+                .startDate(startTimestamp)
+                .endDate(endTimestamp)
                 .status(votingDataDTO.getStatus())
                 .votersList(String.valueOf(getEmailsListOnly(votingDataDTO.getVotersList())))
                 .candidatesList(String.valueOf(getEmailsListOnly(votingDataDTO.getCandidatesList())))
@@ -68,12 +94,11 @@ public class VotingDataDTO {
     }
 
 
-
     private static List getEmailsListOnly(List<String> votersList) {
         String[] temp;
         List<String> listParsed = new ArrayList<>();
-        for(String u:votersList){
-            temp=u.split(",");
+        for (String u : votersList) {
+            temp = u.split(",");
             listParsed.add(temp[1]);
         }
         return listParsed;
@@ -85,7 +110,7 @@ public class VotingDataDTO {
         String temp;
         List<String> listParsed;
 
-        temp = listToParse.replace("[", "").replace("]", "");
+        temp = listToParse.replace("[", "").replace("]", "").replace(" ","");
         listParsed = Arrays.asList(temp.trim().split(","));
         return listParsed;
     }

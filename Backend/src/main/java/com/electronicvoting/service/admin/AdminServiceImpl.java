@@ -35,7 +35,7 @@ public class AdminServiceImpl implements AdminService {
         }
         log.info("Find admin by e-mail[{}]", email);
         admin = adminRepository.findByEmail(email).orElseThrow(() ->
-                new UserNotFoundException("Error: Admin is not found.", email));
+                new UserNotFoundException("Error: Admin [{}] is not found.", email));
         return admin;
     }
 

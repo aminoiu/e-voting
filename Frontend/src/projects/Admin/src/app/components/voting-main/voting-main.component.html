@@ -23,7 +23,7 @@
     </div>
 
     <div [ngClass]="{'active': main}" class="modal-body container" style="">
-      <form (ngSubmit)="onSubmit()" [formGroup]="form1"> <!--[formGroup]="loginForm" (ngSubmit)="onSubmit()-->
+      <form (ngSubmit)="onSubmit()" [formGroup]="form1" > <!--[formGroup]="loginForm" (ngSubmit)="onSubmit()-->
 
         <div class="form-group">
           <label class="font-weight-bold" for="title">Titlu</label>
@@ -32,9 +32,9 @@
           <p #errorMessageTitle class="text-danger"></p>
         </div>
 
-        <div class="form-group">
+        <div class="form-group"  >
           <label class="font-weight-bold" for="voting_type">Tipul de alegeri</label>
-          <select class="form-control bg-light" formControlName="voting_type" id="voting_type">
+          <select class="form-control bg-light" formControlName="voting_type" id="voting_type" >
             <option>Alegeri candidați</option>
             <option>Alegeri opțiuni</option>
           </select>
@@ -179,7 +179,7 @@
           <div class="row">
             <div class="col form-group">
               <button (click)="addVoter()" class="btn font-weight-bold float-right" routerLinkActive="active"
-                      type="submit">ADD
+                      type="submit">ADĂUGARE
               </button>
             </div>
           </div>

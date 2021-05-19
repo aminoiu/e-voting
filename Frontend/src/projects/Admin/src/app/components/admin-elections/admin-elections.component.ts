@@ -42,7 +42,8 @@ export class AdminElectionsComponent implements OnInit {
             title2: response[i].votersNumber,
             title3: response[i].status,
             title4: response[i].candidatesNumber,
-            title5: response[i].votesNumber
+            title5: response[i].votesNumber,
+            title7: response[i].votingWinner
           };
           this.electionsArray.push(this.newDynamicElection);
         }

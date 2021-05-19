@@ -43,7 +43,7 @@
 
 <div [style.display]="showModal ? 'block' : 'none'" aria-hidden="true"
      aria-labelledby="myModalLabel" class="modal" id="imagemodal" role="dialog" tabindex="-1">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-sm">
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title" id="myModalLabel">Informațiile candidatului</h4>
@@ -52,23 +52,23 @@
         <form (ngSubmit)="onSave()" [formGroup]="confirmationForm">
           <div class="container">
             <div class="form-group row">
-              <label class="col">Informații personale</label>
-              <div class="col">
+              <label class="col font-weight-bold">Informații personale</label>
+              <div class="col mr-0">
                 <p contenteditable="true" id="name">[Nu sunt date!]</p>
                 <p contenteditable="true" id="email">[Nu sunt date!]</p>
               </div>
             </div>
-            <div class="form-group row">
-              <label class="col">Poziția</label>
-              <p class="col" contenteditable="true" id="position">[Nu sunt date!]</p>
+            <div class="form-group row ">
+              <label class="col font-weight-bold ">Poziția</label>
+              <p class="col border" contenteditable="true" id="position">[Nu sunt date!]</p>
             </div>
             <div class="form-group row">
-              <label class="col">Educație</label>
-              <p class="col" contenteditable="true" id="education">[Nu sunt date!]</p>
+              <label class="col font-weight-bold">Educație</label>
+              <p class="col border" contenteditable="true" id="education">[Nu sunt date!]</p>
             </div>
             <div class="form-group row">
-              <label class="col">Auto-Descriere</label>
-              <p class="col" contenteditable="true" id="selfDescription">[Nu sunt date!]</p>
+              <label class="col font-weight-bold">Auto-Descriere</label>
+              <p class="col border" contenteditable="true" id="selfDescription">[Nu sunt date!]</p>
 
             </div>
           </div>

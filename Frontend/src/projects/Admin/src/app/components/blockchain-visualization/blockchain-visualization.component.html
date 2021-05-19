@@ -19,19 +19,62 @@
 
     </div>
   </div>
-  <form [formGroup]="form" style="padding-left:10% ">
-    <h4>Alege sesiunea de vot</h4>
-    <mat-form-field appearance="fill">
-      <mat-label>Favorite Food</mat-label>
-      <mat-select [formControl]="foodControl" >
-        <mat-option *ngFor="let food of foods" [value]="food.value">
-          {{food.viewValue}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <p>Selected: {{foodControl.value}}</p>
+  <form [formGroup]="form" style="padding-left:10%; padding-top: 20px; " class="row g-2">
+    <h4 class="form-group col-3" >Alege sesiunea de vot</h4>
+    <div class="form-group col-4" [formGroup]="form">
+
+      <select   class="form-control bg-light"  id="voting_titles" (change)="update($event)" formControlName="titles">
+        <option *ngFor="let title of options" [value]="title">
+          {{title}}
+        </option>
+      </select>
+    </div>
 
   </form>
+  <div class="modal-body" style="">
+
+   <div [ngClass]="{'active': main}" class="modal-body container " style="">
+      <div *ngFor="let dynamic of blocksArray;let i = index;" class="row ">
+        <div *ngIf="blocksArray.length==0">
+          <h4 class="form-group col-3" >Nu există blocuri!</h4>
+        </div>
+        <div class="container border border-primary mt-2 shadow p-2 pl-3 bg-white rounded ">
+          <div class="row ">
+            <div class="col-3   mt-2 font-weight-bold">Titlul sesiunii de vot: </div>
+            <div class="col   mt-2 font-italic">{{blocksArray[i].title1}}</div>
+
+          </div>
+          <div class="row ">
+          <div class="col-3   mt-2 font-weight-bold">Versiunea: </div>
+            <div class="col   mt-2 font-italic">{{blocksArray[i].title3}}</div>
+        </div>
+          <div class="row ">
+            <div class="col-3   mt-2 font-weight-bold">Hash: </div>
+            <div class="col   mt-2 font-italic">{{blocksArray[i].title2}}</div>
+
+          </div>
+          <div class="row">
+            <div class="col-3   mt-2 font-weight-bold">Hash-ul blocului precedent: </div>
+            <div class="col   mt-2 font-italic">{{blocksArray[i].title4}}</div>
+
+          </div>
+          <div class="row">
+            <div class="col-3   mt-2 font-weight-bold">"Merkle Root" Hash: </div>
+            <div class="col   mt-2 font-italic">{{blocksArray[i].title5}}</div>
+
+          </div>
+          <div class="row">
+            <div class="col-3   mt-2 font-weight-bold">Numărul de tranzacții: </div>
+            <div class="col   mt-2 font-italic">{{blocksArray[i].title6}}</div>
+
+          </div>
+        </div>
+      </div>
+      <br>
+    </div>
+    <br>
+  </div>
+
 
 </div>
 </body>

@@ -32,4 +32,6 @@ public interface VotingDataRepository extends JpaRepository<VotingData, String> 
 
     VotingData findByVoteCode(String votingCode);
 
+    List<VotingData> findByStatus(String status);
+
 }

@@ -100,7 +100,7 @@ export class LoginComponent implements OnInit {
     if (httpError.status === HttpStatus.NOT_FOUND) {
       this.email.setErrors({invalid: true});
       this.password.setErrors({invalid: true});
-      this.inforef.nativeElement.innerText = 'User not found!';
+      this.inforef.nativeElement.innerText = 'Utilizatorul nu a fost găsit!';
     }
     if (httpError.status === HttpStatus.BAD_REQUESTS) {
       console.error(httpError.error);
@@ -108,13 +108,13 @@ export class LoginComponent implements OnInit {
       this.inforef.nativeElement.innerText = httpError.error;
     }
     if (httpError.status === HttpStatus.INTERNAL_SERVER_ERROR) {
-      console.error('Something went wrong!');
-      this.inforef.nativeElement.innerText = 'Internal server error!';
+      console.error('Ceva nu a mers bine!');
+      this.inforef.nativeElement.innerText = 'Eroare internă de server!';
     }
 
     if (httpError.status === HttpStatus.ERR_CONNECTION_REFUSED) {
-      console.error('Servers might be down');
-      this.inforef.nativeElement.innerText = 'Connection error!';
+      console.error('Serverul poate fi deconectat');
+      this.inforef.nativeElement.innerText = 'Eroare de conexiune!';
     }
 
     setTimeout(function() {  this.document.location.reload(); }, 3000);

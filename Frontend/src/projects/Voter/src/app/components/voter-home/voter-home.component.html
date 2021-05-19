@@ -18,10 +18,11 @@
               <div>
                 <h4 class=" h6-responsive mb-5" style="color: red">Introduceți COD-ul sesiunii de vot</h4>
                 <label>
-                  <input class="row form-control" formControlName="votingCode" id="votingCode" name="votingCode" type="text">
+                  <input class="row form-control" formControlName="votingCode" id="votingCode" name="votingCode"
+                         type="text">
                 </label>
                 <div class="form-group ">
-                  <label class="text-info info" #info for="votingCode" > </label>
+                  <label class="text-info info" #info for="votingCode"> </label>
                 </div>
                 <br>
                 <br>
@@ -102,13 +103,13 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel">Voting information</h4>
+        <h4 class="modal-title" id="myModalLabel">Securizare cont</h4>
       </div>
       <div class="modal-body">
         <form (ngSubmit)="onSave()" [formGroup]="confirmationForm">
           <div class="container">
             <div class="form-group row">
-              <label class="col" for="newPassword">Enter the new password</label>
+              <label class="col" for="newPassword">Introdu o nouă parolă</label>
               <input class="col form-control" formControlName="newPassword" id="newPassword" name="newPassword"
                      type="password">
             </div>
@@ -116,12 +117,8 @@
         </form>
       </div>
       <div class="modal-footer">
-
-        <button (click)="hide()" class="btn btn-danger float-left mr-auto" data-dismiss="modal" type="button">Close
+        <button (click)="onSave()" class="btn btn-success rounded-pill float-right" type="submit">SALVEAZĂ
         </button>
-        <button (click)="onSave()" class="btn btn-success rounded-pill float-right" type="submit">SAVE
-        </button>
-
       </div>
     </div>
   </div>
@@ -129,56 +126,55 @@
 
 <div [style.display]="showCandidatesModal ? 'block' : 'none'" aria-hidden="true"
      aria-labelledby="myModalLabel" class="modal" id="imagemodal2" role="dialog" tabindex="-1">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-xl">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel2">Voting information</h4>
+        <h4 class="modal-title" id="myModalLabel2">Informații despre alegeri</h4>
       </div>
       <div class="modal-body">
         <form [formGroup]="submitVote">
           <div class="container">
 
-            <table #candidatesList [hidden]="isEmptyC()" class="table table-striped table-bordered" >
+            <table #candidatesList [hidden]="isEmptyC()" class="table table-striped table-bordered">
               <thead>
               <tr>
-                <th style="width: 400px">Candidate personal information</th>
-                <th style="width: 400px">Profile</th>
-                <th style="width: 20px">Action</th>
+                <th style="width: 400px ;padding-left: 15px;">Candidatul</th>
+                <th style="width: 400px;padding-left: 15px; ">Profil</th>
+                <th style="width: 20px;padding-left: 15px;">Acțiune</th>
               </tr>
               </thead>
-              <tbody >
+              <tbody>
 
               <tr *ngFor="let dynamic of dynamicCandidatesArray; let i = index;">
                 <ng-container *ngIf="dynamicCandidatesArray.length>0">
                   <td>
-                    <div class="row" style="padding-left: 10px">
-                      <div>
-                        <b>Name:</b>  {{dynamicCandidatesArray[i].title1}}
-                      </div>
-                      <div>
-                        <b>Email:</b>  {{dynamicCandidatesArray[i].title2}}
-                      </div>
 
+                    <div class="row" style="padding-left: 15px">
+                      <b>Nume: </b> &nbsp;&nbsp; {{dynamicCandidatesArray[i].title1}}
                     </div>
+                    <div class="row" style="padding-left: 15px">
+                      <b>E-mail: </b> &nbsp;&nbsp; {{dynamicCandidatesArray[i].title2}}
+                    </div>
+
+
                   </td>
                   <td>
-                    <div class="row" style="padding-left: 10px">
-                      <div>
-                        <b>Position:</b>  {{dynamicCandidatesArray[i].title3}}
-                      </div>
-                      <div >
-                        <b>Education:</b>  {{dynamicCandidatesArray[i].title4}}
-                      </div>
-                      <div >
-                        <b>SelfDescription:</b>  {{dynamicCandidatesArray[i].title5}}
-                      </div>
+                    <div class="row" style="padding-left: 15px">
+                      <b>Poziția: </b> &nbsp;&nbsp;{{dynamicCandidatesArray[i].title3}}
+                    </div>
+                    <div class="row" style="padding-left: 15px">
+                      <b>Educație: </b> &nbsp;&nbsp;{{dynamicCandidatesArray[i].title4}}
+                    </div>
+                    <div class="row" style="padding-left: 15px">
+                      <b>Auto-descriere:</b>&nbsp;&nbsp;{{dynamicCandidatesArray[i].title5}}
                     </div>
 
                   </td>
-                  <td >
-                    <button (click)= castVote(i) class="btn font-weight-bold "
-                            id="vote" name="vote" routerLinkActive="active" style="padding-left: 10px" type="submit">
-                      VOTE ME
+                  <td>
+                    <button (click)=castVote(i) class="btn font-weight-bold "
+                            id="vote" name="vote" routerLinkActive="active"
+                            style="padding-left: 15px; width: 150px; padding-top: 20px" type="submit">
+                      VOTEAZĂ-MA
                     </button>
                   </td>
                 </ng-container>
@@ -191,9 +187,10 @@
       </div>
       <div class="modal-footer">
 
-        <button (click)="hideCand()" class="btn btn-danger float-left mr-auto" data-dismiss="modal" type="button">Close
+        <button (click)="hideCand()" class="btn btn-danger float-left mr-auto" data-dismiss="modal" type="button">
+          Închide
         </button>
-        <button (click)="onSaveCand()" class="btn btn-success rounded-pill float-right" type="submit">SAVE
+        <button (click)="onSaveCand()" class="btn btn-success rounded-pill float-right" type="submit">SALVEAZĂ
         </button>
 
       </div>
@@ -205,7 +202,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel3">RESULT</h4>
+        <h4 class="modal-title" id="myModalLabel3">REZULTAT</h4>
       </div>
       <div class="modal-body">
         <div class="container">
@@ -218,7 +215,7 @@
       <div class="modal-footer">
 
         <button (click)="hideModalWithResults()" class="btn btn-danger float-left mr-auto" data-dismiss="modal"
-                type="button">FINISH
+                type="button">FINISARE
         </button>
 
       </div>

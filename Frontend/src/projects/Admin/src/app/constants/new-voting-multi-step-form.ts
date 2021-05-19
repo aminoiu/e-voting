@@ -2,8 +2,8 @@
 New voting form elements
  */
 const VOTING_CATEGORIES = [
-  {name: 'Administrative'},
-  {name: 'Educational'}  //TODO: Add more categories. The reason: for statistics.
+  {name: 'Administrativ'},
+  {name: 'Educație'}  // TODO: Add more categories. The reason: for statistics.
 ];
 
 const ADD_VOTERS_MODE = [
@@ -17,14 +17,14 @@ const ADD_CNDIDATES_MODE = [
 ];
 
 const VOTING_TYPE = [
-  {name: 'Candidate'},
-  {name: 'Option'}
+  {name: 'Candidați'},
+  {name: 'Opțiuni'}
 ];
 
-const FORM_STEP_1 = { //name: {type: '', validations: {}, errors: {}, placeholder: ''}
+const FORM_STEP_1 = { // name: {type: '', validations: {}, errors: {}, placeholder: ''}
   title: {
     type: 'text', validations: { required: false},
-    errors: {}, placeholder: 'Create a voting session'
+    errors: {}, placeholder: 'Crează o nouă sesiune de vot'
   },
   voting_title: {
     type: 'text', validations: {required: false}, errors: {},
@@ -147,7 +147,7 @@ const FORM_STEP_3 = {
 const FORM_STEP_4 = {
   title: {
     type: 'text', validations: {required: false},
-    errors: {}, placeholder: 'Voting information'
+    errors: {}, placeholder: 'Informații despre alegeri'
   },
   voting_title: {
     type: 'text', validations: {required: false},
@@ -156,13 +156,13 @@ const FORM_STEP_4 = {
   voters_number: {
     type: 'text', validations: {required: false},
     errors: {
-    }, placeholder: 'Number of votersList'
+    }, placeholder: 'Numărul de alegători'
   },
   candidates_number: {
     type: 'text', validations: {
     },
     errors: {
-    }, placeholder: 'Number of candidatesList'
+    }, placeholder: 'Numărul de candidați'
   },
   start_details: {
     type: 'dateTime', validations: {
@@ -187,4 +187,4 @@ const STEP_ITEMS = [
   {label: 'Review & Submit', data: {}}
 ];
 
-export {STEP_ITEMS}
+export {STEP_ITEMS};

@@ -20,12 +20,16 @@
 
     <div [ngClass]="{'active': main}" class="modal-body container " style="">
       <div *ngFor="let dynamic of electionsArray;let i = index;" class="row " >
-        <div class="container border border-primary mt-3 shadow p-2 pl-3 bg-white rounded ">
+        <div class="container border border-primary mt-5 shadow p-2 pl-3 bg-white rounded ">
           <div class="row ">
             <div class="col   mt-2 font-weight-bold">{{electionsArray[i].title1}}</div>
-            <div class="col   mt-2 font-weight-bold">Data de început: {{electionsArray[i].title2}}</div>
-            <div class="col   mt-2 font-weight-bold">Data de încheiere: {{electionsArray[i].title4}}</div>
-<!--            <div class="col col-lg-2 mt-2 font-weight-bold " style="width: 20px">-->
+            <div class="col   mt-2 font-weight-bold">Data de început: </div>
+            <div class="col   mt-2 font-italic">{{electionsArray[i].title2}}</div>
+
+            <div class="col   mt-2 font-weight-bold">Data de încheiere: </div>
+            <div class="col   mt-2 font-italic">{{electionsArray[i].title4}}</div>
+
+            <!--            <div class="col col-lg-2 mt-2 font-weight-bold " style="width: 20px">-->
 <!--              <form (ngSubmit)="onSubmit()" [formGroup]="form1">-->
 <!--                <div class="d-inline-block dropright" display="dynamic" ngbDropdown placement="right">-->
 <!--                  <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Actions</button>-->
@@ -38,8 +42,11 @@
 <!--            </div>-->
 
           </div>
-          <div class="row">
-            <div class="col mt-2 text-info">Status: {{electionsArray[i].title3}}</div>
+          <div class="row mt-2">
+            <div class="col mt-2 mb-1 text-info">Status: {{electionsArray[i].title3}}</div>
+          </div>
+          <div class="row mt-2">
+            <div class="col mt-2 text-danger " *ngIf="electionsArray[i].title3==='Finisat'"><b>Câștigător:</b> <i> {{electionsArray[i].title5}}</i></div>
           </div>
         </div>
       </div>

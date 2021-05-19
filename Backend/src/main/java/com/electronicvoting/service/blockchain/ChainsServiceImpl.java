@@ -1,5 +1,6 @@
 package com.electronicvoting.service.blockchain;
 
+import com.electronicvoting.domain.dto.BlockDto;
 import com.electronicvoting.entity.Chains;
 import com.electronicvoting.helper.SHA256;
 import com.electronicvoting.repository.ChainsRepository;
@@ -7,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
@@ -36,5 +38,7 @@ public class ChainsServiceImpl implements ChainsService {
        return  SHA256.generateHash(transactionInfo);
 
     }
+
+
 
 }
